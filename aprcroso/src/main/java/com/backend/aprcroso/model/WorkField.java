@@ -8,19 +8,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Entity
-public class Address {
+
+public class WorkField {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String city;
-
+    private String name;
     @Column
-    private String street;
-
+    private String description;
     @Column
-    private String numberAndLetter;
+    private String code;
 }

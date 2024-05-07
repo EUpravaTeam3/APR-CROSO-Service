@@ -1,12 +1,16 @@
 package com.backend.aprcroso.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Date;
 
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +20,9 @@ public class User {
     private String JMBG;
 
     @Column
+    private String username;
+
+    @Column
     private String role;
 
     @Column
@@ -23,9 +30,6 @@ public class User {
 
     @Column
     private String lastName;
-
-    @Column
-    private String address;
 
     @Column
     private Date dateOfBirth;

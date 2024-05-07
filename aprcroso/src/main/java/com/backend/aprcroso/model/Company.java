@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Builder
 
@@ -28,14 +29,12 @@ public class Company {
     @Column
     private String registrationNumber;               // ili registration number  //ovo je za maticniBr
 
+    //vratiti na LocalDate
     @Column
-    private LocalDate registrationDate;
+    private Date registrationDate;
 
     @Column
     private String name;                             //naziv
-
-    @Column
-    private String address;
 
     @Enumerated(EnumType.STRING)
     @Column
