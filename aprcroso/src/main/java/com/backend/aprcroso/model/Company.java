@@ -2,10 +2,21 @@ package com.backend.aprcroso.model;
 
 //Privredni subjekat - Company
 
+import com.backend.aprcroso.model.enums.CompanyStatus;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 
+@Builder
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+
+
+@Entity
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
