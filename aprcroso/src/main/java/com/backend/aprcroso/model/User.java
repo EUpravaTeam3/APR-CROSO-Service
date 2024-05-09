@@ -5,12 +5,14 @@ import lombok.*;
 
 import java.util.Date;
 
+import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
+
 @Builder
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Inheritance(strategy = SINGLE_TABLE)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

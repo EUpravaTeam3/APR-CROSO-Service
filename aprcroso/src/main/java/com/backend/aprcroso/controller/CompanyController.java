@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/")
 public class CompanyController {
-
-  @Autowired
-  private CompanyRepository companyRepository;
+  @GetMapping("/pocetna")
+  public String Pocetna(){
+    return "Pozdrav ovo je pocetna";
+  }
 
 
 //    private final CompanyService companyService;
@@ -23,15 +24,15 @@ public class CompanyController {
 //    CompanyController(CompanyService companyService) {
 //        this.companyService = companyService;
 //    }
-//
-//    @Autowired
-//    private CompanyRepository companyRepository;
-//
-//    //get all companies
-//    @GetMapping("/companies")
-//    public List<Company> getAllCompanies(){
-//        return companyRepository.findAll();
-//    }
+
+    @Autowired
+    private CompanyRepository companyRepository;
+
+    //get all companies
+    @GetMapping("/companies")
+    public List<Company> getAllCompanies(){
+        return companyRepository.findAll();
+    }
 
 
 
