@@ -4,6 +4,6 @@ import com.backend.aprcroso.dto.UserDTO;
 
 public interface UserService {
 
-    UserDTO findFirstByUsername(String username);
+    UserDTO findByUsername(String username);
 
 }

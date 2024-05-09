@@ -20,18 +20,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    //get all companies
+    //get all users
     @GetMapping
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
 
 
-//    private final UserService userService;
-//
-//    UserController(UserService userService){
-//        this.userService = userService;
-//    }
 
     //.....
 
