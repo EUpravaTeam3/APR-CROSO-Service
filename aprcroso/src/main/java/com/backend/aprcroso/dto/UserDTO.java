@@ -24,6 +24,6 @@ public class UserDTO {
 
     private Long companyId;
 
-    private List<UserDTO> employee;
+    private List<UserDTO> worker;
 
 }

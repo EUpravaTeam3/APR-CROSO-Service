@@ -1,6 +1,7 @@
 package com.backend.aprcroso.service.impl;
 
 import com.backend.aprcroso.dto.UserDTO;
+import com.backend.aprcroso.model.Company;
 import com.backend.aprcroso.model.User;
 import com.backend.aprcroso.repository.UserRepository;
 import com.backend.aprcroso.service.UserService;

@@ -6,11 +6,11 @@ import com.backend.aprcroso.dto.CreateCompanyDTO;
 import java.util.List;
 
 public interface CompanyService {
-    List<CompanyDTO> findAll(String search, String criteria);
+    List<CompanyDTO> findAllCompanies(String search);
 
-    CompanyDTO findByUser();
+    CompanyDTO findCompanyByUser();
 
-    CompanyDTO findById(Long id);
+    CompanyDTO findCompanyById(Long id);
 
     CompanyDTO createCompany(CreateCompanyDTO createCompanyDTO);
 }

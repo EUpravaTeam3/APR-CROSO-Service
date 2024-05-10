@@ -7,6 +7,9 @@ import com.backend.aprcroso.exception.NotFoundException;
 import com.backend.aprcroso.model.Company;
 import com.backend.aprcroso.repository.CompanyRepository;
 import com.backend.aprcroso.service.CompanyService;
+import com.backend.aprcroso.service.impl.CompanyServiceImpl;
+import com.backend.aprcroso.service.impl.UserServiceImpl;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +30,17 @@ public class CompanyController {
 
   @Autowired
   private CompanyRepository companyRepository;
+
+  @Autowired
+  private CompanyServiceImpl companyServiceImpl;
+
+  //posting hardcoded company info
+  @PostConstruct
+  public void initCompany(){
+    companyServiceImpl.initCompany();
+  }
+
+
 
   //create company
   @PostMapping("/companies")

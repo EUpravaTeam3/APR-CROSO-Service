@@ -33,8 +33,8 @@ public class CompanyDTO {
 
     private CompanyStatus status;
 
-    //postavljanje u listu
-    private Set<User> employee = new HashSet<>();
+    //postavljanje u listu //zaposleni u kompaniji
+    private Set<User> worker = new HashSet<>();
 
 }
 

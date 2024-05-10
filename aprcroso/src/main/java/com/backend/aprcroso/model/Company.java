@@ -8,6 +8,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Builder
 
@@ -38,6 +40,10 @@ public class Company {
     @Enumerated(EnumType.STRING)
     @Column
     private CompanyStatus status;
+
+    //mapping to user and company
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<User> employee = new HashSet<>();
 }
 
 

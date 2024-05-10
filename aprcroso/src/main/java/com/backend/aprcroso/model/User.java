@@ -1,5 +1,6 @@
 package com.backend.aprcroso.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -40,7 +41,9 @@ public class User {
     private String citizenship;
 
 
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Company company;
 
 }
 
