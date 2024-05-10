@@ -12,6 +12,6 @@ import lombok.*;
 public class CreateCompanyDTO {
     private String name;
 
-    private String pio;
+    private String pib;
 
 }
