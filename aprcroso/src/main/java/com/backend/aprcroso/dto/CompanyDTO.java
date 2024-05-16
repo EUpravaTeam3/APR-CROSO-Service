@@ -2,11 +2,13 @@ package com.backend.aprcroso.dto;
 
 import com.backend.aprcroso.model.User;
 import com.backend.aprcroso.model.enums.CompanyStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.extern.jackson.Jacksonized;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +31,7 @@ public class CompanyDTO {
 
     private String registrationNumber;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate registrationDate;
 
     private CompanyStatus status;

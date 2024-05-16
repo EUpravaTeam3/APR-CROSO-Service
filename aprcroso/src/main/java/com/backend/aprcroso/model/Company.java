@@ -3,6 +3,7 @@ package com.backend.aprcroso.model;
 //Privredni subjekat - Company
 
 import com.backend.aprcroso.model.enums.CompanyStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,7 +33,8 @@ public class Company {
 
     //vratiti na LocalDate
     @Column
-    private Date registrationDate;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate registrationDate;
 
     @Column
     private String name;                             //naziv
