@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
         user.setUsername("perica");
         user.setFirstName("Petar");
         user.setLastName("Peric");
-        user.setRole("ADMIN");
+        user.setRole("ADMIN,USER");
         user.setCitizenship("Serbian");
         user.setJMBG("12356789");
         user.setDateOfBirth(null);
