@@ -15,4 +15,8 @@ export class CompanyService {
   getCompanyList(): Observable<Company[]>{
     return this.httpClient.get<Company[]>(`${this.baseURL}`);
   }
+
+  createCompany(company: Company): Observable<Company> {
+    return this.httpClient.post<Company>(this.baseURL, company);
+  }
 }
