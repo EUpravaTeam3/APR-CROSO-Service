@@ -9,13 +9,19 @@ import { CreateCompanyComponent } from './components/user/create-company/create-
 import { CompanyListComponent } from './components/user/company-list/company-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CompanyService } from './service/company.service';
+import { CompanyDetailsComponent } from './components/user/company-details/company-details.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { CompanyReportComponent } from './components/user/company-report/company-report.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CreateCompanyComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    CompanyDetailsComponent,
+    NavBarComponent,
+    CompanyReportComponent
   ],
   imports: [
     BrowserModule,

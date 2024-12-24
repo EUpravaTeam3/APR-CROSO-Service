@@ -22,7 +22,7 @@ export class CreateCompanyComponent implements OnInit {
       pib: ['', [Validators.required]],
       registrationNumber: ['', [Validators.required]],
       registrationDate: ['', [Validators.required]],
-      companyStatus: ['', [Validators.required]]
+      companyStatus: ['Active', [Validators.required]]  // Podrazumevani status 'Active'
     });
   }
 
@@ -33,6 +33,8 @@ export class CreateCompanyComponent implements OnInit {
     }
 
     const company: Company = this.companyForm.value;
+
+    console.log('Submitted Company Status:', company.companyStatus);  // Proverite vrednost ovde
 
     this.companyService.createCompany(company).subscribe(
       (response) => {

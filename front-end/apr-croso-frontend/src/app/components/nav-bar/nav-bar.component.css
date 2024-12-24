@@ -1,0 +1,39 @@
+/* Osnovna stilizacija za navbar */
+.navbar {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  /* Lista linkova */
+  .navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .navbar li {
+    margin: 0 15px;
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+  }
+  
+  /* Efekat kada je link aktivan */
+  .navbar a:hover {
+    background-color: #555;
+    border-radius: 5px;
+  }
+  
+  .navbar .active {
+    background-color: #777;
+    border-radius: 5px;
+  }
+  

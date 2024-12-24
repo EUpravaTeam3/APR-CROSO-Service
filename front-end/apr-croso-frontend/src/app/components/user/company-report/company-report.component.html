@@ -1,0 +1,57 @@
+<div class="report-container">
+    <!-- Finansijski izveštaj -->
+    <h2>Podnošenje finansijskih izveštaja</h2>
+    <form [formGroup]="financialReportForm" (ngSubmit)="onSubmitFinancialReport()">
+      <div>
+        <label for="companyName">Naziv Kompanije:</label>
+        <input id="companyName" formControlName="companyName" required>
+      </div>
+      <div>
+        <label for="year">Godina:</label>
+        <input type="number" id="year" formControlName="year" required>
+      </div>
+      <div>
+        <label for="balanceSheet">Bilans Stanja:</label>
+        <input id="balanceSheet" formControlName="balanceSheet" required>
+      </div>
+      <div>
+        <label for="incomeStatement">Bilans Uspeha:</label>
+        <input id="incomeStatement" formControlName="incomeStatement" required>
+      </div>
+      <button type="submit" [disabled]="!financialReportForm.valid">Podnesi izveštaj</button>
+    </form>
+  
+    <div *ngIf="financialReportSubmitted">
+      <h3>Podaci o finansijskom izveštaju:</h3>
+      <p><strong>Kompanija:</strong> {{ financialReportData.companyName }}</p>
+      <p><strong>Godina:</strong> {{ financialReportData.year }}</p>
+      <p><strong>Bilans Stanja:</strong> {{ financialReportData.balanceSheet }}</p>
+      <p><strong>Bilans Uspeha:</strong> {{ financialReportData.incomeStatement }}</p>
+    </div>
+  
+    <!-- Stečaj i likvidacija -->
+    <h2>Podnošenje prijava za stečaj i likvidaciju</h2>
+    <form [formGroup]="bankruptcyForm" (ngSubmit)="onSubmitBankruptcy()">
+      <div>
+        <label for="companyNameBankruptcy">Naziv Kompanije:</label>
+        <input id="companyNameBankruptcy" formControlName="companyName" required>
+      </div>
+      <div>
+        <label for="bankruptcyDate">Datum početka stečaja:</label>
+        <input type="date" id="bankruptcyDate" formControlName="bankruptcyDate" required>
+      </div>
+      <div>
+        <label for="liquidation">Podnošenje likvidacije:</label>
+        <input type="checkbox" id="liquidation" formControlName="liquidation">
+      </div>
+      <button type="submit" [disabled]="!bankruptcyForm.valid">Podnesi prijavu</button>
+    </form>
+  
+    <div *ngIf="bankruptcySubmitted">
+      <h3>Podaci o stečaju i likvidaciji:</h3>
+      <p><strong>Kompanija:</strong> {{ bankruptcyData.companyName }}</p>
+      <p><strong>Datum početka stečaja:</strong> {{ bankruptcyData.bankruptcyDate }}</p>
+      <p><strong>Likvidacija:</strong> {{ bankruptcyData.liquidation ? 'Da' : 'Ne' }}</p>
+    </div>
+  </div>
+  

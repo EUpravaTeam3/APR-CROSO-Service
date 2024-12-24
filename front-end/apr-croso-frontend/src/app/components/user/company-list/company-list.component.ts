@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Company } from '../../../class/company';
 import { CompanyService } from '../../../service/company.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'company-list',
@@ -11,7 +12,7 @@ export class CompanyListComponent {
 
   companies: Company[] = [];
 
-  constructor(private companyService: CompanyService){}
+  constructor(private companyService: CompanyService, private router: Router){}
 
   ngOnInit(): void {
     this.getCompanies();
@@ -21,6 +22,11 @@ export class CompanyListComponent {
     this.companyService.getCompanyList().subscribe(data => {
       this.companies = data;
     })
+  }
+
+  companyDetails(companyId: number){
+    this.router.navigate(['/company-details', companyId]);
+
   }
 
 }

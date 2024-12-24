@@ -1,0 +1,53 @@
+<nav-bar></nav-bar>
+
+<div class="company-info-container">
+    <h2>Company Info</h2>
+  
+    <table class="company-info-table">
+      <tr >
+        <th>ID</th>
+        <td>{{ company.id }}</td>
+      </tr>
+      <tr>
+        <th>PIB</th>
+        <td>{{ company.pib }}</td>
+      </tr>
+      <tr>
+        <th>Broj registracije</th>
+        <td>{{ company.registrationNumber }}</td>
+      </tr>
+      <tr>
+        <th>Datum registracije</th>
+        <td>{{ company.registrationDate | date:'dd.MM.yyyy' }}</td>
+      </tr>
+      <tr>
+        <th>Naziv</th>
+        <td>{{ company.name }}</td>
+      </tr>
+      <tr>
+        <th>Delatnost</th>
+        <td>Delatnost DEMO</td>
+      </tr>
+      <tr>
+        <th>Adresa</th>
+        <td>Adresa DEMO</td>
+      </tr>
+      <tr>
+        <th>Status kompanije</th>
+        <td>{{ company.companyStatus }}</td>
+      </tr>
+    </table>
+  </div>
+  
+  <p>Ove 2. funck. treba da vide prijavljeni korisnici date kompanije</p>
+  <company-report></company-report>
+
+  <div class="navigation-container">
+    <button class="btn btn-info" (click)="goHome()">Go Back</button>
+
+    <p>Funkcionalnosti Preduzetnici i pravna lica (subjekti registracije)
+      <br>1. Podnošenje finansijskih izveštaja: Preduzetnici i preduzeća su obavezni da godišnje podnose finansijske izveštaje (bilans stanja, bilans uspeha, itd.), kao i druge potrebne informacije.
+     <br>2. Podnošenje prijava za stečaj i likvidaciju: Preduzetnici i preduzeća mogu prijaviti početak stečaja ili likvidacije kroz sistem APR-a.</p>
+  </div>
+  
+

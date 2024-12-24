@@ -8,7 +8,7 @@ import { Company } from '../class/company';
 })
 export class CompanyService {
 
-  private baseURL = "http://localhost:8005/api/companies"
+  private baseURL = "http://localhost:8005/api/companies";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,4 +19,9 @@ export class CompanyService {
   createCompany(company: Company): Observable<Company> {
     return this.httpClient.post<Company>(this.baseURL, company);
   }
+
+  getCompanyById(id: number): Observable<any>{
+    return this.httpClient.get<Company>(`${this.baseURL}/${id}`);
+  }
+
 }
