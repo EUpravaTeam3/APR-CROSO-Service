@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms'; // Dodato FormsModule
+
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +14,8 @@ import { CompanyService } from './service/company.service';
 import { CompanyDetailsComponent } from './components/user/company-details/company-details.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { CompanyReportComponent } from './components/user/company-report/company-report.component';
+import { AddingEmployeeComponent } from './components/admin/adding-employee/adding-employee.component';
+import { EmployeeSearchComponent } from './components/user/employee-search/employee-search.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +25,13 @@ import { CompanyReportComponent } from './components/user/company-report/company
     CompanyListComponent,
     CompanyDetailsComponent,
     NavBarComponent,
-    CompanyReportComponent
+    CompanyReportComponent,
+    AddingEmployeeComponent,
+    EmployeeSearchComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule

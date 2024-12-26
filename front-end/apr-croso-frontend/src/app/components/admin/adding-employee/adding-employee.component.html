@@ -1,0 +1,16 @@
+<div class="container">
+    <p>*Admin u APR dodaje zaposlenog u neku kompaniju.*</p>
+    <h2>Dodavanje Zaposlenih</h2>
+    <form (ngSubmit)="onAddEmployee()">
+      <label for="employeeName">Ime zaposlenog:</label>
+      <input type="text" id="employeeName" [(ngModel)]="employee.name" name="employeeName" required />
+  
+      <label for="employeeType">Tip zaposlenja:</label>
+      <select id="employeeType" [(ngModel)]="employee.type" name="employeeType">
+        <option value="privremeni">Privremeni</option>
+        <option value="stalni">Stalni</option>
+      </select>
+  
+      <button type="submit">Dodaj Zaposlenog</button>
+    </form>
+  </div>

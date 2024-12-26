@@ -1,0 +1,67 @@
+<p>**Vlasnik neke kompanije moze da pretrrazi svoje zaposlene**</p>
+<div class="search-container">
+  <input type="text" [formControl]="searchControl" placeholder="Pretraži zaposlene..." class="search-input" />
+</div>
+<table class="employee-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Ime i Prezime</th>
+      <th>Pozicija</th>
+      <th>Odsek</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of filteredEmployees" (click)="selectEmployee(employee)">
+      <td>{{ employee.id }}</td>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.position }}</td>
+      <td>{{ employee.department }}</td>
+      <td>
+        <button class="btn btn-info" (click)="selectEmployee(employee)">Izmeni</button>
+        <button class="btn btn-danger" (click)="deleteEmployee(employee.id)">Otpusti</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="add-employee-container">
+  <h3>Dodaj Zaposlenog</h3>
+  <form [formGroup]="addEmployeeForm" (ngSubmit)="addEmployee()" class="add-employee-form">
+    <div class="form-group">
+      <input formControlName="id" placeholder="ID" type="number" class="form-control" />
+    </div>
+    <div class="form-group">
+      <input formControlName="name" placeholder="Ime" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+      <input formControlName="position" placeholder="Pozicija" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+      <input formControlName="department" placeholder="Odsek" type="text" class="form-control" />
+    </div>
+    <button type="submit" class="btn-submit">Dodaj</button>
+  </form>
+</div>
+
+<div *ngIf="selectedEmployee" class="edit-employee-container">
+  <h3>Izmena zaposlenog</h3>
+  <form [formGroup]="editEmployeeForm" (ngSubmit)="updateEmployee()">
+    <div class="form-group">
+      <input formControlName="id" placeholder="ID" class="form-control" />
+    </div>
+    <div class="form-group">
+      <input formControlName="name" placeholder="Ime" class="form-control" />
+    </div>
+    <div class="form-group">
+      <input formControlName="position" placeholder="Pozicija" class="form-control" />
+    </div>
+    <div class="form-group">
+      <input formControlName="department" placeholder="Odsek" class="form-control" />
+    </div>
+    <button type="submit" class="btn-submit">Ažuriraj</button>
+  </form>
+</div>
+
+
