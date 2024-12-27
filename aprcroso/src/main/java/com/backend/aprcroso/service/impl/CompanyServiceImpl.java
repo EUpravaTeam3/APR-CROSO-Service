@@ -35,7 +35,7 @@ public class CompanyServiceImpl {
         company.setId(null);
         company.setName("Company1");
         company.setPIB("123");
-        company.setRegistrationDate(LocalDate.ofYearDay(2007,1));
+        company.setRegistrationDate(LocalDate.of(2017, 6,23));
         company.setRegistrationNumber("reg123");
         company.setStatus(CompanyStatus.ACTIVE);
         companyRepository.save(company);
@@ -44,7 +44,7 @@ public class CompanyServiceImpl {
         company2.setId(null);
         company2.setName("Company2");
         company2.setPIB("321");
-        company2.setRegistrationDate(LocalDate.ofYearDay(2017,12));
+        company2.setRegistrationDate(LocalDate.of(2003, 4,22));
         company2.setRegistrationNumber("reg321");
         company2.setStatus(CompanyStatus.ACTIVE);
         companyRepository.save(company2);

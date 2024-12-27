@@ -1,9 +1,11 @@
 package com.backend.aprcroso.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
@@ -35,7 +37,8 @@ public class User {
     private String lastName;
 
     @Column
-    private Date dateOfBirth;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate dateOfBirth;
 
     @Column
     private String citizenship;

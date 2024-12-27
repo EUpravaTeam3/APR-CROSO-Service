@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -36,7 +38,7 @@ public class UserServiceImpl implements UserService{
         user.setRole("ADMIN,USER");
         user.setCitizenship("Serbian");
         user.setJMBG("12356789");
-        user.setDateOfBirth(null);
+        user.setDateOfBirth(LocalDate.of(2000, 12,12));
         userRepository.save(user);
 
 
@@ -48,10 +50,8 @@ public class UserServiceImpl implements UserService{
         user2.setRole("USER");
         user2.setCitizenship("Serbian");
         user2.setJMBG("12356789");
-        user2.setDateOfBirth(null);
+        user2.setDateOfBirth(LocalDate.of(2000, 12,12));
         userRepository.save(user2);
-
-
     }
 
     @Override
