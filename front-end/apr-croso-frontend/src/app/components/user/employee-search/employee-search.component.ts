@@ -15,6 +15,7 @@ export class EmployeeSearchComponent {
   ];
 
   searchControl = new FormControl('');
+  sortDirection: boolean = true; // true = rastuće, false = opadajuće
 
   addEmployeeForm = new FormGroup({
     id: new FormControl(''),
@@ -33,12 +34,31 @@ export class EmployeeSearchComponent {
   });
 
   get filteredEmployees() {
+    let employees = [...this.employees];
+
     const searchTerm = this.searchControl.value?.toLowerCase() || '';
-    return this.employees.filter(employee =>
+
+    //Filtriranje
+    employees = employees.filter(employee =>
       employee.name.toLowerCase().includes(searchTerm) ||
       employee.position.toLowerCase().includes(searchTerm) ||
       employee.department.toLowerCase().includes(searchTerm)
     );
+
+    // Sortiranje po ID
+    employees.sort((a, b) => {
+      if (this.sortDirection) {
+        return a.id - b.id; // Rastuće
+      } else {
+        return b.id - a.id; // Opadajuće
+      }
+    });
+
+    return employees;
+
+  }
+  sortById() {
+    this.sortDirection = !this.sortDirection;
   }
 
   addEmployee() {
