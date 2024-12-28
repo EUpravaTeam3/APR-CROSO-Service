@@ -12,11 +12,11 @@
       </div>
       <div>
         <label for="balanceSheet">Bilans Stanja:</label>
-        <input id="balanceSheet" formControlName="balanceSheet" required>
+        <input id="balanceSheet" type="number" formControlName="balanceSheet" required min="0">
       </div>
       <div>
         <label for="incomeStatement">Bilans Uspeha:</label>
-        <input id="incomeStatement" formControlName="incomeStatement" required>
+        <input id="incomeStatement" type="number" formControlName="incomeStatement" required min="0">
       </div>
       <button type="submit" [disabled]="!financialReportForm.valid">Podnesi izveštaj</button>
     </form>
