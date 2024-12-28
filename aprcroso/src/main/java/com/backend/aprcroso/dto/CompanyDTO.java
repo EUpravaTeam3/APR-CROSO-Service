@@ -1,5 +1,6 @@
 package com.backend.aprcroso.dto;
 
+import com.backend.aprcroso.model.Address;
 import com.backend.aprcroso.model.User;
 import com.backend.aprcroso.model.enums.CompanyStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -20,7 +21,7 @@ import java.util.Set;
 
 @ToString
 @Jacksonized
-
+@Data
 public class CompanyDTO {
 
     private Long id;
@@ -35,6 +36,8 @@ public class CompanyDTO {
     private LocalDate registrationDate;
 
     private CompanyStatus status;
+
+    private Set<Address> addresses; // Adrese se sada uključuju
 
     //postavljanje u listu //zaposleni u kompaniji
     private Set<User> worker = new HashSet<>();

@@ -4,6 +4,7 @@ package com.backend.aprcroso.controller;
 import com.backend.aprcroso.dto.CompanyDTO;
 import com.backend.aprcroso.dto.CreateCompanyDTO;
 import com.backend.aprcroso.exception.NotFoundException;
+import com.backend.aprcroso.model.Address;
 import com.backend.aprcroso.model.Company;
 import com.backend.aprcroso.repository.CompanyRepository;
 import com.backend.aprcroso.service.CompanyService;
@@ -34,6 +35,9 @@ public class CompanyController {
 
   @Autowired
   private CompanyServiceImpl companyServiceImpl;
+
+  @Autowired
+  private CompanyService companyService;
 
   //posting hardcoded company info
   @PostConstruct
@@ -67,6 +71,25 @@ public class CompanyController {
     return ResponseEntity.ok(company);
   }
 
+  //adding Address to Company
+  @PostMapping("/companies/{companyId}/address")
+  public ResponseEntity<Void> addAddressToCompany(@PathVariable Long companyId, @RequestBody @Validated Address address) {
+    companyServiceImpl.addAddressToCompany(companyId, address); // Koristite generički servis
+    return ResponseEntity.ok().build();
+  }
 
-    //.....................
+
+  //getting addresses
+  @GetMapping("/companies/{id}/details")
+  public ResponseEntity<CompanyDTO> getCompanyWithAddresses(@PathVariable Long id) {
+    CompanyDTO company = companyService.findCompanyById(id);
+    if (company == null) {
+      throw new NotFoundException("Company not found with ID: " + id);
+    }
+    return ResponseEntity.ok(company);
+  }
+
+
+
+  //.....................
 }

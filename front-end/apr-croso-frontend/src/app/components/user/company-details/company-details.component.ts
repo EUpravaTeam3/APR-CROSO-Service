@@ -18,7 +18,6 @@ export class CompanyDetailsComponent {
 
   ngOnInit(): void {
     this.getCompanyById();
-    // this.getCompanies();
   }
 
 
@@ -34,31 +33,5 @@ export class CompanyDetailsComponent {
   goHome(){
     this.router.navigate(['/home']);
   }
-
-  // private getCompanies(){
-  //   this.companyService.getCompanyList().subscribe(data => {
-  //     this.companies = data;
-  //   })
-  // }
-
-  // private getCompanyById(){
-  //   this.companyId = this.route.snapshot.params['id']
-    
-  //   console.log('companyId from Company: ', this.companyId);
-
-  //   this.companyService.getCompanyById(this.companyId).subscribe(data => {
-  //     this.companies = data;
-  //   });
-  // }
-
-  // // Primer podataka o kompaniji
-  // company: Company = {
-  //   id: 1,
-  //   pib: '1234567890123',
-  //   registrationNumber: '2001234567890',
-  //   registrationDate: new Date('2020-01-15'),
-  //   name: 'ABC Tehnika',
-  //   companyStatus: 'Aktivna'
-  // };
 
 }
