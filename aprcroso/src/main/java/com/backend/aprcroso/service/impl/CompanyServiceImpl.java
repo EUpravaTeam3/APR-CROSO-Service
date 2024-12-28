@@ -50,6 +50,19 @@ public class CompanyServiceImpl implements CompanyService{
         companyRepository.save(company);
     }
 
+    public Address getAddressByCompanyId(Long companyId) {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new NotFoundException("Company not found with ID: " + companyId));
+
+        return company.getAddresses().stream()
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("No addresses found for company ID: " + companyId));
+
+        //vracamo prvu adresu iz skupa
+    }
+
+
+
 
 
 

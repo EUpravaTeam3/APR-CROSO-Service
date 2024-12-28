@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/")
 public class CompanyController {
@@ -77,6 +77,18 @@ public class CompanyController {
     companyServiceImpl.addAddressToCompany(companyId, address); // Koristite generički servis
     return ResponseEntity.ok().build();
   }
+
+  //getting Addresses By Company ID
+  @GetMapping("/companies/{companyId}/address")
+  public ResponseEntity<Address> getAddressByCompanyId(@PathVariable Long companyId) {
+    Address address = companyServiceImpl.getAddressByCompanyId(companyId);
+    if (address == null) {
+      throw new NotFoundException("Address not found for company ID: " + companyId);
+    }
+    return ResponseEntity.ok(address);
+  }
+
+
 
 
   //getting addresses

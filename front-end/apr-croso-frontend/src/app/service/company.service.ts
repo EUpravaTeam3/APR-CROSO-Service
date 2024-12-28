@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Company } from '../class/company';
+import { Address } from '../class/address';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class CompanyService {
 
   getCompanyById(id: number): Observable<any>{
     return this.httpClient.get<Company>(`${this.baseURL}/${id}`);
+  }
+
+  getAddressByCompanyId(companyId: number): Observable<Address> {
+    return this.httpClient.get<Address>(`${this.baseURL}/${companyId}/address`);
   }
 
 }

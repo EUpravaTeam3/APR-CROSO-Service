@@ -30,7 +30,12 @@
       </tr>
       <tr>
         <th>Adresa</th>
-        <td>Adresa DEMO</td>
+        <td>
+          <div *ngIf="address; else noAddress">
+            {{ address.street }} {{ address.numberAndLetter }}, {{ address.city }}
+          </div>
+          <ng-template #noAddress>Nema dostupnih informacija o adresi</ng-template>
+        </td>
       </tr>
       <tr>
         <th>Status kompanije</th>

@@ -56,6 +56,7 @@ export class CreateCompanyComponent implements OnInit {
             console.log('Address added successfully!', addressResponse);
             alert('Company and address created successfully!');
             this.companyForm.reset();
+            this.reloadPage();
           },
           (addressError) => {
             console.error('Error adding address', addressError);
