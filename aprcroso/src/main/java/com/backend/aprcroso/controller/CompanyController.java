@@ -74,7 +74,7 @@ public class CompanyController {
   //adding Address to Company
   @PostMapping("/companies/{companyId}/address")
   public ResponseEntity<Void> addAddressToCompany(@PathVariable Long companyId, @RequestBody @Validated Address address) {
-    companyServiceImpl.addAddressToCompany(companyId, address); // Koristite generički servis
+    companyServiceImpl.addAddressToCompany(companyId, address);
     return ResponseEntity.ok().build();
   }
 
