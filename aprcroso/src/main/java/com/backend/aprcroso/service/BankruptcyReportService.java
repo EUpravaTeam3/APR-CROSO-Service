@@ -5,6 +5,8 @@ import com.backend.aprcroso.repository.BankruptcyReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BankruptcyReportService {
 
@@ -13,6 +15,12 @@ public class BankruptcyReportService {
     @Autowired
     public BankruptcyReportService(BankruptcyReportRepository bankruptcyReportRepository) {
         this.bankruptcyReportRepository = bankruptcyReportRepository;
+    }
+
+    public List<BankruptcyReport> getAllBankruptcyReports() { return bankruptcyReportRepository.findAll(); }
+
+    public BankruptcyReport getBankruptcyReportById(Long id) {
+        return bankruptcyReportRepository.findById(id).orElse(null);
     }
 
     public BankruptcyReport saveBankruptcyReport(BankruptcyReport bankruptcyReport) {
