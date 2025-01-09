@@ -2,7 +2,7 @@
 Service for APR and CROSO 
 
 *******************************
-## Insured Person Register API  
+## Insured Person Register REST API  
 ### Registracija osiguranika (POST /api/insured-persons/register):  
 Zahtev (JSON):  
   
