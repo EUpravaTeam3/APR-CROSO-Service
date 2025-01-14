@@ -1,5 +1,8 @@
+<nav-bar></nav-bar>
 <div class="report-container">
     <!-- Finansijski izveštaj -->
+    <p>Ove 2. funck. treba da vide prijavljeni korisnici date kompanije</p>
+
     <h2>Podnošenje finansijskih izveštaja</h2>
     <form [formGroup]="financialReportForm" (ngSubmit)="onSubmitFinancialReport()">
       <div>
@@ -20,7 +23,7 @@
       </div>
       <button type="submit" [disabled]="!financialReportForm.valid">Podnesi izveštaj</button>
     </form>
-  
+    
     <div *ngIf="financialReportSubmitted">
       <h3>Podaci o finansijskom izveštaju:</h3>
       <p><strong>Kompanija:</strong> {{ financialReportData.companyName }}</p>

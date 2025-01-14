@@ -1,0 +1,34 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class FinancialReportService {
+
+  private financialReportUrl = 'http://localhost:8005/api/financial-reports';
+  private bankruptcyReportUrl = 'http://localhost:8005/api/bankruptcy-reports';
+
+  constructor(private http: HttpClient) {}
+
+  // Kreiranje finansijskog izveštaja
+  createFinancialReport(report: any): Observable<any> {
+    return this.http.post(this.financialReportUrl, report);
+  }
+
+  // Dobijanje svih finansijskih izveštaja
+  getAllFinancialReports(): Observable<any[]> {
+    return this.http.get<any[]>(this.financialReportUrl);
+  }
+
+  // Dobijanje finansijskog izveštaja po ID-u
+  getFinancialReportById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.financialReportUrl}/${id}`);
+  }
+
+  // Kreiranje prijave za stečaj
+  createBankruptcyReport(report: any): Observable<any> {
+    return this.http.post(this.bankruptcyReportUrl, report);
+  }
+}
