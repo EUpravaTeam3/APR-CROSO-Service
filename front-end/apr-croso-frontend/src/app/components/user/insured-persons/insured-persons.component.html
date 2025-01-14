@@ -1,0 +1,95 @@
+<nav-bar></nav-bar>
+
+<div class="container">
+    <!-- Forma za registraciju -->
+    <section class="form-container">
+        <h2>Registracija Osigurane Osobe</h2>
+        <form [formGroup]="insuredPersonForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="firstName">Ime</label>
+                <input id="firstName" formControlName="firstName" placeholder="Unesite ime">
+                <small class="error"
+                    *ngIf="insuredPersonForm.get('firstName')?.touched && insuredPersonForm.get('firstName')?.invalid">
+                    {{ getErrorMessage('firstName') }}
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Prezime</label>
+                <input id="lastName" formControlName="lastName" placeholder="Unesite prezime">
+                <small class="error"
+                    *ngIf="insuredPersonForm.get('lastName')?.touched && insuredPersonForm.get('lastName')?.invalid">
+                    {{ getErrorMessage('lastName') }}
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="jmbg">JMBG</label>
+                <input id="jmbg" formControlName="jmbg" placeholder="Unesite JMBG">
+                <small class="error"
+                    *ngIf="insuredPersonForm.get('jmbg')?.touched && insuredPersonForm.get('jmbg')?.invalid">
+                    {{ getErrorMessage('jmbg') }}
+                </small>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label>
+                    Zaposlen
+                    <input type="checkbox" id="employed" formControlName="employed">
+                </label>
+            </div>
+
+            <div class="form-group" *ngIf="insuredPersonForm.get('employed')?.value">
+                <label for="employerName">Naziv Poslodavca</label>
+                <input id="employerName" formControlName="employerName" placeholder="Unesite naziv poslodavca">
+                <small class="error"
+                    *ngIf="insuredPersonForm.get('employerName')?.touched && insuredPersonForm.get('employerName')?.invalid">
+                    {{ getErrorMessage('employerName') }}
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="insuranceTypes">Vrste Osiguranja</label>
+                <select id="insuranceTypes" formControlName="insuranceTypes" multiple>
+                    <option value="HEALTH">Zdravstveno</option>
+                    <option value="PENSION">Penzijsko</option>
+                    <option value="UNEMPLOYMENT">Nezaposlenost</option>
+                </select>
+                <small class="error"
+                    *ngIf="insuredPersonForm.get('insuranceTypes')?.touched && insuredPersonForm.get('insuranceTypes')?.invalid">
+                    Izaberite bar jednu vrstu osiguranja.
+                </small>
+            </div>
+
+            <button type="submit" class="btn-submit" [disabled]="!insuredPersonForm.valid">Registruj</button>
+        </form>
+    </section>
+
+    <!-- Lista osiguranih osoba -->
+    <section class="list-container">
+        <h2>Lista Osiguranih Osoba</h2>
+        <ul class="person-list">
+            <li *ngFor="let person of insuredPersons" class="person-item">
+                <span>{{ person.firstName }} {{ person.lastName }}</span>
+                <span class="jmbg">JMBG: {{ person.jmbg }}</span>
+                <div class="actions">
+                    <button class="btn-details" (click)="selectPerson(person)">Detalji</button>
+                    <button class="btn-delete" (click)="deletePerson(person.id!)">Obriši</button>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Detalji osigurane osobe -->
+    <section #detailsSection *ngIf="selectedPerson" class="details-container">
+        <h3>Detalji Osigurane Osobe</h3>
+        <div class="details">
+            <p><strong>Ime:</strong> {{ selectedPerson.firstName }}</p>
+            <p><strong>Prezime:</strong> {{ selectedPerson.lastName }}</p>
+            <p><strong>JMBG:</strong> {{ selectedPerson.jmbg }}</p>
+            <p><strong>Zaposlen:</strong> {{ selectedPerson.employed ? 'Da' : 'Ne' }}</p>
+            <p *ngIf="selectedPerson.employed"><strong>Poslodavac:</strong> {{ selectedPerson.employerName }}</p>
+            <p><strong>Vrste Osiguranja:</strong> {{ selectedPerson.insuranceTypes.join(', ') }}</p>
+        </div>
+    </section>
+</div>

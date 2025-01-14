@@ -5,6 +5,7 @@ import { CompanyDetailsComponent } from './components/user/company-details/compa
 import { CompanyReportComponent } from './components/user/company-report/company-report.component';
 import { AddingEmployeeComponent } from './components/admin/adding-employee/adding-employee.component';
 import { EmployeeSearchComponent } from './components/user/employee-search/employee-search.component';
+import { InsuredPersonsComponent } from './components/user/insured-persons/insured-persons.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'company-details/:id', component: CompanyDetailsComponent},
   {path: 'company-report', component: CompanyReportComponent},
   {path: 'adding-employee', component: AddingEmployeeComponent},
-  {path: 'employee-search', component: EmployeeSearchComponent}
+  {path: 'employee-search', component: EmployeeSearchComponent},
+  {path: 'insured-persons', component: InsuredPersonsComponent}
 ];
 
 @NgModule({

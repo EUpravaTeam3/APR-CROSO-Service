@@ -16,6 +16,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { CompanyReportComponent } from './components/user/company-report/company-report.component';
 import { AddingEmployeeComponent } from './components/admin/adding-employee/adding-employee.component';
 import { EmployeeSearchComponent } from './components/user/employee-search/employee-search.component';
+import { InsuredPersonsComponent } from './components/user/insured-persons/insured-persons.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { EmployeeSearchComponent } from './components/user/employee-search/emplo
     NavBarComponent,
     CompanyReportComponent,
     AddingEmployeeComponent,
-    EmployeeSearchComponent
+    EmployeeSearchComponent,
+    InsuredPersonsComponent
   ],
   imports: [
     BrowserModule,

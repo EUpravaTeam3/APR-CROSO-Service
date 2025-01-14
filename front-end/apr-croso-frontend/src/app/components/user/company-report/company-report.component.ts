@@ -25,7 +25,6 @@ export class CompanyReportComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Inicijalizacija formi
     this.financialReportForm = this.fb.group({
       companyName: ['', Validators.required],
       year: ['', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
