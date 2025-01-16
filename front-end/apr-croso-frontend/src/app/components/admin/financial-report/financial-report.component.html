@@ -1,0 +1,30 @@
+<nav-bar></nav-bar>
+
+<p>This is ADMIN PAGE financial-report!</p>
+
+<h2>All Financial Reports</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th (click)="sortTable('id')" class="sortable">#</th>
+        <th (click)="sortTable('companyName')" class="sortable">Company Name</th>
+        <th (click)="sortTable('year')" class="sortable">Year</th>
+        <th (click)="sortTable('balanceSheet')" class="sortable">Balance Sheet</th>
+        <th (click)="sortTable('incomeStatement')" class="sortable">Income Statement</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of financialReports; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ report.companyName }}</td>
+        <td>{{ report.year }}</td>
+        <td>{{ report.balanceSheet }}</td>
+        <td>{{ report.incomeStatement }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" >Edit</button>
+          <button class="btn btn-danger btn-sm">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

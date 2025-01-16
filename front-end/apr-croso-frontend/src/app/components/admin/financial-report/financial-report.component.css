@@ -1,0 +1,38 @@
+/* Stil za naslove kolona koje podržavaju sortiranje */
+.sortable {
+    cursor: pointer; /* Promeni kursor u pointer */
+    font-weight: bold; /* Opcionalno: naglasi naslov */
+    text-decoration: underline; /* Opcionalno: podvuci tekst da ukaže na interaktivnost */
+  }
+  
+  /* Opcionalno: promena boje naslova pri prelasku */
+  .sortable:hover {
+    color: #007bff; /* Plava boja pri prelasku */
+    text-decoration: none; /* Ukloni podvlačenje pri prelasku */
+  }
+  
+  /* Dodavanje okvira tabeli */
+.table {
+    border: 1px solid #ddd; /* Okvir za celu tabelu */
+    border-collapse: collapse; /* Uklanjanje duplih linija između ćelija */
+  }
+  
+  /* Dodavanje okvira ćelijama */
+  .table th,
+  .table td {
+    border: 1px solid #ddd; /* Okvir za svaku ćeliju */
+    padding: 8px; /* Razmak unutar ćelija */
+    text-align: left; /* Poravnanje teksta ulevo */
+  }
+  
+  /* Stil za zaglavlja tabele */
+  .table th {
+    background-color: #f2f2f2; /* Svetlosiva pozadina za zaglavlja */
+    font-weight: bold; /* Podebljani tekst */
+  }
+  
+  /* Promena boje reda pri prelasku */
+  .table tr:hover {
+    background-color: #f9f9f9; /* Svetlija pozadina za red pri prelasku */
+  }
+  

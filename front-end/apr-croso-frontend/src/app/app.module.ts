@@ -17,6 +17,7 @@ import { CompanyReportComponent } from './components/user/company-report/company
 import { AddingEmployeeComponent } from './components/admin/adding-employee/adding-employee.component';
 import { EmployeeSearchComponent } from './components/user/employee-search/employee-search.component';
 import { InsuredPersonsComponent } from './components/user/insured-persons/insured-persons.component';
+import { FinancialReportComponent } from './components/admin/financial-report/financial-report.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { InsuredPersonsComponent } from './components/user/insured-persons/insur
     CompanyReportComponent,
     AddingEmployeeComponent,
     EmployeeSearchComponent,
-    InsuredPersonsComponent
+    InsuredPersonsComponent,
+    FinancialReportComponent
   ],
   imports: [
     BrowserModule,
