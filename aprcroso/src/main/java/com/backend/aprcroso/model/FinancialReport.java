@@ -34,4 +34,6 @@ public class FinancialReport {
     @Min(value = 0, message = "Bilans uspeha mora biti pozitivan.")
     private Double incomeStatement;
 
+    private Boolean valid = false;
+
     }

@@ -57,4 +57,40 @@ export class FinancialReportComponent implements OnInit {
       },
     });
   }
+
+  // markAsValid(report: any): void {
+  //   const updatedReport = { ...report, valid: true };
+  
+  //   this.financialReportService.updateFinancialReport(updatedReport).subscribe({
+  //     next: () => {
+  //       alert('Financial report marked as valid!');
+  //       this.getAllReports(); // Osveži listu da prikaže promenu
+  //     },
+  //     error: (error) => {
+  //       console.error('Error marking report as valid:', error);
+  //       alert('Failed to mark the financial report as valid.');
+  //     },
+  //   });
+  // }
+  
+  toggleValid(report: any, event: any): void {
+    const updatedReport = { ...report, valid: event.target.checked }; // Ažuriraj valid status
+  
+    this.financialReportService.updateFinancialReport(updatedReport).subscribe({
+      next: () => {
+        alert(
+          `Financial report marked as ${
+            updatedReport.valid ? 'valid' : 'invalid'
+          }!`
+        );
+        this.getAllReports(); // Osveži listu da prikaže promenu
+      },
+      error: (error) => {
+        console.error('Error toggling valid status:', error);
+        alert('Failed to update the financial report.');
+      },
+    });
+  }
+  
+
 }

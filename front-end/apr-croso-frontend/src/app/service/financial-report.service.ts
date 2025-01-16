@@ -10,7 +10,7 @@ export class FinancialReportService {
   private financialReportUrl = 'http://localhost:8005/api/financial-reports';
   private bankruptcyReportUrl = 'http://localhost:8005/api/bankruptcy-reports';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Kreiranje finansijskog izveštaja
   createFinancialReport(report: any): Observable<any> {
@@ -30,5 +30,10 @@ export class FinancialReportService {
   // Kreiranje prijave za stečaj
   createBankruptcyReport(report: any): Observable<any> {
     return this.http.post(this.bankruptcyReportUrl, report);
+  }
+
+  // Ažuriranje finansijskog izveštaja
+  updateFinancialReport(report: any): Observable<any> {
+    return this.http.put(`${this.financialReportUrl}/${report.id}`, report);
   }
 }

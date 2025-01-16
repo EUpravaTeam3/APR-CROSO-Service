@@ -3,7 +3,7 @@
 <p>This is ADMIN PAGE financial-report!</p>
 
 <h2>All Financial Reports</h2>
-  <table class="table table-striped">
+<table class="table table-striped">
     <thead>
       <tr>
         <th (click)="sortTable('id')" class="sortable">#</th>
@@ -11,6 +11,7 @@
         <th (click)="sortTable('year')" class="sortable">Year</th>
         <th (click)="sortTable('balanceSheet')" class="sortable">Balance Sheet</th>
         <th (click)="sortTable('incomeStatement')" class="sortable">Income Statement</th>
+        <th>Validated</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -22,9 +23,17 @@
         <td>{{ report.balanceSheet }}</td>
         <td>{{ report.incomeStatement }}</td>
         <td>
+          <input
+            type="checkbox"
+            [checked]="report.valid"
+            (change)="toggleValid(report, $event)"
+          />
+        </td>
+        <td>
           <button class="btn btn-warning btn-sm" >Edit</button>
-          <button class="btn btn-danger btn-sm">Delete</button>
+          <button class="btn btn-danger btn-sm" >Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
+  

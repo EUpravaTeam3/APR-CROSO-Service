@@ -45,4 +45,22 @@ public class FinancialReportController {
         List<FinancialReport> financialReports = financialReportService.getAllFinancialReports();
         return ResponseEntity.ok(financialReports);
     }
+
+    //updating
+    @PutMapping("/{id}")
+    public ResponseEntity<FinancialReport> updateFinancialReport(@PathVariable Long id, @RequestBody FinancialReport updatedReport) {
+        FinancialReport existingReport = financialReportService.getFinancialReportById(id);
+
+//                .orElseThrow(() -> new ResourceNotFoundException("FinancialReport not found with id: " + id));
+
+        existingReport.setCompanyName(updatedReport.getCompanyName());
+        existingReport.setYear(updatedReport.getYear());
+        existingReport.setBalanceSheet(updatedReport.getBalanceSheet());
+        existingReport.setIncomeStatement(updatedReport.getIncomeStatement());
+        existingReport.setValid(updatedReport.getValid());
+
+        FinancialReport savedReport = financialReportService.saveFinancialReport(existingReport);
+        return ResponseEntity.ok(savedReport);
+    }
+
 }
