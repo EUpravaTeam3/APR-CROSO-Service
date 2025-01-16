@@ -1,3 +1,7 @@
+.panel{
+    padding: 10px;
+}
+
 /* Stil za naslove kolona koje podržavaju sortiranje */
 .sortable {
     cursor: pointer; /* Promeni kursor u pointer */

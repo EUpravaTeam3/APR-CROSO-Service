@@ -46,7 +46,7 @@ public class FinancialReportController {
         return ResponseEntity.ok(financialReports);
     }
 
-    //updating
+    //updating Financial-reports
     @PutMapping("/{id}")
     public ResponseEntity<FinancialReport> updateFinancialReport(@PathVariable Long id, @RequestBody FinancialReport updatedReport) {
         FinancialReport existingReport = financialReportService.getFinancialReportById(id);

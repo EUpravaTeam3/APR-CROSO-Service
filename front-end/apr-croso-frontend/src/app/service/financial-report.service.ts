@@ -27,13 +27,15 @@ export class FinancialReportService {
     return this.http.get<any>(`${this.financialReportUrl}/${id}`);
   }
 
+  // Ažuriranje finansijskog izveštaja
+  updateFinancialReport(report: any): Observable<any> {
+    return this.http.put(`${this.financialReportUrl}/${report.id}`, report);
+  }
+  
   // Kreiranje prijave za stečaj
   createBankruptcyReport(report: any): Observable<any> {
     return this.http.post(this.bankruptcyReportUrl, report);
   }
 
-  // Ažuriranje finansijskog izveštaja
-  updateFinancialReport(report: any): Observable<any> {
-    return this.http.put(`${this.financialReportUrl}/${report.id}`, report);
-  }
+  
 }
