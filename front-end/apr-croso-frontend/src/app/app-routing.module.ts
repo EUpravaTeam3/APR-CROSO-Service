@@ -7,6 +7,7 @@ import { AddingEmployeeComponent } from './components/admin/adding-employee/addi
 import { EmployeeSearchComponent } from './components/user/employee-search/employee-search.component';
 import { InsuredPersonsComponent } from './components/user/insured-persons/insured-persons.component';
 import { FinancialReportComponent } from './components/admin/financial-report/financial-report.component';
+import { BankruptcyReportComponent } from './components/admin/bankruptcy-report/bankruptcy-report.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -16,7 +17,9 @@ const routes: Routes = [
   {path: 'adding-employee', component: AddingEmployeeComponent},
   {path: 'employee-search', component: EmployeeSearchComponent},
   {path: 'insured-persons', component: InsuredPersonsComponent},
-  {path: 'financial-report', component: FinancialReportComponent}
+  {path: 'financial-report', component: FinancialReportComponent},
+  {path: 'bankruptcy-report', component: BankruptcyReportComponent}
+
 ];
 
 @NgModule({

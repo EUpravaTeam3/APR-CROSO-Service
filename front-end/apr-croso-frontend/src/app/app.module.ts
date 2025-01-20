@@ -18,6 +18,7 @@ import { AddingEmployeeComponent } from './components/admin/adding-employee/addi
 import { EmployeeSearchComponent } from './components/user/employee-search/employee-search.component';
 import { InsuredPersonsComponent } from './components/user/insured-persons/insured-persons.component';
 import { FinancialReportComponent } from './components/admin/financial-report/financial-report.component';
+import { BankruptcyReportComponent } from './components/admin/bankruptcy-report/bankruptcy-report.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FinancialReportComponent } from './components/admin/financial-report/fi
     AddingEmployeeComponent,
     EmployeeSearchComponent,
     InsuredPersonsComponent,
-    FinancialReportComponent
+    FinancialReportComponent,
+    BankruptcyReportComponent
   ],
   imports: [
     BrowserModule,
