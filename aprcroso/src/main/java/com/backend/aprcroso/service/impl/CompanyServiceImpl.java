@@ -81,7 +81,7 @@ public class CompanyServiceImpl implements CompanyService{
         company.setPIB("123");
         company.setRegistrationDate(LocalDate.of(2017, 6,23));
         company.setRegistrationNumber("reg123");
-        company.setStatus(CompanyStatus.ACTIVE);
+        company.setCompanyStatus(CompanyStatus.ACTIVE);
         company.setEmployee(new Company().getEmployee());
         companyRepository.save(company);
 
@@ -91,7 +91,7 @@ public class CompanyServiceImpl implements CompanyService{
         company2.setPIB("321");
         company2.setRegistrationDate(LocalDate.of(2003, 4,22));
         company2.setRegistrationNumber("reg321");
-        company2.setStatus(CompanyStatus.ACTIVE);
+        company2.setCompanyStatus(CompanyStatus.ACTIVE);
         companyRepository.save(company2);
 
         Company company3 = new Company();
@@ -100,7 +100,7 @@ public class CompanyServiceImpl implements CompanyService{
         company3.setPIB("32123");
         company3.setRegistrationDate(LocalDate.now());
         company3.setRegistrationNumber("reg321233");
-        company3.setStatus(CompanyStatus.INACTIVE);
+        company3.setCompanyStatus(CompanyStatus.INACTIVE);
         companyRepository.save(company3);
 
         Company company4 = new Company();
@@ -109,7 +109,7 @@ public class CompanyServiceImpl implements CompanyService{
         company4.setPIB("234567");
         company4.setRegistrationDate(LocalDate.now());
         company4.setRegistrationNumber("reg31215678");
-        company4.setStatus(CompanyStatus.INACTIVE);
+        company4.setCompanyStatus(CompanyStatus.INACTIVE);
         companyRepository.save(company4);
 
     }

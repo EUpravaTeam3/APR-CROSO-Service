@@ -25,8 +25,8 @@ export class CreateCompanyComponent implements OnInit {
       pib: ['', [Validators.required]],
       registrationNumber: ['', [Validators.required]],
       registrationDate: ['', [Validators.required]],
-      companyStatus: ['Active', [Validators.required]],
-      address: this.fb.group({ // Dodavanje address kao FormGroup
+      companyStatus: ['ACTIVE', [Validators.required]],
+      address: this.fb.group({ 
         city: ['', Validators.required],
         street: ['', Validators.required],
         numberAndLetter: ['', Validators.required]
@@ -42,6 +42,8 @@ export class CreateCompanyComponent implements OnInit {
     }
 
     const company: Company = this.companyForm.value;
+
+    console.log('Submitted Form:', this.companyForm.value); // Proverite sve vrednosti
 
     console.log('Submitted Company Status:', company.companyStatus);  // Proverite vrednost ovde
 

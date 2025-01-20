@@ -41,7 +41,7 @@ public class Company {
 
     @Enumerated(EnumType.STRING)
     @Column
-    private CompanyStatus status;
+    private CompanyStatus companyStatus;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<User> employee = new HashSet<>();

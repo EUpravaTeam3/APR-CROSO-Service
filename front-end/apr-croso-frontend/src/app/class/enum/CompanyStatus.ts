@@ -1,3 +1,5 @@
-// enum CompanyStatus{
-//     ACTIVE, INACTIVE, DELETED
-// }
+enum CompanyStatus{
+    ACTIVE, 
+    INACTIVE, 
+    DELETED
+}

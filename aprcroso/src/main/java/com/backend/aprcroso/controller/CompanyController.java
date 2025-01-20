@@ -49,7 +49,8 @@ public class CompanyController {
 
   //create company
   @PostMapping("/companies")
-  public Company createCompany(@RequestBody @Validated Company company){
+  public Company createCompany(@RequestBody @Validated Company company) {
+    System.out.println("Received JSON: " + company);
     return companyRepository.save(company);
   }
 

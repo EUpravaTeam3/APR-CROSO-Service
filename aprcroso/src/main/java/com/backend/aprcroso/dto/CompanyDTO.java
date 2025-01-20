@@ -35,7 +35,7 @@ public class CompanyDTO {
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate registrationDate;
 
-    private CompanyStatus status;
+    private CompanyStatus companyStatus;
 
     private Set<Address> addresses; // Adrese se sada uključuju
 

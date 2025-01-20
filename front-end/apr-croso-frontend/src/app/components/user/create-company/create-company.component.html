@@ -37,14 +37,14 @@
     <div class="form-group">
       <label for="companyStatus">Company Status</label>
       <select id="companyStatus" formControlName="companyStatus" class="form-control" required>
-        <option value="">Select Status</option>
-        <option value="Active">Active</option>
-        <option value="Inactive">Inactive</option>
+        <option value="ACTIVE">Active</option>
+        <option value="INACTIVE">Inactive</option>
       </select>
       <div *ngIf="companyForm.get('companyStatus')?.invalid && companyForm.get('companyStatus')?.touched" class="text-danger">
         Company status is required.
       </div>
     </div>
+    
 
     <!-- Polja za unos adrese -->
      <h4>Company Address </h4>
