@@ -3,9 +3,11 @@ package com.backend.aprcroso.controller;
 
 import com.backend.aprcroso.dto.CompanyDTO;
 import com.backend.aprcroso.dto.CreateCompanyDTO;
+import com.backend.aprcroso.dto.UpdateCompanyStatusRequest;
 import com.backend.aprcroso.exception.NotFoundException;
 import com.backend.aprcroso.model.Address;
 import com.backend.aprcroso.model.Company;
+import com.backend.aprcroso.model.enums.CompanyStatus;
 import com.backend.aprcroso.repository.CompanyRepository;
 import com.backend.aprcroso.service.CompanyService;
 import com.backend.aprcroso.service.impl.CompanyServiceImpl;
@@ -16,8 +18,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -89,9 +94,6 @@ public class CompanyController {
     return ResponseEntity.ok(address);
   }
 
-
-
-
   //getting addresses
   @GetMapping("/companies/{id}/details")
   public ResponseEntity<CompanyDTO> getCompanyWithAddresses(@PathVariable Long id) {
@@ -102,7 +104,28 @@ public class CompanyController {
     return ResponseEntity.ok(company);
   }
 
+  //update status-by-pib
+  @PutMapping("/companies/update-status-by-pib")
+  public ResponseEntity<Company> updateCompanyStatus(@RequestBody UpdateCompanyStatusRequest request) {
+    Optional<Company> optionalCompany = companyRepository.findByPIB(request.getPib());
+
+    if (optionalCompany.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+    Company company = optionalCompany.get();
+
+    try {
+      company.setCompanyStatus(CompanyStatus.valueOf(request.getStatus().toUpperCase()));
+      companyRepository.save(company);
+      return ResponseEntity.ok(company);
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
+  }
 
 
-  //.....................
+
+
+
 }

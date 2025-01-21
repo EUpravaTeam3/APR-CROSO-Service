@@ -6,11 +6,11 @@ import { FinancialReportService } from '../../../service/financial-report.servic
   templateUrl: './bankruptcy-report.component.html',
   styleUrl: './bankruptcy-report.component.css'
 })
-export class BankruptcyReportComponent implements OnInit{
+export class BankruptcyReportComponent implements OnInit {
   bankruptcyReports: any[] = [];
   errorMessage: string = '';
 
-  constructor(private financialReportService: FinancialReportService) {}
+  constructor(private financialReportService: FinancialReportService) { }
 
   ngOnInit(): void {
     this.loadBankruptcyReports();
@@ -29,29 +29,67 @@ export class BankruptcyReportComponent implements OnInit{
   }
 
   confirmLiquidation(reportId: number): void {
-    // Prikazujemo potvrdu korisniku pre izvršavanja akcije
-    const confirmAction = confirm('Da li ste sigurni da želite da potvrdite likvidaciju?');
-  
-    if (confirmAction) {
-      // Ova funkcija može pozvati servis za ažuriranje stanja u bazi ili poslati drugi zahtev
-      console.log('Potvrđena likvidacija za ID:', reportId);
-      // TODO: Implementacija poziva servisa za potvrdu likvidacije
-    } else {
-      console.log('Likvidacija nije potvrđena.');
+    const report = this.bankruptcyReports.find(r => r.id === reportId);
+
+    if (!report) {
+        console.error(`Report with ID ${reportId} not found.`);
+        return;
     }
-  }
+
+    const confirmAction = confirm('Da li ste sigurni da želite da potvrdite likvidaciju?');
+
+    if (confirmAction) {
+        this.financialReportService.updateCompanyStatusByPib({ pib: report.pib, status: 'LIQUIDATION' }).subscribe(
+            (updatedReport) => {
+                alert('Likvidacija potvrđena uspesno!');
+                console.log('Status updated successfully:', updatedReport);
+
+                // Ažuriramo status direktno u listi prijava
+                report.status = updatedReport.companyStatus; 
+
+            },
+            (error) => {
+                console.error('Error updating status:', error);
+            }
+        );
+    } else {
+      alert('Likvidacija nije potvrđena');
+        console.log('Likvidacija nije potvrđena.');
+    }
+}
+
 
   confirmBankcruptcy(reportId: number): void {
+    const report = this.bankruptcyReports.find(r => r.id === reportId);
+
+    if (!report) {
+        console.error(`Report with ID ${reportId} not found.`);
+        return;
+    }
+
     const confirmAction = confirm('Da li ste sigurni da želite da potvrdite stečaj?');
 
     if (confirmAction) {
-      // Ova funkcija može pozvati servis za ažuriranje stanja u bazi ili poslati drugi zahtev
-      console.log('Potvrđen stečaj za ID:', reportId);
-      // TODO: Implementacija poziva servisa za potvrdu stečaja
+        this.financialReportService.updateCompanyStatusByPib({ pib: report.pib, status: 'BANKRUPTCY' }).subscribe(
+            (updatedReport) => {
+                alert('Stecaj potvrđen uspesno!');
+                console.log('Status updated successfully:', updatedReport);
+
+                // Ažuriramo status direktno u listi prijava
+                report.status = updatedReport.companyStatus; 
+
+            },
+            (error) => {
+                console.error('Error updating status:', error);
+            }
+        );
     } else {
-      console.log('Stečaj nije potvrđen.');
+        console.log('Stečaj nije potvrđen.');
     }
-  }
-    
+}
+
+
+
+
 
 }

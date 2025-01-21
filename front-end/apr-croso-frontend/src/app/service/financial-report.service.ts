@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -41,5 +41,13 @@ export class FinancialReportService {
   getAllBankruptcyReports(): Observable<any[]> {
     return this.http.get<any[]>(this.bankruptcyReportUrl);
   }
+
+  updateCompanyStatusByPib(requestBody: { pib: string; status: string }): Observable<any> {
+    return this.http.put('http://localhost:8005/api/companies/update-status-by-pib', requestBody);
+  }
+  
+  
+
+  
 
 }

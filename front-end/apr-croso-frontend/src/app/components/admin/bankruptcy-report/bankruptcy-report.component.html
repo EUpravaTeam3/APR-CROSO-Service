@@ -17,7 +17,7 @@
                 <th>Company Name</th>
                 <th>PIB</th>
                 <th>Bankruptcy Date</th>
-                <th>Liquidation</th>
+                <th>Liquidation Pending</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -30,10 +30,12 @@
                 <td>{{ report.liquidation ? 'Yes' : 'No' }}</td>
                 <td>
                     <button class="btn btn-warning btn-sm" *ngIf="report.liquidation"
+                        [disabled]="report.status === 'LIQUIDATION'" 
                         (click)="confirmLiquidation(report.id)">
                         Potvrdi likvidaciju
                     </button>
                     <button class="btn btn-warning btn-sm" *ngIf="!report.liquidation"
+                        [disabled]="report.status === 'BANKRUPTCY'"
                         (click)="confirmBankcruptcy(report.id)">
                         Potvrdi stečaj
                     </button>
