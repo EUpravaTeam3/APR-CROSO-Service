@@ -41,4 +41,17 @@ export class BankruptcyReportComponent implements OnInit{
     }
   }
 
+  confirmBankcruptcy(reportId: number): void {
+    const confirmAction = confirm('Da li ste sigurni da želite da potvrdite stečaj?');
+
+    if (confirmAction) {
+      // Ova funkcija može pozvati servis za ažuriranje stanja u bazi ili poslati drugi zahtev
+      console.log('Potvrđen stečaj za ID:', reportId);
+      // TODO: Implementacija poziva servisa za potvrdu stečaja
+    } else {
+      console.log('Stečaj nije potvrđen.');
+    }
+  }
+    
+
 }

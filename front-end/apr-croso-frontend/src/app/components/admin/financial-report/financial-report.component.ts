@@ -17,7 +17,7 @@ export class FinancialReportComponent implements OnInit {
 
   isEditing = false;
   editingReportId: number | null = null;
-  sortColumn: string = ''; // Trenutno aktivna kolona za sortiranje
+  sortColumn: string = ''; 
   sortAscending: boolean = true; // Sortiranje u rastućem ili opadajućem redosledu
 
   constructor(private financialReportService: FinancialReportService) { }

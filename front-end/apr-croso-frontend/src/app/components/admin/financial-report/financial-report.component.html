@@ -3,8 +3,8 @@
 <p>This is ADMIN PAGE financial-report!</p>
 <div class="panel panel-primary">
 
-<h2>All Financial Reports</h2>
-<table class="table table-striped">
+  <h2>All Financial Reports</h2>
+  <table class="table table-striped" *ngIf="financialReports.length > 0; else noData">
     <thead>
       <tr>
         <th (click)="sortTable('id')" class="sortable">ID</th>
@@ -24,20 +24,16 @@
         <td>{{ report.balanceSheet }}</td>
         <td>{{ report.incomeStatement }}</td>
         <td>
-          <input
-            type="checkbox"
-            [checked]="report.valid"
-            (change)="toggleValid(report, $event)"
-          />
+          <input type="checkbox" [checked]="report.valid" (change)="toggleValid(report, $event)" />
         </td>
         <td>
-          <button class="btn btn-warning btn-sm" >Edit</button>
-          <button class="btn btn-danger btn-sm" >Delete</button>
+          <button class="btn btn-warning btn-sm">Edit</button>
+          <button class="btn btn-danger btn-sm">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
-
+  <ng-template #noData>
+    <p>No bankruptcy reports available.</p>
+</ng-template>
 </div>
-
-  

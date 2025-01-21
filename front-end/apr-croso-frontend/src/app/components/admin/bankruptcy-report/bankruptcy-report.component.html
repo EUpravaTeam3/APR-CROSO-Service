@@ -31,6 +31,10 @@
                         (click)="confirmLiquidation(report.id)">
                         Potvrdi likvidaciju
                     </button>
+                    <button class="btn btn-warning btn-sm" *ngIf="!report.liquidation"
+                        (click)="confirmBankcruptcy(report.id)">
+                        Potvrdi stečaj
+                    </button>
                 </td>
             </tr>
         </tbody>
