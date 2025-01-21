@@ -22,6 +22,9 @@ public class FinancialReport {
     @NotBlank(message = "Naziv kompanije je obavezan.")
     private String companyName;
 
+    @NotNull
+    private String PIB;
+
     @NotNull(message = "Godina je obavezna.")
     @Min(value = 1900, message = "Godina mora biti veća ili jednaka 1900.")
     private Integer year;

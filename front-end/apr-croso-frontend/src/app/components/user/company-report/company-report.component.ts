@@ -27,6 +27,7 @@ export class CompanyReportComponent implements OnInit {
   ngOnInit(): void {
     this.financialReportForm = this.fb.group({
       companyName: ['', Validators.required],
+      pib: ['', Validators.required],
       year: ['', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
       balanceSheet: ['', Validators.required],
       incomeStatement: ['', Validators.required]
@@ -34,6 +35,7 @@ export class CompanyReportComponent implements OnInit {
 
     this.bankruptcyForm = this.fb.group({
       companyName: ['', Validators.required],
+      pib: ['', Validators.required],
       bankruptcyDate: ['', Validators.required],
       liquidation: [false]
     });

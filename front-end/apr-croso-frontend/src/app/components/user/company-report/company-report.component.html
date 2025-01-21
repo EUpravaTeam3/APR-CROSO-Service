@@ -10,8 +10,8 @@
         <input id="companyName" formControlName="companyName" required>
       </div>
       <div>
-        <label>PIB:</label>
-        <input type="number">
+        <label for="pib">PIB:</label>
+        <input id="pib" formControlName="pib" required type="number">
       </div>
       <br>
       <div>
@@ -32,6 +32,7 @@
     <div *ngIf="financialReportSubmitted">
       <h3>Podaci o finansijskom izveštaju:</h3>
       <p><strong>Kompanija:</strong> {{ financialReportData.companyName }}</p>
+      <p><strong>PIB:</strong>{{ financialReportData.pib }}</p>
       <p><strong>Godina:</strong> {{ financialReportData.year }}</p>
       <p><strong>Bilans Stanja:</strong> {{ financialReportData.balanceSheet }}</p>
       <p><strong>Bilans Uspeha:</strong> {{ financialReportData.incomeStatement }}</p>
@@ -45,8 +46,8 @@
         <input id="companyNameBankruptcy" formControlName="companyName" required>
       </div>
       <div>
-        <label>PIB:</label>
-        <input type="number">
+        <label for="pibBankruptcy">PIB:</label>
+        <input id="pibBankruptcy" formControlName="pib" type="number" required>
       </div>
       <br>
       <div>
@@ -63,6 +64,7 @@
     <div *ngIf="bankruptcySubmitted">
       <h3>Podaci o stečaju i likvidaciji:</h3>
       <p><strong>Kompanija:</strong> {{ bankruptcyData.companyName }}</p>
+      <p><strong>PIB:</strong>{{ bankruptcyData.pib }}</p>
       <p><strong>Datum početka stečaja:</strong> {{ bankruptcyData.bankruptcyDate }}</p>
       <p><strong>Likvidacija:</strong> {{ bankruptcyData.liquidation ? 'Da' : 'Ne' }}</p>
     </div>

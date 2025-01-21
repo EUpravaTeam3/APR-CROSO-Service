@@ -9,6 +9,7 @@
       <tr>
         <th (click)="sortTable('id')" class="sortable">ID</th>
         <th (click)="sortTable('companyName')" class="sortable">Company Name</th>
+        <th (click)="sortTable('pib')" class="sortable">PIB</th>
         <th (click)="sortTable('year')" class="sortable">Year</th>
         <th (click)="sortTable('balanceSheet')" class="sortable">Balance Sheet</th>
         <th (click)="sortTable('incomeStatement')" class="sortable">Income Statement</th>
@@ -20,6 +21,7 @@
       <tr *ngFor="let report of financialReports; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ report.companyName }}</td>
+        <td>{{ report.pib }}</td>
         <td>{{ report.year }}</td>
         <td>{{ report.balanceSheet }}</td>
         <td>{{ report.incomeStatement }}</td>

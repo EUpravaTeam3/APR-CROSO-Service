@@ -16,6 +16,7 @@ public class BankruptcyReport {
     private Long id;
 
     private String companyName;
+    private String PIB;
     private LocalDate bankruptcyDate;
     private boolean liquidation;    //likvidacija
 }
