@@ -3,6 +3,40 @@
 <p>This is ADMIN PAGE bankruptcy-report!</p>
 
 
-<div class="panel panel-primary">
-    <p>bankruptcy-report works!</p>
+<div class="container mt-4">
+    <h2>Bankruptcy Reports</h2>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
+
+    <table class="table table-striped" *ngIf="bankruptcyReports.length > 0; else noData">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Company Name</th>
+                <th>Bankruptcy Date</th>
+                <th>Liquidation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let report of bankruptcyReports">
+                <td>{{ report.id }}</td>
+                <td>{{ report.companyName }}</td>
+                <td>{{ report.bankruptcyDate | date: 'dd.MM.yyyy.' }}</td>
+                <td>{{ report.liquidation ? 'Yes' : 'No' }}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" *ngIf="report.liquidation"
+                        (click)="confirmLiquidation(report.id)">
+                        Potvrdi likvidaciju
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ng-template #noData>
+        <p>No bankruptcy reports available.</p>
+    </ng-template>
 </div>

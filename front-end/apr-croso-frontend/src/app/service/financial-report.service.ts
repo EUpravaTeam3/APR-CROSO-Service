@@ -37,5 +37,9 @@ export class FinancialReportService {
     return this.http.post(this.bankruptcyReportUrl, report);
   }
 
-  
+  // Dobijanje svih prijava za stečaj
+  getAllBankruptcyReports(): Observable<any[]> {
+    return this.http.get<any[]>(this.bankruptcyReportUrl);
+  }
+
 }
