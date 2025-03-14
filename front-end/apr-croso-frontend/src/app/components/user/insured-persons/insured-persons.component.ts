@@ -83,14 +83,26 @@ export class InsuredPersonsComponent implements OnInit {
   }
 
   deletePerson(id: number | undefined): void {
-    if (id === undefined) {
-      console.error('ID nije definisan');
-      return;
+
+    const confirmAction = confirm('Da li ste sigurni da želite da obrišete osiguranu osobu?');
+
+    if(confirmAction){ 
+      if (id === undefined) {
+        console.error('ID nije definisan');
+        return;
+      }
+  
+      this.insuredPersonService.deleteInsuredPerson(id).subscribe(() => {
+        this.insuredPersons = this.insuredPersons.filter(person => person.id !== id);
+      });
+
+      alert('Osigurana soba uspešno obrisana');
+    }
+    else{
+      alert('Osigurana osoba nije obrisana.');
     }
 
-    this.insuredPersonService.deleteInsuredPerson(id).subscribe(() => {
-      this.insuredPersons = this.insuredPersons.filter(person => person.id !== id);
-    });
+    
   }
   getErrorMessage(field: string): string {
     const control = this.insuredPersonForm.get(field);

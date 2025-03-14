@@ -64,6 +64,7 @@ export class BankruptcyReportComponent implements OnInit {
 
     if (!report) {
         console.error(`Report with ID ${reportId} not found.`);
+        alert("Company with entered PIB not found.");
         return;
     }
 
@@ -84,6 +85,7 @@ export class BankruptcyReportComponent implements OnInit {
             }
         );
     } else {
+        alert('Stečaj nije potvrđen.');
         console.log('Stečaj nije potvrđen.');
     }
 }
