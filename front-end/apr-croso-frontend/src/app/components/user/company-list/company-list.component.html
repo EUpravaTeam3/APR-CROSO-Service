@@ -1,33 +1,54 @@
 <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h2>All Companies List</h2>
-    </div>
-    <div class="panel-body">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>PIB</th>
-            <th>Registration Number</th>
-            <th>Registration Date</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let company of companies">
-            <td>{{company.name}}</td>
-            <td>{{company.pib}}</td>
-            <td>{{company.registrationNumber}}</td>
-            <td>{{company.registrationDate | date:'dd.MM.yyyy.' }}</td>
-            <td>{{company.companyStatus}}</td>
-            <td>
-                <button class="btn btn-info" (click)="companyDetails(company.id)">Details</button>
-                <button class="btn btn-warning" style="margin-left: 10px">Update</button>
-                <button  class="btn btn-danger" style="margin-left: 10px">Delete</button>
-            </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="panel-heading">
+    <h2>All Companies List</h2>
   </div>
+  <div class="panel-body">
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            Name <br>
+            <input type="text" class="form-control" [(ngModel)]="nameFilter" placeholder="Search by Name">
+          </th>
+          <th>
+            PIB <br>
+            <input type="text" class="form-control" [(ngModel)]="pibFilter" placeholder="Search by PIB">
+          </th>
+          <th>
+            Registration Number <br>
+            <input type="text" class="form-control" [(ngModel)]="regNumberFilter" placeholder="Search by Reg. Number">
+          </th>
+          <th>
+            Registration Date <br>
+            <input type="text" class="form-control" [(ngModel)]="regDateFilter" placeholder="Search by Date" readonly>
+          </th>
+          <th>
+            Status <br>
+            <select class="form-control" [(ngModel)]="statusFilter">
+              <option value="">All</option>
+              <option *ngFor="let status of statusOptions" [value]="status">{{status}}</option>
+            </select>
+          <th>Actions <br>
+            <button class="btn btn-secondary" (click)="resetFilters()">Reset Filters</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of filteredCompanies">
+          <td>{{company.name}}</td>
+          <td>{{company.pib}}</td>
+          <td>{{company.registrationNumber}}</td>
+          <td>{{company.registrationDate}}</td>
+          <td>{{company.companyStatus}}</td>
+          <td>
+            <button class="btn btn-info" (click)="companyDetails(company.id)">Details</button>
+            <!-- <button class="btn btn-warning" style="margin-left: 10px">Update</button> -->
+            <button class="btn btn-danger" style="margin-left: -1px">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
