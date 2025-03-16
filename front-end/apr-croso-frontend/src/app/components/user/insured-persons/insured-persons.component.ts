@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InsuredPerson } from '../../../class/InsuredPerson';
 import { InsuredPersonService } from '../../../service/insured-person.service';
+import { Company } from '../../../class/company';
+import { CompanyService } from '../../../service/company.service';
 
 @Component({
   selector: 'insured-persons',
@@ -12,6 +14,7 @@ export class InsuredPersonsComponent implements OnInit {
   insuredPersonForm!: FormGroup;
   insuredPersons: InsuredPerson[] = [];
   selectedPerson: InsuredPerson | null = null;
+  companies: Company[] = [];
 
   // Selektovanje sekcije detalja
   @ViewChild('detailsSection', { static: false }) detailsSection!: ElementRef;
@@ -19,7 +22,9 @@ export class InsuredPersonsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private insuredPersonService: InsuredPersonService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private companyService: CompanyService,
+
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +49,18 @@ export class InsuredPersonsComponent implements OnInit {
     });
 
     this.loadInsuredPersons();
+    this.loadCompanies();
   }
+
+  loadCompanies(): void {
+    this.companyService.getCompanyList().subscribe({
+      next: (data) => {
+        this.companies = data;
+      },
+      error: (err) => console.error('Failed to load companies:', err)
+    });
+  }
+  
 
   loadInsuredPersons(): void {
     this.insuredPersonService.getAllInsuredPersons().subscribe({

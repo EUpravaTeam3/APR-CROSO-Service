@@ -41,7 +41,12 @@
 
             <div class="form-group" *ngIf="insuredPersonForm.get('employed')?.value">
                 <label for="employerName">Naziv Poslodavca</label>
-                <input id="employerName" formControlName="employerName" placeholder="Unesite naziv poslodavca">
+                <select id="employerName" formControlName="employerName">
+                    <option value="">-- Izaberite poslodavca --</option>
+                    <option *ngFor="let company of companies" [value]="company.name">
+                        {{ company.name }}
+                    </option>
+                </select>
                 <small class="error"
                     *ngIf="insuredPersonForm.get('employerName')?.touched && insuredPersonForm.get('employerName')?.invalid">
                     {{ getErrorMessage('employerName') }}
