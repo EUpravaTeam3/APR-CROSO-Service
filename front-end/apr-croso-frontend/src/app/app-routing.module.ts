@@ -8,6 +8,8 @@ import { EmployeeSearchComponent } from './components/user/employee-search/emplo
 import { InsuredPersonsComponent } from './components/user/insured-persons/insured-persons.component';
 import { FinancialReportComponent } from './components/admin/financial-report/financial-report.component';
 import { BankruptcyReportComponent } from './components/admin/bankruptcy-report/bankruptcy-report.component';
+import { CreateCompanyComponent } from './components/user/create-company/create-company.component';
+import { ContributionPaymentComponent } from './components/user/contribution-payment/contribution-payment.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -18,7 +20,9 @@ const routes: Routes = [
   {path: 'employee-search', component: EmployeeSearchComponent},
   {path: 'insured-persons', component: InsuredPersonsComponent},
   {path: 'financial-report', component: FinancialReportComponent},
-  {path: 'bankruptcy-report', component: BankruptcyReportComponent}
+  {path: 'bankruptcy-report', component: BankruptcyReportComponent},
+  {path: 'create-company', component: CreateCompanyComponent},
+  {path: 'contribution-payment', component: ContributionPaymentComponent}
 
 ];
 

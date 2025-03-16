@@ -1,6 +1,7 @@
+<nav-bar></nav-bar>
 <div class="container">
-    <p>*Admin u APR dodaje zaposlenog u neku kompaniju.*</p>
-    <h2>Dodavanje Zaposlenih</h2>
+    <h2>Prvo kompanija salje zahtev da zaposli korisnika, zatim ADMIN u CROSO odobrava</h2>
+    <h3>Znaci treba 1 komponenta za unos zaposlenog od strane kompanije i 1 komponenta za potvrdu od strane CROSO</h3>
     <form (ngSubmit)="onAddEmployee()">
       <label for="employeeName">Ime zaposlenog:</label>
       <input type="text" id="employeeName" [(ngModel)]="employee.name" name="employeeName" required />
@@ -14,3 +15,7 @@
       <button type="submit">Dodaj Zaposlenog</button>
     </form>
   </div>
+
+  <br>
+
+  <employee-search></employee-search>
