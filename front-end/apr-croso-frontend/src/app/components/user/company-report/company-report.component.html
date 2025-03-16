@@ -6,8 +6,13 @@
     <h2>Podnošenje finansijskih izveštaja</h2>
     <form [formGroup]="financialReportForm" (ngSubmit)="onSubmitFinancialReport()">
       <div>
-        <label for="companyName">Naziv Kompanije:</label>
-        <input id="companyName" formControlName="companyName" required>
+        <label for="companyName">Naziv Kompanije</label>
+                <select id="companyName" formControlName="companyName">
+                    <option value="">-- Izaberite kompaniju --</option>
+                    <option *ngFor="let company of companies" [value]="company.name">
+                        {{ company.name }}
+                    </option>
+                </select>
       </div>
       <div>
         <label for="pib">PIB:</label>
@@ -42,8 +47,13 @@
     <h2>Podnošenje prijava za stečaj i likvidaciju</h2>
     <form [formGroup]="bankruptcyForm" (ngSubmit)="onSubmitBankruptcy()">
       <div>
-        <label for="companyNameBankruptcy">Naziv Kompanije:</label>
-        <input id="companyNameBankruptcy" formControlName="companyName" required>
+        <label for="companyName">Naziv Kompanije</label>
+                <select id="companyName" formControlName="companyName">
+                    <option value="">-- Izaberite kompaniju --</option>
+                    <option *ngFor="let company of companies" [value]="company.name">
+                        {{ company.name }}
+                    </option>
+                </select>
       </div>
       <div>
         <label for="pibBankruptcy">PIB:</label>

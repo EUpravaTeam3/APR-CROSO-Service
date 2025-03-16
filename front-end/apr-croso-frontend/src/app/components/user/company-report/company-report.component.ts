@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FinancialReportService } from '../../../service/financial-report.service';
+import { Company } from '../../../class/company';
+import { CompanyService } from '../../../service/company.service';
 
 @Component({
   selector: 'company-report',
@@ -19,9 +21,13 @@ export class CompanyReportComponent implements OnInit {
   bankruptcySubmitted: boolean = false;
   bankruptcyData: any;
 
+  companies: Company[] = [];
+  
   constructor(
     private fb: FormBuilder,
-    private financialReportService: FinancialReportService
+    private financialReportService: FinancialReportService,
+    private companyService: CompanyService
+    
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +44,17 @@ export class CompanyReportComponent implements OnInit {
       pib: ['', Validators.required],
       bankruptcyDate: ['', Validators.required],
       liquidation: [false]
+    });
+    this.loadCompanies();
+  }
+
+  //Ucitavanje Kompanije iz servisa
+  loadCompanies(): void {
+    this.companyService.getCompanyList().subscribe({
+      next: (data) => {
+        this.companies = data;
+      },
+      error: (err) => console.error('Failed to load companies:', err)
     });
   }
 

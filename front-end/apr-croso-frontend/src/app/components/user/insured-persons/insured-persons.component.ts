@@ -23,7 +23,7 @@ export class InsuredPersonsComponent implements OnInit {
     private fb: FormBuilder,
     private insuredPersonService: InsuredPersonService,
     private renderer: Renderer2,
-    private companyService: CompanyService,
+    private companyService: CompanyService
 
   ) { }
 
