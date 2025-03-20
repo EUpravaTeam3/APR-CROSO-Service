@@ -23,7 +23,8 @@
     <div class="form-group">
       <label for="registrationNumber">Registration Number</label>
       <input id="registrationNumber" formControlName="registrationNumber" type="text" class="form-control" required />
-      <div *ngIf="companyForm.get('registrationNumber')?.invalid && companyForm.get('registrationNumber')?.touched" class="text-danger">
+      <div *ngIf="companyForm.get('registrationNumber')?.invalid && companyForm.get('registrationNumber')?.touched"
+        class="text-danger">
         Registration number is required.
       </div>
     </div>
@@ -31,7 +32,8 @@
     <div class="form-group">
       <label for="registrationDate">Registration Date</label>
       <input id="registrationDate" formControlName="registrationDate" type="date" class="form-control" required />
-      <div *ngIf="companyForm.get('registrationDate')?.invalid && companyForm.get('registrationDate')?.touched" class="text-danger">
+      <div *ngIf="companyForm.get('registrationDate')?.invalid && companyForm.get('registrationDate')?.touched"
+        class="text-danger">
         Registration date is required.
       </div>
     </div>
@@ -42,48 +44,64 @@
         <option value="ACTIVE">Active</option>
         <option value="INACTIVE">Inactive</option>
       </select>
-      <div *ngIf="companyForm.get('companyStatus')?.invalid && companyForm.get('companyStatus')?.touched" class="text-danger">
+      <div *ngIf="companyForm.get('companyStatus')?.invalid && companyForm.get('companyStatus')?.touched"
+        class="text-danger">
         Company status is required.
       </div>
     </div>
 
-    <!-- <div class="form-group">
-      <label for="companyWorkField">Company Work Field</label>
-      <select id="companyWorkField" formControlName="companyWorkField" class="form-control" required>
-        <option value="A011">A011</option>
-        <option value="A012">A012</option>
-      </select>
-    </div> -->
-    
+    <h4>Company Work Field</h4>
+    <div formGroupName="workField">
+      <div class="form-group">
+        <label for="workFieldName">Work Field Name</label>
+        <input id="workFieldName" formControlName="name" type="text" class="form-control" required />
+      </div>
+
+      <div class="form-group">
+        <label for="workFieldDescription">Work Field Description</label>
+        <input id="workFieldDescription" formControlName="description" type="text" class="form-control" required />
+      </div>
+
+      <div class="form-group">
+        <label for="workFieldCode">Work Field Code</label>
+        <input id="workFieldCode" formControlName="code" type="text" class="form-control" required />
+      </div>
+    </div>
+
+
 
     <!-- Polja za unos adrese -->
-     <h4>Company Address </h4>
+    <h4>Company Address </h4>
     <div formGroupName="address"> <!-- Obeležite da koristite address FormGroup -->
       <div class="form-group">
         <label for="city">City</label>
         <input id="city" formControlName="city" type="text" class="form-control" required />
-        <div *ngIf="companyForm.get('address.city')?.invalid && companyForm.get('address.city')?.touched" class="text-danger">
+        <div *ngIf="companyForm.get('address.city')?.invalid && companyForm.get('address.city')?.touched"
+          class="text-danger">
           City is required.
         </div>
       </div>
-    
+
       <div class="form-group">
         <label for="street">Street</label>
         <input id="street" formControlName="street" type="text" class="form-control" required />
-        <div *ngIf="companyForm.get('address.street')?.invalid && companyForm.get('address.street')?.touched" class="text-danger">
+        <div *ngIf="companyForm.get('address.street')?.invalid && companyForm.get('address.street')?.touched"
+          class="text-danger">
           Street is required.
         </div>
       </div>
-    
+
       <div class="form-group">
         <label for="numberAndLetter">Number and Letter</label>
         <input id="numberAndLetter" formControlName="numberAndLetter" type="text" class="form-control" required />
-        <div *ngIf="companyForm.get('address.numberAndLetter')?.invalid && companyForm.get('address.numberAndLetter')?.touched" class="text-danger">
+        <div
+          *ngIf="companyForm.get('address.numberAndLetter')?.invalid && companyForm.get('address.numberAndLetter')?.touched"
+          class="text-danger">
           Number and Letter are required.
         </div>
       </div>
     </div>
-    
+
 
     <button type="submit" class="btn btn-primary" [disabled]="companyForm.invalid">Submit</button>
   </form>

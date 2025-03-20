@@ -26,7 +26,14 @@
       </tr>
       <tr>
         <th>Delatnost</th>
-        <td>Delatnost DEMO</td>
+        <td>
+          <div *ngIf="workFields.length > 0; else noWorkFields">
+              <li *ngFor="let workField of workFields">
+                {{ workField.name }} ({{ workField.code }}) - {{ workField.description }}
+              </li>
+          </div>
+          <ng-template #noWorkFields>Nema dostupnih informacija o delatnosti</ng-template>
+        </td>
       </tr>
       <tr>
         <th>Adresa</th>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Company } from '../../../class/company';
 import { CompanyService } from '../../../service/company.service';
 import { AddressService } from '../../../service/address.service';
+import { WorkField, WorkfieldService } from '../../../service/workfield.service';
 
 @Component({
   selector: 'create-company',
@@ -11,11 +12,13 @@ import { AddressService } from '../../../service/address.service';
 })
 export class CreateCompanyComponent implements OnInit {
   companyForm!: FormGroup;
+  workFields: WorkField[] = [];
 
   constructor(
     private fb: FormBuilder,
     private companyService: CompanyService,
-    private addressService: AddressService // Dodajemo servis za adrese
+    private addressService: AddressService,
+    private workFieldService: WorkfieldService
 
   ) {}
 
@@ -30,6 +33,11 @@ export class CreateCompanyComponent implements OnInit {
         city: ['', Validators.required],
         street: ['', Validators.required],
         numberAndLetter: ['', Validators.required]
+      }),
+      workField: this.fb.group({
+        name: ['', Validators.required],
+        description: ['', Validators.required],
+        code: ['', Validators.required]
       })
     });
   }
@@ -42,27 +50,37 @@ export class CreateCompanyComponent implements OnInit {
     }
 
     const company: Company = this.companyForm.value;
+    const workField: WorkField = this.companyForm.get('workField')?.value;
 
     console.log('Submitted Form:', this.companyForm.value); // Proverite sve vrednosti
 
     console.log('Submitted Company Status:', company.companyStatus);  // Proverite vrednost ovde
+
 
     this.companyService.createCompany(company).subscribe(
       (companyResponse) => {
         console.log('Company created successfully!', companyResponse);
 
         const address = this.companyForm.get('address')?.value;
-
         this.addressService.addAddressToCompany(companyResponse.id, address).subscribe(
-          (addressResponse) => {
-            console.log('Address added successfully!', addressResponse);
-            alert('Company and address created successfully!');
+          () => {
+            console.log('Address added successfully!');
+          },
+          (error) => {
+            console.error('Error adding address', error);
+          }
+        );
+
+        this.workFieldService.addWorkFieldToCompany(companyResponse.id, workField).subscribe(
+          () => {
+            console.log('WorkField added successfully!');
+            alert('Company, address, and work field added successfully!');
             this.companyForm.reset();
             this.reloadPage();
           },
-          (addressError) => {
-            console.error('Error adding address', addressError);
-            alert('Company created, but error adding address.');
+          (error) => {
+            console.error('Error adding work field', error);
+            alert('Company created, but error adding work field.');
           }
         );
       },

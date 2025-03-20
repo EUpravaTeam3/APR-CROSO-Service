@@ -3,6 +3,7 @@ import { Company } from '../../../class/company';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from '../../../service/company.service';
 import { Address } from '../../../class/address';
+import { WorkField, WorkfieldService } from '../../../service/workfield.service';
 
 @Component({
   selector: 'company-details',
@@ -14,13 +15,21 @@ export class CompanyDetailsComponent {
   id!: number;
   company!: Company;
   address!: Address;
+  workFields: WorkField[] = [];  // Promenili smo workField u niz workFields
 
 
-  constructor(private companyService: CompanyService, private router: Router, private route: ActivatedRoute){}
+  constructor(
+    private companyService: CompanyService, 
+    private workFieldService: WorkfieldService, 
+    private router: Router, 
+    private route: ActivatedRoute
+  ){}
 
   ngOnInit(): void {
     this.getCompanyById();
     this.getAddressByCompanyId(); // Pozovite metodu za učitavanje adrese
+    this.getWorkFieldsByCompanyId(); 
+
   }
 
 
@@ -43,6 +52,18 @@ export class CompanyDetailsComponent {
       }
     );
   }
+
+  getWorkFieldsByCompanyId() {
+    this.workFieldService.getWorkFieldsByCompanyId(this.id).subscribe(
+      (data) => {
+        this.workFields = data;
+      },
+      (error) => {
+        console.error('Error fetching work fields:', error);
+      }
+    );
+  }
+
 
   goHome(){
     this.router.navigate(['/home']);
