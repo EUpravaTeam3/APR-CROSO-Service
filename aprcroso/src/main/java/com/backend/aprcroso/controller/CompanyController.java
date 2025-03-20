@@ -7,6 +7,7 @@ import com.backend.aprcroso.dto.UpdateCompanyStatusRequest;
 import com.backend.aprcroso.exception.NotFoundException;
 import com.backend.aprcroso.model.Address;
 import com.backend.aprcroso.model.Company;
+import com.backend.aprcroso.model.WorkField;
 import com.backend.aprcroso.model.enums.CompanyStatus;
 import com.backend.aprcroso.repository.CompanyRepository;
 import com.backend.aprcroso.service.CompanyService;
@@ -123,6 +124,22 @@ public class CompanyController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
   }
+
+  //dodavanje WorkField u kompanije
+  @PostMapping("/companies/{companyId}/workfields")
+  public ResponseEntity<Void> addWorkFieldToCompany(@PathVariable Long companyId, @RequestBody @Validated WorkField workField) {
+    companyServiceImpl.addWorkFieldToCompany(companyId, workField);
+    return ResponseEntity.ok().build();
+  }
+
+  //dobavljanje WorkField iz kompanije
+  @GetMapping("/companies/{companyId}/workfields")
+  public ResponseEntity<List<WorkField>> getWorkFieldsByCompanyId(@PathVariable Long companyId) {
+    List<WorkField> workFields = companyServiceImpl.getWorkFieldsByCompanyId(companyId);
+    return ResponseEntity.ok(workFields);
+  }
+
+
 
 
 

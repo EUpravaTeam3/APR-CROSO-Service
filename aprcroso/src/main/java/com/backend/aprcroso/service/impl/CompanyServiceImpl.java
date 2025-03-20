@@ -2,23 +2,20 @@ package com.backend.aprcroso.service.impl;
 
 import com.backend.aprcroso.dto.CompanyDTO;
 import com.backend.aprcroso.dto.CreateCompanyDTO;
-import com.backend.aprcroso.dto.UserDTO;
 import com.backend.aprcroso.exception.NotFoundException;
 import com.backend.aprcroso.model.Address;
 import com.backend.aprcroso.model.Company;
-import com.backend.aprcroso.model.User;
+import com.backend.aprcroso.model.WorkField;
 import com.backend.aprcroso.model.enums.CompanyStatus;
 import com.backend.aprcroso.repository.AddressRepository;
 import com.backend.aprcroso.repository.CompanyRepository;
 import com.backend.aprcroso.repository.UserRepository;
 import com.backend.aprcroso.service.CompanyService;
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CompanyServiceImpl implements CompanyService{
@@ -60,6 +57,31 @@ public class CompanyServiceImpl implements CompanyService{
 
         //vracamo prvu adresu iz skupa
     }
+
+    //dodavanje WorkField-a
+    @Override
+    public void addWorkFieldToCompany(Long companyId, WorkField workField) {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new NotFoundException("Company not found with ID: " + companyId));
+
+        if (workField == null) {
+            throw new IllegalArgumentException("WorkField cannot be null");
+        }
+
+        workField.setCompany(company);  // OVA LINIJA SADA RADI
+        company.getWorkFields().add(workField);
+
+        companyRepository.save(company);
+    }
+
+    //dobavljanje WorkField-a
+    public List<WorkField> getWorkFieldsByCompanyId(Long companyId) {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new NotFoundException("Company not found with ID: " + companyId));
+
+        return company.getWorkFields();
+    }
+
 
 
 
