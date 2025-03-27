@@ -1,0 +1,29 @@
+<nav-bar></nav-bar>
+<br>
+<a>Komponenta za ADMINA APR</a>
+<h2>Zahtevi za Zaposlenje</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Ime</th>
+      <th>Pozicija</th>
+      <th>Status</th>
+      <th>Akcije</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let request of requests">
+      <td>{{ request.employee.name }}</td>
+      <td>{{ request.employee.position }}</td>
+      <td>{{ request.status }}</td>
+      <td>
+        <button *ngIf="request.id !== undefined" (click)="processRequest(request.id!, true)">
+          Prihvati
+        </button>
+        <button *ngIf="request.id !== undefined" (click)="processRequest(request.id!, false)">
+          Odbij
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

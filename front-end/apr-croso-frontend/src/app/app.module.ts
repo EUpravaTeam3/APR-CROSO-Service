@@ -20,6 +20,9 @@ import { InsuredPersonsComponent } from './components/user/insured-persons/insur
 import { FinancialReportComponent } from './components/admin/financial-report/financial-report.component';
 import { BankruptcyReportComponent } from './components/admin/bankruptcy-report/bankruptcy-report.component';
 import { ContributionPaymentComponent } from './components/user/contribution-payment/contribution-payment.component';
+import { EmployeeListComponent } from './components/admin/employee-management/employee-list/employee-list.component';
+import { RequestListComponent } from './components/admin/employee-management/request-list/request-list.component';
+import { AddingEmployeeFinalComponent } from './components/admin/employee-management/adding-employee-final/adding-employee-final.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { ContributionPaymentComponent } from './components/user/contribution-pay
     InsuredPersonsComponent,
     FinancialReportComponent,
     BankruptcyReportComponent,
-    ContributionPaymentComponent
+    ContributionPaymentComponent,
+    EmployeeListComponent,
+    RequestListComponent,
+    AddingEmployeeFinalComponent
   ],
   imports: [
     BrowserModule,

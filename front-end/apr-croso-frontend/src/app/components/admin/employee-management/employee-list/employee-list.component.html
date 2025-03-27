@@ -1,0 +1,20 @@
+<nav-bar></nav-bar>
+<br>
+
+<h2>Lista Zaposlenih</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Ime</th>
+      <th>Pozicija</th>
+      <th>Zaposlen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.position }}</td>
+      <td>{{ employee.employed ? 'Da' : 'Ne' }}</td>
+    </tr>
+  </tbody>
+</table>

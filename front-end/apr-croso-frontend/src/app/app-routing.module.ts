@@ -10,6 +10,9 @@ import { FinancialReportComponent } from './components/admin/financial-report/fi
 import { BankruptcyReportComponent } from './components/admin/bankruptcy-report/bankruptcy-report.component';
 import { CreateCompanyComponent } from './components/user/create-company/create-company.component';
 import { ContributionPaymentComponent } from './components/user/contribution-payment/contribution-payment.component';
+import { EmployeeListComponent } from './components/admin/employee-management/employee-list/employee-list.component';
+import { RequestListComponent } from './components/admin/employee-management/request-list/request-list.component';
+import { AddingEmployeeFinalComponent } from './components/admin/employee-management/adding-employee-final/adding-employee-final.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -22,7 +25,10 @@ const routes: Routes = [
   {path: 'financial-report', component: FinancialReportComponent},
   {path: 'bankruptcy-report', component: BankruptcyReportComponent},
   {path: 'create-company', component: CreateCompanyComponent},
-  {path: 'contribution-payment', component: ContributionPaymentComponent}
+  {path: 'contribution-payment', component: ContributionPaymentComponent},
+  {path: 'employee-list', component: EmployeeListComponent},
+  {path: 'request-list', component: RequestListComponent},
+  {path: 'adding-employee-final', component: AddingEmployeeFinalComponent}
 
 ];
 
