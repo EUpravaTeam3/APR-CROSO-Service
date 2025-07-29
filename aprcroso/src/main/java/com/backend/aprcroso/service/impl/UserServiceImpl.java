@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService{
         user.setUsername("perica");
         user.setFirstName("Petar");
         user.setLastName("Peric");
-        user.setRole("ADMIN,USER");
+        user.setRole("ADMIN");
         user.setCitizenship("Serbian");
         user.setJMBG("12356789");
         user.setDateOfBirth(LocalDate.of(2000, 12,12));
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService{
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .role(user.getRole())
-                .companyId(user.getCompany().getId())
+                .companyId(user.getCompany() != null ? user.getCompany().getId() : null)
                 .build();
     }
 

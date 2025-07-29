@@ -13,10 +13,11 @@ import { ContributionPaymentComponent } from './components/user/contribution-pay
 import { EmployeeListComponent } from './components/admin/employee-management/employee-list/employee-list.component';
 import { RequestListComponent } from './components/admin/employee-management/request-list/request-list.component';
 import { AddingEmployeeFinalComponent } from './components/admin/employee-management/adding-employee-final/adding-employee-final.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'company-details/:id', component: CompanyDetailsComponent},
   {path: 'company-report', component: CompanyReportComponent},
   {path: 'adding-employee', component: AddingEmployeeComponent},
@@ -28,8 +29,8 @@ const routes: Routes = [
   {path: 'contribution-payment', component: ContributionPaymentComponent},
   {path: 'employee-list', component: EmployeeListComponent},
   {path: 'request-list', component: RequestListComponent},
-  {path: 'adding-employee-final', component: AddingEmployeeFinalComponent}
-
+  {path: 'adding-employee-final', component: AddingEmployeeFinalComponent},
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

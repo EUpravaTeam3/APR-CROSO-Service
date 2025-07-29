@@ -1,0 +1,29 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+  class="login-form"
+>
+  <h2 class="form-title">Sign in</h2>
+
+  <label class="form-label">
+    <span class="form-label-text">Username</span>
+    <input
+      class="form-input"
+      type="text"
+      formControlName="username"
+      placeholder="perica"
+    />
+  </label>
+
+  <button
+    class="form-button"
+    type="submit"
+    [disabled]="form.invalid || loading()"
+  >
+    {{ loading() ? 'Signing in…' : 'Login' }}
+  </button>
+
+  <p class="form-error" *ngIf="error()">
+    {{ error() }}
+  </p>
+</form>

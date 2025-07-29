@@ -23,6 +23,7 @@ import { ContributionPaymentComponent } from './components/user/contribution-pay
 import { EmployeeListComponent } from './components/admin/employee-management/employee-list/employee-list.component';
 import { RequestListComponent } from './components/admin/employee-management/request-list/request-list.component';
 import { AddingEmployeeFinalComponent } from './components/admin/employee-management/adding-employee-final/adding-employee-final.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AddingEmployeeFinalComponent } from './components/admin/employee-manage
     ContributionPaymentComponent,
     EmployeeListComponent,
     RequestListComponent,
-    AddingEmployeeFinalComponent
+    AddingEmployeeFinalComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
