@@ -59,6 +59,18 @@ export class CompanyListComponent {
     })
   }
 
+
+  deleteCompany(id: number): void {
+    if (confirm('Da li ste sigurni da želite da obrišete kompaniju?')) {
+      this.companyService.deleteCompany(id).subscribe(() => {
+        alert('Kompanija uspešno obrisana.');
+        this.getCompanies(); // osveži listu
+      }, error => {
+        alert('Došlo je do greške prilikom brisanja kompanije.');
+      });
+    }
+  }
+
   companyDetails(companyId: number){
     this.router.navigate(['/company-details', companyId]);
 

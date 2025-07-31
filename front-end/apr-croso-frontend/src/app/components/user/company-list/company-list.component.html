@@ -45,7 +45,7 @@
           <td>
             <button class="btn btn-info" (click)="companyDetails(company.id)">Details</button>
             <!-- <button class="btn btn-warning" style="margin-left: 10px">Update</button> -->
-            <button *ngIf="isAdmin" class="btn btn-danger" style="margin-left: -1px">Delete</button>
+            <button *ngIf="isAdmin" class="btn btn-danger" (click)="deleteCompany(company.id)" style="margin-left: -1px">Delete</button>
           </td>
         </tr>
       </tbody>

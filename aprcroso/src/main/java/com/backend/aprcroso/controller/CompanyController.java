@@ -139,6 +139,19 @@ public class CompanyController {
     return ResponseEntity.ok(workFields);
   }
 
+  @DeleteMapping("/companies/{id}")
+  public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
+    try {
+      companyService.deleteCompany(id);
+      return ResponseEntity.noContent().build(); // 204 No Content
+    } catch (NotFoundException e) {
+      return ResponseEntity.notFound().build();
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+
 
 
 

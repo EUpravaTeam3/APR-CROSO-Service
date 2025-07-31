@@ -21,4 +21,7 @@ public interface CompanyService {
     void addWorkFieldToCompany(Long companyId, WorkField workField);
 
     List<WorkField> getWorkFieldsByCompanyId(Long companyId);
+
+    void deleteCompany(Long id);
+
 }

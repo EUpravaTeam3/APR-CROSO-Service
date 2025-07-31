@@ -21,6 +21,11 @@ export class CompanyService {
     return this.httpClient.post<Company>(this.baseURL, company);
   }
 
+  deleteCompany(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`http://localhost:8005/api/companies/${id}`);
+  }
+
+
   getCompanyById(id: number): Observable<any>{
     return this.httpClient.get<Company>(`${this.baseURL}/${id}`);
   }
