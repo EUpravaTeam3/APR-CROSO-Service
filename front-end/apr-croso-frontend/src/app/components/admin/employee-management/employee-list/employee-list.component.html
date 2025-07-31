@@ -8,6 +8,7 @@
       <th>Ime</th>
       <th>Pozicija</th>
       <th>Zaposlen</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,7 @@
       <td>{{ employee.name }}</td>
       <td>{{ employee.position }}</td>
       <td>{{ employee.employed ? 'Da' : 'Ne' }}</td>
+      <td *ngFor="let request of requests">{{ request.status }}</td>
     </tr>
   </tbody>
 </table>

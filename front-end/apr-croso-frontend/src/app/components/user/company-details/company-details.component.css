@@ -58,6 +58,18 @@
     font-size: 15px;
     color: #555;
   }
+
+  .navigation-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .navigation-container button {
+    padding: 10px 70px;
+    font-size: 16px; 
+  }
+
   
   @media (max-width: 600px) {
     .company-info-table {

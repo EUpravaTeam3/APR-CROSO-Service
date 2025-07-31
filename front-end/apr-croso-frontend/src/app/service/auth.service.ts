@@ -40,6 +40,17 @@ export class AuthService {
       );
   }
 
+  getRole(): string | null {
+    return this.currentUserSignal()?.role ?? null;
+  }
+
+  hasRole(roleToCheck: string): boolean {
+    const role = this.getRole();
+    return role ? role.includes(roleToCheck) : false;
+  }
+
+
+
   logout() {
     localStorage.removeItem('user');
     this.currentUserSignal.set(null);

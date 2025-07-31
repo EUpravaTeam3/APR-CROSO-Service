@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService{
         Optional<User> users = userRepository.findFirstByUsername(username);
         if (users.isEmpty()){
             throw new NotFoundException("No User found with username: " + username);
+
         }
 
         User user = users.get();

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Company } from '../../../class/company';
 import { CompanyService } from '../../../service/company.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'company-list',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './company-list.component.css'
 })
 export class CompanyListComponent {
+  isAdmin: boolean = false;
 
   companies: Company[] = [];
 
@@ -20,10 +22,12 @@ export class CompanyListComponent {
 
   statusOptions: String[] = ['ACTIVE', 'INACTIVE', 'DELETED', 'BANKRUPTCY', 'LIQUIDATION'];
 
-  constructor(private companyService: CompanyService, private router: Router){}
+  constructor(private companyService: CompanyService, private router: Router, private authService: AuthService
+  ){}
 
   ngOnInit(): void {
     this.getCompanies();
+    this.isAdmin = this.authService.hasRole('ADMIN');
   }
 
   matchesSearch(fieldValue: String, filterValue: String): boolean {
