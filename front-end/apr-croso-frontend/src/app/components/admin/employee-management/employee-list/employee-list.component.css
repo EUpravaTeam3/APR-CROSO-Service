@@ -36,4 +36,20 @@ table {
     text-align: center;
     color: #333;
   }
+
+  .status-approved {
+    color: green;
+    font-weight: bold;
+  }
+
+.status-rejected {
+    color: red;
+    font-weight: bold;
+  }
+
+.status-pending {
+    color: goldenrod;
+    font-weight: bold;
+  }
+
   

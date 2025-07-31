@@ -2,26 +2,26 @@
   <ul *ngIf="user() as u">
     <!-- USER stavke -->
     <ng-container *ngIf="u.role === 'USER'">
-      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-      <li><a routerLink="/create-company" routerLinkActive="active">create-company</a></li>
-      <li><a routerLink="/company-report" routerLinkActive="active">company-report</a></li>
-      <li><a routerLink="/insured-persons" routerLinkActive="active">adding insurance</a></li>
-      <li><a routerLink="/contribution-payment" routerLinkActive="active">payment-contribution</a></li>
-      <li><a routerLink="/adding-employee-final" routerLinkActive="active">adding-employee</a></li>
-      <li><a routerLink="/employee-list" routerLinkActive="active">employee-list</a></li>
+      <li><a routerLink="/home" routerLinkActive="active">HOME</a></li>
+      <li><a routerLink="/create-company" routerLinkActive="active">CREATE COMPANY</a></li>
+      <li><a routerLink="/company-report" routerLinkActive="active">COMPANY REPORT</a></li>
+      <li><a routerLink="/adding-employee-final" routerLinkActive="active">ADDING EMPLOYEE</a></li>
+      <li><a routerLink="/insured-persons" routerLinkActive="active">ADDING INSURANCE</a></li>
+      <li><a routerLink="/contribution-payment" routerLinkActive="active">PAYMENT CONTRIBUTION</a></li>
+      <li><a routerLink="/employee-list" routerLinkActive="active">EMPLOYEE LIST</a></li>
     </ng-container>
 
     <!-- ADMIN stavke -->
     <ng-container *ngIf="u.role === 'ADMIN'">
-      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-      <li><a routerLink="/adding-employee" routerLinkActive="active">ADMIN adding employee</a></li>
-      <li><a routerLink="/financial-report" routerLinkActive="active">ADMIN-fin-report</a></li>
-      <li><a routerLink="/bankruptcy-report" routerLinkActive="active">ADMIN-bankrup-report</a></li>
-      <li><a routerLink="/request-list" routerLinkActive="active">request-list</a></li>
+      <li><a routerLink="/home" routerLinkActive="active">HOME</a></li>
+      <!-- <li><a routerLink="/adding-employee" routerLinkActive="active">ADMIN adding employee</a></li> -->
+      <li><a routerLink="/financial-report" routerLinkActive="active">FINANCIAL REPORT</a></li>
+      <li><a routerLink="/bankruptcy-report" routerLinkActive="active">BANKRUPTCY REPORT</a></li>
+      <li><a routerLink="/request-list" routerLinkActive="active">REQUEST LIST</a></li>
     </ng-container>
 
     <!-- Logout dugme -->
-    <li style="margin-top: 1rem;">
+    <li>
       <button (click)="logout()" class="logout-button">Logout</button>
     </li>
   </ul>

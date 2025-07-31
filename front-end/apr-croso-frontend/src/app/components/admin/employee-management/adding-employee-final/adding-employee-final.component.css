@@ -43,6 +43,11 @@ form {
     color: #333;
   }
 
+  a{
+    text-align:center;
+    font-size: 12px;
+  }
+
   .error {
     color: red;
     font-size: 14px;

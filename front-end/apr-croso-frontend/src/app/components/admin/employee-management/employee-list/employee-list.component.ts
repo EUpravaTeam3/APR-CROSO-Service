@@ -31,4 +31,27 @@ export class EmployeeListComponent implements OnInit {
     this.addingEmployeeService.getRequests().subscribe((data) => (this.requests = data));
   }
 
+  getRequestStatusForEmployee(employeeId: number | undefined): string {
+    if (!employeeId) return 'N/A'; // Ako je undefined, vrati N/A
+
+    const request = this.requests.find(r => r.employee?.id === employeeId);
+    return request ? request.status : 'N/A';
+  }
+
+  getStatusClass(status: string): string {
+  switch (status) {
+    case 'APPROVED':
+      return 'status-approved';
+    case 'REJECTED':
+      return 'status-rejected';
+    case 'PENDING':
+      return 'status-pending';
+    default:
+      return '';
+  }
+}
+
+
+
+
 }

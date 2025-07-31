@@ -2,8 +2,67 @@
 
 <p>*Uplata doprinosa*</p>
 
+
 <div class="container">
-    <!-- Korak 1 i 2: Izbor kriterijuma pretrage i unos vrednosti -->
+  <!-- Korak 1 i 2: Izbor kriterijuma pretrage i unos vrednosti -->
+  <div *ngIf="step === 1 || step === 2">
+    <h2>Pretraga zaposlenih</h2>
+    <form [formGroup]="searchForm" (ngSubmit)="searchEmployees()">
+      <label>
+        <input type="radio" formControlName="searchCriteria" value="name" checked> Ime i prezime
+      </label>
+      <!-- Pošto nema jmbg polja u Employee, opciju sakrij ili ukloni -->
+      
+      <input type="text" formControlName="searchValue" placeholder="Unesite ime zaposlenog">
+      <button type="submit">Pretraži</button>
+    </form>
+  </div>
+
+  <!-- Korak 3: Prikaz rezultata pretrage -->
+  <div *ngIf="step === 3">
+    <h3>Izaberite zaposlenog</h3>
+    <ul>
+      <li *ngFor="let employee of filteredEmployees">
+        {{ employee.name }}
+        <button (click)="selectEmployee(employee)">Izaberi</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Korak 4: Unos iznosa i perioda -->
+  <div *ngIf="step === 4">
+    <h2>Uplata doprinosa</h2>
+    <p><strong>Zaposleni:</strong> {{ selectedEmployee?.name }}</p>
+    <form [formGroup]="paymentForm" (ngSubmit)="submitPayment()">
+      <label>Iznos uplate (RSD):</label>
+      <input type="number" formControlName="amount" placeholder="Unesite iznos">
+
+      <label>Period uplate:</label>
+      <select formControlName="period">
+        <option value="1 mesec">1 mesec</option>
+        <option value="3 meseca">3 meseca</option>
+        <option value="6 meseci">6 meseci</option>
+        <option value="12 meseci">12 meseci</option>
+      </select>
+
+      <button type="submit">Potvrdi uplatu</button>
+    </form>
+  </div>
+
+  <!-- Korak 5: Uspešna uplata -->
+  <div *ngIf="step === 5">
+    <h2>Uspešno izvršena uplata</h2>
+    <p>{{ successMessage }}</p>
+    <button (click)="resetProcess()">Nova uplata</button>
+  </div>
+</div>
+
+
+
+
+
+<!-- <div class="container">
+    
     <div *ngIf="step === 1 || step === 2">
       <h2>Pretraga zaposlenih</h2>
       <form [formGroup]="searchForm" (ngSubmit)="searchEmployees()">
@@ -19,7 +78,7 @@
       </form>
     </div>
   
-    <!-- Korak 3: Prikaz rezultata pretrage -->
+    
     <div *ngIf="step === 3">
       <h3>Izaberite zaposlenog</h3>
       <ul>
@@ -30,7 +89,7 @@
       </ul>
     </div>
   
-    <!-- Korak 4: Unos iznosa i perioda -->
+    
     <div *ngIf="step === 4">
       <h2>Uplata doprinosa</h2>
       <p><strong>Zaposleni:</strong> {{ selectedEmployee?.firstName }} {{ selectedEmployee?.lastName }}</p>
@@ -50,11 +109,11 @@
       </form>
     </div>
   
-    <!-- Korak 5: Uspešna uplata -->
+    
     <div *ngIf="step === 5">
       <h2>Uspešno izvršena uplata</h2>
       <p>{{ successMessage }}</p>
       <button (click)="resetProcess()">Nova uplata</button>
     </div>
-  </div>
+  </div> -->
   

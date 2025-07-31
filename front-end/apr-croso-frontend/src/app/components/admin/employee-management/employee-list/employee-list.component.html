@@ -16,7 +16,11 @@
       <td>{{ employee.name }}</td>
       <td>{{ employee.position }}</td>
       <td>{{ employee.employed ? 'Da' : 'Ne' }}</td>
-      <td *ngFor="let request of requests">{{ request.status }}</td>
+      <td>
+        <span [ngClass]="getStatusClass(getRequestStatusForEmployee(employee.id))">
+          {{ getRequestStatusForEmployee(employee.id) }}
+        </span>
+      </td>
     </tr>
   </tbody>
 </table>

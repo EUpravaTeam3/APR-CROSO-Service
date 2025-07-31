@@ -1,11 +1,10 @@
 <nav-bar></nav-bar>
 <br>
-<a>Kompanija dodaje zaposlenog i salje zahtev ka APR Adminu</a>
 
 <h2>Dodaj Novog Zaposlenog</h2>
 
 <form (ngSubmit)="sendRequest(employeeForm)" #employeeForm="ngForm">
-  <label for="name">Ime:</label>
+  <label for="name">Ime i Prezime:</label>
   <input id="name" [(ngModel)]="employee.name" name="name" required #nameInput="ngModel" />
   <div *ngIf="nameInput.invalid && nameInput.touched" class="error">
     Ime je obavezno!
@@ -18,4 +17,6 @@
   </div>
 
   <button type="submit" [disabled]="employeeForm.invalid">Pošalji Zahtev</button>
+    <a>*zahtev se salje APR adminu*</a>
+
 </form>
