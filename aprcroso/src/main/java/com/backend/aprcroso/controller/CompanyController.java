@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -57,8 +58,22 @@ public class CompanyController {
   @PostMapping("/companies")
   public Company createCompany(@RequestBody @Validated Company company) {
     System.out.println("Received JSON: " + company);
-    return companyRepository.save(company);
+    Company savedCompany = companyRepository.save(company);
+
+    try {
+      RestTemplate restTemplate = new RestTemplate();
+      String url = "http://localhost:8000/company";
+
+      ResponseEntity<Company> response = restTemplate.postForEntity(url, savedCompany, Company.class);
+
+      System.out.println("Company sent to external service, response: " + response.getStatusCode());
+    } catch (Exception e) {
+      System.err.println("Error sending company to external service: " + e.getMessage());
+    }
+
+    return savedCompany;
   }
+
 
 
   //get all companies
