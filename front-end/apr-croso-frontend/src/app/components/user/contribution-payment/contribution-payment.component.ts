@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AddingEmployeeService } from '../../../service/adding-employee.service';
+import { ContributionService } from '../../../service/contribution.service';
 
 export interface Employee {
   id?: number;
@@ -15,6 +16,18 @@ export interface AddingEmployeeRequest {
   status: string;
 }
 
+export interface Contribution {
+  id?: number;
+  amount: number;
+  period: string;
+  paymentDate?: Date;
+  employee: {
+    id?: number;
+    name: string;
+    position: string;
+  };
+}
+
 
 @Component({
   selector: 'contribution-payment',
@@ -24,13 +37,18 @@ export interface AddingEmployeeRequest {
 export class ContributionPaymentComponent implements OnInit {
   searchForm!: FormGroup;
   paymentForm!: FormGroup;
-  employees: Employee[] = []; // Simulacija baze podataka
+  employees: Employee[] = []; 
   filteredEmployees: Employee[] = [];
   selectedEmployee: Employee | null = null;
   step: number = 1;
   successMessage: string = '';
+  contributions: Contribution[] = [];
 
-  constructor(private fb: FormBuilder, private addingEmployeeService: AddingEmployeeService) { }
+  constructor(
+    private fb: FormBuilder,
+    private addingEmployeeService: AddingEmployeeService,
+    private contributionService: ContributionService
+  ) { }
 
   ngOnInit(): void {
   this.searchForm = this.fb.group({
@@ -43,8 +61,15 @@ export class ContributionPaymentComponent implements OnInit {
     period: ['', Validators.required]
   });
 
-  this.loadApprovedEmployees(); 
+  this.loadApprovedEmployees();
+  this.loadContributions();
 }
+
+loadContributions(): void {
+    this.contributionService.getContributions().subscribe(data => {
+      this.contributions = data;
+    });
+  }
 
 
 loadApprovedEmployees(): void {
@@ -113,8 +138,18 @@ loadApprovedEmployees(): void {
   // Slanje podataka o uplati
   submitPayment(): void {
     if (this.paymentForm.valid && this.selectedEmployee) {
-    this.successMessage = `Uspešno ste uplatili ${this.paymentForm.value.amount} RSD za period ${this.paymentForm.value.period} zaposlenom ${this.selectedEmployee.name}.`;
-      this.step = 5; // Prikaz uspešne poruke
+      const newContribution: Contribution = {
+        employee: this.selectedEmployee,
+        amount: this.paymentForm.value.amount,
+        period: this.paymentForm.value.period,
+        paymentDate: new Date()
+      };
+
+      this.contributionService.addContribution(newContribution).subscribe(saved => {
+        this.successMessage = `Uspešno ste uplatili ${saved.amount} RSD za period ${saved.period} zaposlenom ${saved.employee.name}.`;
+        this.step = 5;
+        this.loadContributions(); // ponovo učitaj posle upisa
+      });
     } else {
       alert('Molimo popunite sva polja.');
     }

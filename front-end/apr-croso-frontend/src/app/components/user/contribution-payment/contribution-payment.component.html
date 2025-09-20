@@ -11,7 +11,6 @@
       <label>
         <input type="radio" formControlName="searchCriteria" value="name" checked> Ime i prezime
       </label>
-      <!-- Pošto nema jmbg polja u Employee, opciju sakrij ili ukloni -->
       
       <input type="text" formControlName="searchValue" placeholder="Unesite ime zaposlenog">
       <button type="submit">Pretraži</button>
@@ -56,6 +55,33 @@
     <button (click)="resetProcess()">Nova uplata</button>
   </div>
 </div>
+
+
+<!-- Korak 6: Pregled svih uplata doprinosa -->
+<div *ngIf="contributions.length > 0" class="contributions-table">
+  <h2>Pregled uplata doprinosa</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Zaposleni</th>
+        <th>Pozicija</th>
+        <th>Iznos (RSD)</th>
+        <th>Period</th>
+        <th>Datum uplate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of contributions">
+        <td>{{ c.employee.name }}</td>
+        <td>{{ c.employee.position }}</td>
+        <td>{{ c.amount }}</td>
+        <td>{{ c.period }}</td>
+        <td>{{ c.paymentDate | date:'dd.MM.yyyy HH:mm' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 
 
