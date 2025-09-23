@@ -1,12 +1,30 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Employee } from './employee.service';
+import { AuthService } from './auth.service';
 
-export interface AddingEmployeeRequest {
+export interface Employee {
+  id?: number;
+  name: string;
+  position: string;
+  employed?: boolean;
+}
+
+export interface CreateEmployeeRequest {
+  name: string;
+  position: string;
+  createdByUserId: number;
+  companyId: number;
+}
+
+export interface AddingEmployeeResponse {
   id?: number;
   employee: Employee;
   status: string;
+  createdByUserId?: number;
+  createdByUsername?: string;
+  companyId?: number;
+  companyName?: string;
 }
 
 @Injectable({
@@ -14,15 +32,25 @@ export interface AddingEmployeeRequest {
 })
 export class AddingEmployeeService {
   private apiUrl = 'http://localhost:8005/adding-employee';
+  private http = inject(HttpClient);
+  private authService = inject(AuthService);
 
-  constructor(private http: HttpClient) {}
-
-  getRequests(): Observable<AddingEmployeeRequest[]> {
-    return this.http.get<AddingEmployeeRequest[]>(this.apiUrl);
+  getRequests(): Observable<AddingEmployeeResponse[]> {
+    return this.http.get<AddingEmployeeResponse[]>(this.apiUrl);
   }
 
-  sendRequest(employee: Employee): Observable<AddingEmployeeRequest> {
-    return this.http.post<AddingEmployeeRequest>(`${this.apiUrl}/request`, employee);
+  sendRequest(employee: Employee): Observable<AddingEmployeeResponse> {
+    const currentUser = this.authService.currentUser();
+    if (!currentUser) throw new Error('No logged in user');
+
+    const request: CreateEmployeeRequest = {
+      name: employee.name,
+      position: employee.position,
+      createdByUserId: currentUser.id,
+      companyId: currentUser.companyId,
+    };
+
+    return this.http.post<AddingEmployeeResponse>(`${this.apiUrl}/request`, request);
   }
 
   processRequest(id: number, approve: boolean): Observable<string> {

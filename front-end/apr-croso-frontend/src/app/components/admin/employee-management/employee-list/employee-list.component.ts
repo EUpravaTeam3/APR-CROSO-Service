@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee, EmployeeService } from '../../../../service/employee.service';
-import { AddingEmployeeRequest, AddingEmployeeService } from '../../../../service/adding-employee.service';
+import { AddingEmployeeResponse, AddingEmployeeService } from '../../../../service/adding-employee.service';
 
 @Component({
   selector: 'employee-list',
@@ -10,7 +10,7 @@ import { AddingEmployeeRequest, AddingEmployeeService } from '../../../../servic
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = [];
 
-  requests: AddingEmployeeRequest[] = [];
+  requests: AddingEmployeeResponse[] = [];
   
 
   constructor(private employeeService: EmployeeService,

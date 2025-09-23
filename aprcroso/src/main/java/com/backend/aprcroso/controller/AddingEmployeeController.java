@@ -1,5 +1,7 @@
 package com.backend.aprcroso.controller;
 
+import com.backend.aprcroso.dto.AddingEmployeeResponse;
+import com.backend.aprcroso.dto.CreateEmployeeRequest;
 import com.backend.aprcroso.model.AddingEmployeeRequest;
 import com.backend.aprcroso.model.Employee;
 import com.backend.aprcroso.service.AddingEmployeeService;
@@ -18,14 +20,16 @@ public class AddingEmployeeController {
     private final AddingEmployeeService addingEmployeeService;
 
     @GetMapping
-    public ResponseEntity<List<AddingEmployeeRequest>> getAllRequests() {
+    public ResponseEntity<List<AddingEmployeeResponse>> getAllRequests() {
         return ResponseEntity.ok(addingEmployeeService.getAllRequests());
     }
 
+
     @PostMapping("/request")
-    public ResponseEntity<AddingEmployeeRequest> createRequest(@RequestBody Employee employee) {
-        return ResponseEntity.ok(addingEmployeeService.createRequest(employee));
+    public ResponseEntity<AddingEmployeeRequest> createRequest(@RequestBody CreateEmployeeRequest dto) {
+        return ResponseEntity.ok(addingEmployeeService.createRequest(dto));
     }
+
 
     @PostMapping("/process/{id}")
     public ResponseEntity<Map<String, String>> processRequest(@PathVariable Long id, @RequestParam boolean approve) {

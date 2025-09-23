@@ -4,24 +4,26 @@
 <table border="1">
   <thead>
     <tr>
-      <th>Ime</th>
+      <th>ID</th>
+      <th>Ime i Prezime</th>
       <th>Pozicija</th>
       <th>Status</th>
-      <th>Akcije</th>
+      <th>Kreirao</th>
+      <th>Kompanija</th>
+      <th>Akcija</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let request of requests">
-      <td>{{ request.employee.name }}</td>
-      <td>{{ request.employee.position }}</td>
-      <td>{{ request.status }}</td>
+    <tr *ngFor="let req of requests">
+      <td>{{ req.id }}</td>
+      <td>{{ req.employee.name }}</td>
+      <td>{{ req.employee.position }}</td>
+      <td>{{ req.status }}</td>
+      <td>{{ req.createdByUsername }}</td>
+      <td>{{ req.companyName }}</td>
       <td>
-        <button *ngIf="request.id !== undefined" (click)="processRequest(request.id!, true)">
-          Prihvati
-        </button>
-        <button *ngIf="request.id !== undefined" (click)="processRequest(request.id!, false)">
-          Odbij
-        </button>
+        <button (click)="processRequest(req.id!, true)">Odobri</button>
+        <button (click)="processRequest(req.id!, false)">Odbij</button>
       </td>
     </tr>
   </tbody>

@@ -7,6 +7,7 @@ export class Company{
     registrationDate!: Date;
     name!: String;
     companyStatus!: String;
+    createdByUserId?: number;
     // address?: Address; // Dodato polje za adresu
 
 }

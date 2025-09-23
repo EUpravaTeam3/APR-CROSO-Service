@@ -4,6 +4,7 @@ import { Company } from '../../../class/company';
 import { CompanyService } from '../../../service/company.service';
 import { AddressService } from '../../../service/address.service';
 import { WorkField, WorkfieldService } from '../../../service/workfield.service';
+import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'create-company',
@@ -18,7 +19,8 @@ export class CreateCompanyComponent implements OnInit {
     private fb: FormBuilder,
     private companyService: CompanyService,
     private addressService: AddressService,
-    private workFieldService: WorkfieldService
+    private workFieldService: WorkfieldService,
+    private authService: AuthService
 
   ) {}
 
@@ -50,6 +52,7 @@ export class CreateCompanyComponent implements OnInit {
     }
 
     const company: Company = this.companyForm.value;
+    company.createdByUserId = this.authService.currentUser()?.id;
     const workField: WorkField = this.companyForm.get('workField')?.value;
 
     console.log('Submitted Form:', this.companyForm.value); // Proverite sve vrednosti

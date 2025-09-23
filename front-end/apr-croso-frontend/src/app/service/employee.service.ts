@@ -7,6 +7,8 @@ export interface Employee {
   name: string;
   position: string;
   employed?: boolean;
+  createdById?: number;   
+  companyId?: number;     
 }
 
 @Injectable({

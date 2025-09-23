@@ -44,8 +44,8 @@ public class User {
     private String citizenship;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "company_id")
     private Company company;
 
 }

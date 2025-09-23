@@ -21,6 +21,7 @@ import java.util.List;
 public class CompanyServiceImpl implements CompanyService{
 
     private final CompanyRepository companyRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     private AddressRepository addressRepository;
@@ -90,6 +91,7 @@ public class CompanyServiceImpl implements CompanyService{
 
     public CompanyServiceImpl(CompanyRepository companyRepository, UserRepository userRepository){
     this.companyRepository = companyRepository;
+    this.userRepository = userRepository;
     }
 
 
@@ -152,9 +154,37 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public CompanyDTO createCompany(CreateCompanyDTO createCompanyDTO) {
-        return null;
+    public CompanyDTO createCompany(CreateCompanyDTO dto) {
+        Company company = new Company();
+        company.setName(dto.getName());
+        company.setPIB(dto.getPib());
+        company.setRegistrationNumber(dto.getRegistrationNumber());
+        company.setRegistrationDate(dto.getRegistrationDate());
+        company.setCompanyStatus(dto.getCompanyStatus());
+
+        companyRepository.save(company);
+
+        // poveži user-a sa kompanijom (ako je prosleđen)
+        if (dto.getCreatedByUserId() != null) {
+            userRepository.findById(dto.getCreatedByUserId()).ifPresent(user -> {
+                user.setCompany(company);
+                userRepository.save(user);
+            });
+        }
+
+        // vraćamo CompanyDTO — konstruktor mora postojati
+        return new CompanyDTO(
+                company.getId(),
+                company.getName(),
+                company.getPIB(),
+                company.getRegistrationNumber(),
+                company.getRegistrationDate(),
+                company.getCompanyStatus(),
+                null,   // addresses
+                null    // worker
+        );
     }
+
 
     @Override
     public void deleteCompany(Long id) {

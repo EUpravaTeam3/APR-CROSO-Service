@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AddingEmployeeRequest, AddingEmployeeService } from '../../../../service/adding-employee.service';
+import { AddingEmployeeResponse, AddingEmployeeService } from '../../../../service/adding-employee.service';
 
 @Component({
   selector: 'request-list',
@@ -7,7 +7,7 @@ import { AddingEmployeeRequest, AddingEmployeeService } from '../../../../servic
   styleUrl: './request-list.component.css'
 })
 export class RequestListComponent implements OnInit{
-  requests: AddingEmployeeRequest[] = [];
+  requests: AddingEmployeeResponse[] = [];
 
   constructor(private addingEmployeeService: AddingEmployeeService) {}
 
@@ -16,13 +16,14 @@ export class RequestListComponent implements OnInit{
   }
 
   loadRequests(): void {
-    this.addingEmployeeService.getRequests().subscribe((data) => (this.requests = data));
+    this.addingEmployeeService.getRequests().subscribe({
+      next: (res) => this.requests = res,
+      error: (err) => console.error(err)
+    });
   }
-
   processRequest(id: number, approve: boolean): void {
     this.addingEmployeeService.processRequest(id, approve).subscribe(() => {
-      alert('Zahtev obrađen!');
-      this.loadRequests();
+      this.requests = this.requests.filter(r => r.id !== id);
     });
   }
 
