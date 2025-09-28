@@ -1,7 +1,7 @@
 <nav class="navbar">
   <ul *ngIf="user() as u">
     <!-- USER stavke -->
-    <ng-container *ngIf="u.role === 'USER'">
+    <ng-container *ngIf="u.role === 'user'">
       <li><a routerLink="/home" routerLinkActive="active">HOME</a></li>
       <li><a routerLink="/create-company" routerLinkActive="active">CREATE COMPANY</a></li>
       <li><a routerLink="/company-report" routerLinkActive="active">COMPANY REPORT</a></li>
@@ -12,7 +12,7 @@
     </ng-container>
 
     <!-- ADMIN stavke -->
-    <ng-container *ngIf="u.role === 'ADMIN'">
+    <ng-container *ngIf="u.role === 'admin'">
       <li><a routerLink="/home" routerLinkActive="active">HOME</a></li>
       <!-- <li><a routerLink="/adding-employee" routerLinkActive="active">ADMIN adding employee</a></li> -->
       <li><a routerLink="/financial-report" routerLinkActive="active">FINANCIAL REPORT</a></li>

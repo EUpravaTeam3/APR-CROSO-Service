@@ -161,16 +161,17 @@ public class CompanyServiceImpl implements CompanyService{
         company.setRegistrationNumber(dto.getRegistrationNumber());
         company.setRegistrationDate(dto.getRegistrationDate());
         company.setCompanyStatus(dto.getCompanyStatus());
+        company.setOwnerUcn(dto.getOwnerUcn());
 
         companyRepository.save(company);
 
         // poveži user-a sa kompanijom (ako je prosleđen)
-        if (dto.getCreatedByUserId() != null) {
-            userRepository.findById(dto.getCreatedByUserId()).ifPresent(user -> {
-                user.setCompany(company);
-                userRepository.save(user);
-            });
-        }
+//        if (dto.getCreatedByUserId() != null) {
+//            userRepository.findById(Long.valueOf(dto.getCreatedByUserId())).ifPresent(user -> {
+//                user.setCompany(company);
+//                userRepository.save(user);
+//            });
+//        }
 
         // vraćamo CompanyDTO — konstruktor mora postojati
         return new CompanyDTO(
@@ -181,7 +182,8 @@ public class CompanyServiceImpl implements CompanyService{
                 company.getRegistrationDate(),
                 company.getCompanyStatus(),
                 null,   // addresses
-                null    // worker
+                null,    // worker
+                company.getOwnerUcn()
         );
     }
 

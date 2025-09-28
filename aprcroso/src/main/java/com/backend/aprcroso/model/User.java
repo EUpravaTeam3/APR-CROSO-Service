@@ -1,5 +1,6 @@
 package com.backend.aprcroso.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -46,6 +47,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonBackReference
     private Company company;
 
 }

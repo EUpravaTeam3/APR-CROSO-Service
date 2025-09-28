@@ -8,6 +8,7 @@ export class Company{
     name!: String;
     companyStatus!: String;
     createdByUserId?: number;
+    ownerUcn?: string;  
     // address?: Address; // Dodato polje za adresu
 
 }

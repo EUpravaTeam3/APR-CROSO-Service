@@ -42,6 +42,8 @@ public class CompanyDTO {
     //postavljanje u listu //zaposleni u kompaniji
     private Set<User> worker = new HashSet<>();
 
+    private String ownerUcn;
+
 }
 
 

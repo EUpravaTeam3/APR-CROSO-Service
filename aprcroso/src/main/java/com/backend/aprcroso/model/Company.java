@@ -42,6 +42,7 @@ public class Company {
     private CompanyStatus companyStatus;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Set<User> employee = new HashSet<>();
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -52,22 +53,12 @@ public class Company {
     @JsonManagedReference
     private List<WorkField> workFields = new ArrayList<>();
 
+    @Column
+    private String ownerUcn;
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Company company = (Company) o;
-//        return id != null && id.equals(company.id);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return id != null ? id.hashCode() : 0;
-//    }
+
+
 }
-
-
 
 
 

@@ -13,9 +13,9 @@ public class AddingEmployeeResponse {
     private Employee employee;
     private String status;
 
-    private Long createdByUserId;
+    private String createdByUserId;
     private String createdByUsername;
 
-    private Long companyId;
+    private String companyId;
     private String companyName;
 }

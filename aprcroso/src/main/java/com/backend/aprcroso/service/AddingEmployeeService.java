@@ -36,18 +36,18 @@ public class AddingEmployeeService {
         employee.setEmployed(false);
 
         // Uzmi kompaniju korisnika koji kreira zaposlenog
-        userRepository.findById(dto.getCreatedByUserId()).ifPresent(user -> {
-            if (user.getCompany() != null) {
-                employee.setCompany(user.getCompany()); // Postavi kompaniju na zaposlenog
-            }
-        });
+//        userRepository.findById(dto.getCreatedByUserId()).ifPresent(user -> {
+//            if (user.getCompany() != null) {
+//                employee.setCompany(user.getCompany()); // Postavi kompaniju na zaposlenog
+//            }
+//        });
 
         employeeRepository.save(employee);
 
         AddingEmployeeRequest request = new AddingEmployeeRequest();
         request.setEmployee(employee);
         request.setStatus("PENDING");
-        request.setCreatedByUserId(dto.getCreatedByUserId());
+//        request.setCreatedByUserId(dto.getCreatedByUserId());
 
         // Poveži i request sa kompanijom radi odgovora na frontend
         request.setCompany(employee.getCompany());
@@ -82,24 +82,28 @@ public class AddingEmployeeService {
     private AddingEmployeeResponse mapToResponse(AddingEmployeeRequest request) {
         String username = null;
         String companyName = null;
-        Long companyId = null;
+        String companyId = null;
+        String createdByUserId = null;
 
+        // Konvertujemo createdByUserId u String
         if (request.getCreatedByUserId() != null) {
+            createdByUserId = String.valueOf(request.getCreatedByUserId());
             username = userRepository.findById(request.getCreatedByUserId())
                     .map(User::getUsername)
                     .orElse(null);
         }
 
+        // Konvertujemo companyId u String
         if (request.getCompany() != null) {
             companyName = request.getCompany().getName();
-            companyId = request.getCompany().getId();
+            companyId = String.valueOf(request.getCompany().getId());
         }
 
         return new AddingEmployeeResponse(
                 request.getId(),
                 request.getEmployee(),
                 request.getStatus(),
-                request.getCreatedByUserId(),
+                createdByUserId,
                 username,
                 companyId,
                 companyName

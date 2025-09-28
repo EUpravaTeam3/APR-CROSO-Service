@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Company } from '../class/company';
 import { Address } from '../class/address';
+import { CreateCompanyDTO } from '../class/CreateCompanyDTO ';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,9 @@ export class CompanyService {
     return this.httpClient.get<Company[]>(`${this.baseURL}`);
   }
 
-  createCompany(company: Company): Observable<Company> {
-    return this.httpClient.post<Company>(this.baseURL, company);
+  createCompany(dto: CreateCompanyDTO): Observable<Company> {
+    return this.httpClient.post<Company>(this.baseURL, dto);
   }
-
   deleteCompany(id: number): Observable<void> {
     return this.httpClient.delete<void>(`http://localhost:8005/api/companies/${id}`);
   }

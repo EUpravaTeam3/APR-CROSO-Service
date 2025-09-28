@@ -6,6 +6,6 @@ import lombok.Data;
 public class CreateEmployeeRequest {
     private String name;
     private String position;
-    private Long createdByUserId;
+    private String createdByUserId;
 //    private Long companyId;
 }

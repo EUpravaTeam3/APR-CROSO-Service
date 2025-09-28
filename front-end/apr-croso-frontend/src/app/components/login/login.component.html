@@ -6,8 +6,20 @@
   <h2 class="form-title">Sign in</h2>
 
   <label class="form-label">
-    <span class="form-label-text">Username</span>
+    <span class="form-label-text">Ucn</span>
     <input
+    [(ngModel)]="username"
+      class="form-input"
+      type="text"
+      formControlName="username"
+      placeholder="perica"
+    />
+  </label>
+
+  <label class="form-label">
+    <span class="form-label-text">password</span>
+    <input
+      [(ngModel)]="password"
       class="form-input"
       type="text"
       formControlName="username"

@@ -5,6 +5,8 @@ import { CompanyService } from '../../../service/company.service';
 import { AddressService } from '../../../service/address.service';
 import { WorkField, WorkfieldService } from '../../../service/workfield.service';
 import { AuthService } from '../../../service/auth.service';
+import { Router } from '@angular/router';
+import { CreateCompanyDTO } from '../../../class/CreateCompanyDTO ';
 
 @Component({
   selector: 'create-company',
@@ -20,7 +22,8 @@ export class CreateCompanyComponent implements OnInit {
     private companyService: CompanyService,
     private addressService: AddressService,
     private workFieldService: WorkfieldService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
 
   ) {}
 
@@ -45,22 +48,53 @@ export class CreateCompanyComponent implements OnInit {
   }
   
 
-  // Ova funkcija se poziva prilikom slanja forme
   onSubmit(): void {
     if (this.companyForm.invalid) {
       return;
     }
 
     const company: Company = this.companyForm.value;
-    company.createdByUserId = this.authService.currentUser()?.id;
+    
     const workField: WorkField = this.companyForm.get('workField')?.value;
 
-    console.log('Submitted Form:', this.companyForm.value); // Proverite sve vrednosti
+    const currentUser = this.authService.currentUserData();
+      if (!currentUser) {
+        alert("User not logged in or ucn missing");
+        return;
+      }
+      company.ownerUcn = currentUser.ucn;
+    
 
-    console.log('Submitted Company Status:', company.companyStatus);  // Proverite vrednost ovde
+
+    const rawDate = this.companyForm.value.registrationDate;
+    const formattedDate = rawDate.split('T')[0]; // skida vreme ako postoji
+
+      // DTO za backend
+    const dto: CreateCompanyDTO = {
+      name: this.companyForm.value.name,
+      pib: this.companyForm.value.pib,
+      registrationNumber: this.companyForm.value.registrationNumber,
+      registrationDate: formattedDate, // yyyy-MM-dd
+      companyStatus: this.companyForm.value.companyStatus,
+      createdByUserId: currentUser.id,
+      ownerUcn: currentUser.ucn!
+    };
+
+      console.log('DTO to be sent:', dto);
+      console.log(typeof this.companyForm.value.registrationDate, this.companyForm.value.registrationDate)
+      console.log('Raw date before DTO:', this.companyForm.value.registrationDate);
 
 
-    this.companyService.createCompany(company).subscribe(
+
+    company.createdByUserId = this.authService.currentUser()?.id;
+    
+
+
+    console.log('Submitted Form:', this.companyForm.value);
+    console.log('Submitted Company Status:', company.companyStatus);  
+    console.log('Company ownerUcn:', company.ownerUcn);
+
+    this.companyService.createCompany(dto).subscribe(
       (companyResponse) => {
         console.log('Company created successfully!', companyResponse);
 
@@ -79,7 +113,7 @@ export class CreateCompanyComponent implements OnInit {
             console.log('WorkField added successfully!');
             alert('Company, address, and work field added successfully!');
             this.companyForm.reset();
-            this.reloadPage();
+            this.router.navigateByUrl("/home")
           },
           (error) => {
             console.error('Error adding work field', error);
@@ -94,11 +128,6 @@ export class CreateCompanyComponent implements OnInit {
     );
   }
 
-  reloadPage() {
-    setTimeout(()=>{
-      window.location.reload();
-    }, 100);
-  }
   
 }
 

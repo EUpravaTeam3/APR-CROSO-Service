@@ -56,23 +56,25 @@ public class CompanyController {
 
   //create company
   @PostMapping("/companies")
-  public Company createCompany(@RequestBody @Validated Company company) {
-    System.out.println("Received JSON: " + company);
-    Company savedCompany = companyRepository.save(company);
+  public CompanyDTO createCompany(@RequestBody @Validated CreateCompanyDTO dto) {
+    System.out.println("Received DTO: " + dto);
+
+    // delegiraj na servis koji pravi entitet i čuva u bazi
+    CompanyDTO saved = companyServiceImpl.createCompany(dto);
 
     try {
       RestTemplate restTemplate = new RestTemplate();
       String url = "http://localhost:8000/company";
 
-      ResponseEntity<Company> response = restTemplate.postForEntity(url, savedCompany, Company.class);
-
-      System.out.println("Company sent to external service, response: " + response.getStatusCode());
+      restTemplate.postForEntity(url, saved, Company.class);
+      System.out.println("Company sent to external service.");
     } catch (Exception e) {
       System.err.println("Error sending company to external service: " + e.getMessage());
     }
 
-    return savedCompany;
+    return saved;
   }
+
 
 
 
