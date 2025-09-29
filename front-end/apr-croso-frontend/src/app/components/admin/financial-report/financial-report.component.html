@@ -19,7 +19,8 @@
     <tbody>
       <tr *ngFor="let report of financialReports; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ report.companyName }}</td>
+        <td>{{ report.companyName }} <br> <span *ngIf="getOwnerUcn(report)">OwnerUCN: {{ getOwnerUcn(report) }}</span>
+         </td>
         <td>{{ report.pib }}</td>
         <td>{{ report.year }}</td>
         <td>{{ report.balanceSheet }}</td>
@@ -29,7 +30,7 @@
         </td>
         <td>
           <button class="btn btn-warning btn-sm">Edit</button>
-          <button class="btn btn-danger btn-sm">Delete</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteFinancialReport(report.id)">Delete</button>
         </td>
       </tr>
     </tbody>

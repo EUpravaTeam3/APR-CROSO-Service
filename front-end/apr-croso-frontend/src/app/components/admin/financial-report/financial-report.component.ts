@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FinancialReportService } from '../../../service/financial-report.service';
+import { Company } from '../../../class/company';
+import { CompanyService } from '../../../service/company.service';
 
 @Component({
   selector: 'financial-report',
@@ -18,12 +20,16 @@ export class FinancialReportComponent implements OnInit {
   isEditing = false;
   editingReportId: number | null = null;
   sortColumn: string = ''; 
-  sortAscending: boolean = true; // Sortiranje u rastućem ili opadajućem redosledu
+  sortAscending: boolean = true; 
 
-  constructor(private financialReportService: FinancialReportService) { }
+  companies: Company[] = [];
+  
+
+  constructor(private financialReportService: FinancialReportService, private companyService: CompanyService) { }
 
   ngOnInit(): void {
     this.getAllReports();
+    this.getCompanies();
   }
 
   sortTable(column: string): void {
@@ -57,6 +63,31 @@ export class FinancialReportComponent implements OnInit {
       },
     });
   }
+
+  private getCompanies(){
+    this.companyService.getCompanyList().subscribe(data => {
+      this.companies = data;
+    })
+  }
+  getOwnerUcn(report: any): string {
+    const company = this.companies.find(c => c.name === report.companyName);
+    return company ? company.ownerUcn!: '';
+  } 
+
+  deleteFinancialReport(id: number): void {
+    if (confirm('Da li ste sigurni da želite da obrišete kompaniju?')) {
+      this.financialReportService.deleteFinancialReport(id).subscribe(() => {
+        alert('Report uspešno obrisan.');
+        this.getAllReports(); // osveži listu
+      }, error => {
+        alert('Došlo je do greške prilikom brisanja.');
+      });
+    }
+  }
+
+
+
+
 
   toggleValid(report: any, event: any): void {
     const updatedReport = { ...report, valid: event.target.checked }; // Ažuriraj valid status

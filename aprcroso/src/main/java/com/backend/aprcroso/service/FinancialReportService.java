@@ -1,5 +1,7 @@
 package com.backend.aprcroso.service;
 
+import com.backend.aprcroso.exception.NotFoundException;
+import com.backend.aprcroso.model.Company;
 import com.backend.aprcroso.model.FinancialReport;
 import com.backend.aprcroso.repository.FinancialReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,12 @@ public class FinancialReportService {
 
     public FinancialReport saveFinancialReport(FinancialReport financialReport) {
         return financialReportRepository.save(financialReport);
+    }
+
+    public void deleteFinancialReport(Long id) {
+        FinancialReport report = financialReportRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Report not found with id: " + id));
+        financialReportRepository.delete(report);
     }
 
 

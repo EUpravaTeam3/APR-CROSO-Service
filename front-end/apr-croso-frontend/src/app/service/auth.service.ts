@@ -52,9 +52,11 @@ export class AuthService {
 
 
  /** Uzimanje role sa backend-a (9090) i update signala */
-  fetchRole(): void {
-    this.http.get<{ role: string }>("http://localhost:9090/user/aprcroso", { withCredentials: true })
-      .subscribe(res => {
+  /** Uzimanje role sa backend-a (9090) i update signala */
+fetchRole() {
+  return this.http.get<{ role: string }>("http://localhost:9090/user/aprcroso", { withCredentials: true })
+    .pipe(
+      tap(res => {
         console.log("Korisnička uloga sa servera:", res.role);
 
         const current = this.currentUserSignal();
@@ -67,11 +69,15 @@ export class AuthService {
             firstName: "",
             lastName: "",
             companyId: 0,
-            ...res // role dolazi iz servera
+            ...res
           });
         }
-      });
-  }
+      }),
+      // (da može da se koristi spolja)
+      tap(res => res.role)
+    );
+}
+
 
   /** Čitanje role iz signala */
   getRole(): string | null {
@@ -81,7 +87,7 @@ export class AuthService {
   /** Provera da li korisnik ima određenu rolu */
   hasRole(roleToCheck: string): boolean {
     const role = this.getRole();
-    return role === roleToCheck;
+    return role === roleToCheck.toUpperCase();
   }
 
   setCurrentUser(user: LoginResponse) {

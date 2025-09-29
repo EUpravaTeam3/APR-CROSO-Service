@@ -31,6 +31,11 @@ export class FinancialReportService {
   updateFinancialReport(report: any): Observable<any> {
     return this.http.put(`${this.financialReportUrl}/${report.id}`, report);
   }
+
+  deleteFinancialReport(id: number): Observable<void>{
+    return this.http.delete<void>(`${this.financialReportUrl}/${id}`);
+  }
+
   
   // Kreiranje prijave za stečaj
   createBankruptcyReport(report: any): Observable<any> {

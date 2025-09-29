@@ -27,7 +27,10 @@ export class CompanyListComponent {
 
   ngOnInit(): void {
     this.getCompanies();
-    this.isAdmin = this.authService.hasRole('ADMIN');
+    this.authService.fetchRole().subscribe(res => {
+    this.isAdmin = res.role?.toUpperCase() === 'ADMIN';
+    console.log('Da li je admin?', this.isAdmin);
+    });
   }
 
   matchesSearch(fieldValue: String, filterValue: String): boolean {

@@ -5,6 +5,7 @@ import com.backend.aprcroso.model.FinancialReport;
 import com.backend.aprcroso.service.FinancialReportService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,6 +62,19 @@ public class FinancialReportController {
 
         FinancialReport savedReport = financialReportService.saveFinancialReport(existingReport);
         return ResponseEntity.ok(savedReport);
+    }
+
+    //delete Financial-reportByID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFinancialReport(@PathVariable Long id){
+        try {
+            financialReportService.deleteFinancialReport(id);
+            return ResponseEntity.noContent().build(); // 204 No Content
+        } catch (NotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 }

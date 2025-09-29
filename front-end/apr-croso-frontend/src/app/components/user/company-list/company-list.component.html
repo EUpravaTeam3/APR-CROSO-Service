@@ -37,7 +37,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let company of filteredCompanies">
-          <td>{{company.name}}</td>
+          <td>{{company.name}} <br><a *ngIf="isAdmin">OwnerUCN: {{company.ownerUcn}}</a></td>
           <td>{{company.pib}}</td>
           <td>{{company.registrationNumber}}</td>
           <td>{{company.registrationDate}}</td>
