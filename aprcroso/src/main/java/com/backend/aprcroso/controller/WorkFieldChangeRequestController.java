@@ -39,4 +39,12 @@ public class WorkFieldChangeRequestController {
     public ResponseEntity<WorkFieldChangeRequest> reject(@PathVariable Long id) {
         return ResponseEntity.ok(service.rejectRequest(id));
     }
+
+
+    // User - vidi sve svoje zahteve
+    @GetMapping("/user/{username}")
+    public ResponseEntity<List<WorkFieldChangeRequest>> getUserRequests(@PathVariable String username) {
+        return ResponseEntity.ok(service.getRequestsByUser(username));
+    }
+
 }

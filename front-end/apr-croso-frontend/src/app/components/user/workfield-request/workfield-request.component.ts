@@ -3,7 +3,8 @@ import { AuthService } from '../../../service/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompanyService } from '../../../service/company.service';
 import { Company } from '../../../class/company';
-import { WorkField, WorkfieldService } from '../../../service/workfield.service';
+import { WorkField, WorkFieldChangeRequest, WorkfieldService } from '../../../service/workfield.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'workfield-request',
@@ -18,6 +19,9 @@ export class WorkfieldRequestComponent implements OnInit{
   existingWorkFields: WorkField[] = [];
   selectedWorkField: WorkField | null = null;
 
+  userRequests: WorkFieldChangeRequest[] = [];
+
+
 
 
   constructor
@@ -25,7 +29,8 @@ export class WorkfieldRequestComponent implements OnInit{
     private fb: FormBuilder,
     private companyService: CompanyService,
     private auth: AuthService,
-    private workfieldService: WorkfieldService
+    private workfieldService: WorkfieldService,
+    private router: Router
 
   ){}
 
@@ -38,6 +43,7 @@ export class WorkfieldRequestComponent implements OnInit{
     });
 
     this.loadCompanies();
+    this.loadUserRequests();
   }
 
   // Učitaj sve kompanije, filtriraj samo one čiji je owner trenutni user
@@ -77,6 +83,15 @@ export class WorkfieldRequestComponent implements OnInit{
     }
   }
 
+  //ucitavanje User zahteva/requests
+  loadUserRequests(): void {
+  const username = this.auth.currentUserData()?.ucn!;
+  this.workfieldService.getUserRequests(username).subscribe({
+    next: (data) => this.userRequests = data,
+    error: (err) => console.error('Failed to load user requests:', err)
+  });
+}
+
 // Submit - zahtev adminu
   onSubmit(): void {
   if (this.selectedCompany && this.selectedWorkField && this.workfieldReqForm.valid) {
@@ -98,6 +113,7 @@ export class WorkfieldRequestComponent implements OnInit{
         alert('Change request submitted successfully!');
         this.workfieldReqForm.reset();
         this.selectedWorkField = null;
+        this.loadUserRequests();
       },
       error: (err) => {
         console.error('Error submitting change request:', err);

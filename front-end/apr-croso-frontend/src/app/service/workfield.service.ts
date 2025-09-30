@@ -71,4 +71,10 @@ getPendingRequests(): Observable<WorkFieldChangeRequest[]> {
 }
 
 
+//user requests
+getUserRequests(username: string): Observable<WorkFieldChangeRequest[]> {
+  return this.http.get<WorkFieldChangeRequest[]>(`${this.apiUrl}/workfield-requests/user/${username}`);
+}
+
+
 }

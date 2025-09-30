@@ -75,4 +75,11 @@ public class WorkFieldChangeRequestService {
         request.setStatus(RequestStatus.REJECTED);
         return requestRepo.save(request);
     }
+
+
+    //User deo
+    public List<WorkFieldChangeRequest> getRequestsByUser(String username) {
+        return requestRepo.findByCreatedBy(username);
+    }
+
 }

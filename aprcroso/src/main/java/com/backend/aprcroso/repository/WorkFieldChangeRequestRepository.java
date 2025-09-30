@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface WorkFieldChangeRequestRepository extends JpaRepository<WorkFieldChangeRequest, Long> {
     List<WorkFieldChangeRequest> findByStatus(RequestStatus status);
-    List<WorkFieldChangeRequest> findByCreatedBy(String username);
+    List<WorkFieldChangeRequest> findByCreatedBy(String createdBy);
 }
