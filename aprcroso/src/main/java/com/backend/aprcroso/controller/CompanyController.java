@@ -6,10 +6,13 @@ import com.backend.aprcroso.dto.CreateCompanyDTO;
 import com.backend.aprcroso.dto.UpdateCompanyStatusRequest;
 import com.backend.aprcroso.exception.NotFoundException;
 import com.backend.aprcroso.model.Address;
+import com.backend.aprcroso.model.AuditLog;
 import com.backend.aprcroso.model.Company;
 import com.backend.aprcroso.model.WorkField;
 import com.backend.aprcroso.model.enums.CompanyStatus;
+import com.backend.aprcroso.repository.AuditLogRepository;
 import com.backend.aprcroso.repository.CompanyRepository;
+import com.backend.aprcroso.service.AuditLogService;
 import com.backend.aprcroso.service.CompanyService;
 import com.backend.aprcroso.service.impl.CompanyServiceImpl;
 import com.backend.aprcroso.service.impl.UserServiceImpl;
@@ -45,6 +48,13 @@ public class CompanyController {
 
   @Autowired
   private CompanyService companyService;
+
+  @Autowired
+  private AuditLogService auditLogService;
+
+  @Autowired
+  private AuditLogRepository auditLogRepository;
+
 
   //posting hardcoded company info
   @PostConstruct
@@ -132,15 +142,41 @@ public class CompanyController {
     }
 
     Company company = optionalCompany.get();
+    CompanyStatus oldStatus = company.getCompanyStatus();
+
 
     try {
-      company.setCompanyStatus(CompanyStatus.valueOf(request.getStatus().toUpperCase()));
+      CompanyStatus newStatus = CompanyStatus.valueOf(request.getStatus().toUpperCase());
+
+      // Snimanje u audit log ako je došlo do promene
+      if (oldStatus != newStatus) {
+        auditLogService.logChange(
+                "Company",
+                company.getId(),
+                "companyStatus",
+                oldStatus != null ? oldStatus.toString() : null,
+                newStatus.toString(),
+                "adminUser" // request.getChangedBy() za usera
+        );
+      }
+
+      company.setCompanyStatus(newStatus);
       companyRepository.save(company);
       return ResponseEntity.ok(company);
     } catch (IllegalArgumentException e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
   }
+
+  @GetMapping("/companies/{id}/history")
+  public ResponseEntity<List<AuditLog>> getCompanyHistory(@PathVariable Long id) {
+    List<AuditLog> logs = auditLogRepository.findByEntityNameAndEntityIdOrderByChangedAtDesc("Company", id);
+    System.out.println("Logs found for company " + id + ": " + logs.size());
+    return ResponseEntity.ok(logs);
+  }
+
+
+
 
   //dodavanje WorkField u kompanije
   @PostMapping("/companies/{companyId}/workfields")

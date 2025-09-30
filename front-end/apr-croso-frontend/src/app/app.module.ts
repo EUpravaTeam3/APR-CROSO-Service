@@ -27,6 +27,7 @@ import { LoginComponent } from './components/login/login.component';
 import { WorkfieldRequestComponent } from './components/user/workfield-request/workfield-request.component';
 import { WorkfieldRequestListComponent } from './components/admin/workfield-request-list/workfield-request-list.component';
 import { StatsDashboardComponent } from './components/admin/stats-dashboard/stats-dashboard.component';
+import { CompanyHistoryComponent } from './components/admin/company-history/company-history.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { StatsDashboardComponent } from './components/admin/stats-dashboard/stat
     LoginComponent,
     WorkfieldRequestComponent,
     WorkfieldRequestListComponent,
-    StatsDashboardComponent
+    StatsDashboardComponent,
+    CompanyHistoryComponent
   ],
   imports: [
     BrowserModule,

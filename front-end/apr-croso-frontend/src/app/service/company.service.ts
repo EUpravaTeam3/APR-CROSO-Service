@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Company } from '../class/company';
 import { Address } from '../class/address';
 import { CreateCompanyDTO } from '../class/CreateCompanyDTO ';
+import { AuditLog } from '../class/AuditLog';
 
 @Injectable({
   providedIn: 'root'
@@ -25,13 +26,18 @@ export class CompanyService {
     return this.httpClient.delete<void>(`http://localhost:8005/api/companies/${id}`);
   }
 
-
   getCompanyById(id: number): Observable<any>{
     return this.httpClient.get<Company>(`${this.baseURL}/${id}`);
   }
 
   getAddressByCompanyId(companyId: number): Observable<Address> {
     return this.httpClient.get<Address>(`${this.baseURL}/${companyId}/address`);
+  }
+
+
+  //AuditLogCompanyHistory
+  getCompanyHistory(companyId: number): Observable<AuditLog[]> {
+    return this.httpClient.get<AuditLog[]>(`${this.baseURL}/${companyId}/history`);
   }
 
 }

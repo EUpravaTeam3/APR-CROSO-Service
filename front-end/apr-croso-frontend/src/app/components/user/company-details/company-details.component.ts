@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from '../../../service/company.service';
 import { Address } from '../../../class/address';
 import { WorkField, WorkfieldService } from '../../../service/workfield.service';
+import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'company-details',
@@ -15,20 +16,28 @@ export class CompanyDetailsComponent {
   id!: number;
   company!: Company;
   address!: Address;
-  workFields: WorkField[] = [];  // Promenili smo workField u niz workFields
+  workFields: WorkField[] = []; 
+  isAdmin: boolean = false;
+
 
 
   constructor(
     private companyService: CompanyService, 
     private workFieldService: WorkfieldService, 
     private router: Router, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService 
   ){}
 
   ngOnInit(): void {
     this.getCompanyById();
-    this.getAddressByCompanyId(); // Pozovite metodu za učitavanje adrese
-    this.getWorkFieldsByCompanyId(); 
+    this.getAddressByCompanyId(); 
+    this.getWorkFieldsByCompanyId();
+    
+    this.authService.fetchRole().subscribe(res => {
+    this.isAdmin = res.role?.toUpperCase() === 'ADMIN';
+    console.log('Da li je admin?', this.isAdmin);
+    });
 
   }
 

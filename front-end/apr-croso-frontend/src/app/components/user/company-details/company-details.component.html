@@ -52,6 +52,12 @@
   </div>
 
 
+  <company-history *ngIf="isAdmin && company?.id" [companyId]="company.id"></company-history>
+
+
+
+
+
   <div class="navigation-container">
     <button class="btn btn-info" (click)="goHome()">Go Back</button>
   </div>
