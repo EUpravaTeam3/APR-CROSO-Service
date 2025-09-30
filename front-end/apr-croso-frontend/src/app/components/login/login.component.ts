@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       console.log('Logged in:', res);
       
       // user = res
-      console.log(res);
+      // console.log(res);
       const user = (res as any).user;  // uzimamo user objekat iz res
 
       this.auth.setCurrentUser(user);

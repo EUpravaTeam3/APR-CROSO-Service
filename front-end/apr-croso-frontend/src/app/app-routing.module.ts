@@ -14,6 +14,7 @@ import { EmployeeListComponent } from './components/admin/employee-management/em
 import { RequestListComponent } from './components/admin/employee-management/request-list/request-list.component';
 import { AddingEmployeeFinalComponent } from './components/admin/employee-management/adding-employee-final/adding-employee-final.component';
 import { LoginComponent } from './components/login/login.component';
+import { WorkfieldRequestComponent } from './components/user/workfield-request/workfield-request.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -30,7 +31,8 @@ const routes: Routes = [
   {path: 'employee-list', component: EmployeeListComponent},
   {path: 'request-list', component: RequestListComponent},
   {path: 'adding-employee-final', component: AddingEmployeeFinalComponent},
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  {path: 'workfield-request', component: WorkfieldRequestComponent}
 ];
 
 @NgModule({

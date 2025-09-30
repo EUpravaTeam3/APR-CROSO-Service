@@ -24,4 +24,7 @@ public interface CompanyService {
 
     void deleteCompany(Long id);
 
+    WorkField updateWorkField(Long companyId, Long workFieldId, WorkField updatedWorkField);
+
+
 }

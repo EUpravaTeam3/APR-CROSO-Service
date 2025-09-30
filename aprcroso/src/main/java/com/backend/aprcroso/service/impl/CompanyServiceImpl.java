@@ -195,6 +195,25 @@ public class CompanyServiceImpl implements CompanyService{
         companyRepository.delete(company);
     }
 
+    public WorkField updateWorkField(Long companyId, Long workFieldId, WorkField updatedWorkField) {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new NotFoundException("Company not found with id: " + companyId));
+
+        WorkField existing = company.getWorkFields().stream()
+                .filter(wf -> wf.getId().equals(workFieldId))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("WorkField not found with id: " + workFieldId));
+
+        // azuriranje polja
+        existing.setName(updatedWorkField.getName());
+        existing.setDescription(updatedWorkField.getDescription());
+        existing.setCode(updatedWorkField.getCode());
+
+        companyRepository.save(company);
+        return existing;
+    }
+
+
 
 
     //......

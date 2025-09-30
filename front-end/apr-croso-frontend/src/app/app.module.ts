@@ -24,6 +24,7 @@ import { EmployeeListComponent } from './components/admin/employee-management/em
 import { RequestListComponent } from './components/admin/employee-management/request-list/request-list.component';
 import { AddingEmployeeFinalComponent } from './components/admin/employee-management/adding-employee-final/adding-employee-final.component';
 import { LoginComponent } from './components/login/login.component';
+import { WorkfieldRequestComponent } from './components/user/workfield-request/workfield-request.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { LoginComponent } from './components/login/login.component';
     EmployeeListComponent,
     RequestListComponent,
     AddingEmployeeFinalComponent,
-    LoginComponent
+    LoginComponent,
+    WorkfieldRequestComponent
   ],
   imports: [
     BrowserModule,

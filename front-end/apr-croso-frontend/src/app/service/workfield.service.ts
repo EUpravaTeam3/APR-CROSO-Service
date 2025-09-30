@@ -24,4 +24,10 @@ export class WorkfieldService {
   getWorkFieldsByCompanyId(companyId: number): Observable<WorkField[]> {
     return this.http.get<WorkField[]>(`${this.apiUrl}/companies/${companyId}/workfields`);
   }
+
+  updateWorkField(companyId: number, workFieldId: number, workField: WorkField): Observable<WorkField> {
+  return this.http.put<WorkField>(`${this.apiUrl}/companies/${companyId}/workfields/${workFieldId}`, workField);
+}
+
+
 }

@@ -1,0 +1,70 @@
+<nav-bar></nav-bar>
+<br>
+
+
+<h1>Zahtev za promenu delatnosti kompanije</h1>
+
+<!-- <table class="table table-striped">
+    <tr>
+      <th>Company Name</th>
+      <th>OwnerUCN</th>
+    </tr>
+    <tr *ngFor="let company of companies">
+      <td>{{company.name}}</td>
+      <td>{{company.ownerUcn}}</td>
+    </tr>
+  
+</table> -->
+
+
+<div class="container mt-3">
+  <h2>Update WorkField</h2>
+
+  <!-- Odabir firme -->
+  <label for="companySelect">Select your company:</label>
+  <select id="companySelect" class="form-control mb-3" (change)="onCompanyChange($event)">
+    <option value="">-- Choose Company --</option>
+    <option *ngFor="let company of userCompanies" [value]="company.id">
+      {{ company.name }} (PIB: {{ company.pib }})
+    </option>
+  </select>
+
+  <!-- Odabir postojećeg workfield-a -->
+  <div *ngIf="existingWorkFields.length > 0">
+    <label for="workFieldSelect">Select WorkField to update:</label>
+    <select id="workFieldSelect" class="form-control mb-3" (change)="onWorkFieldSelect($event)">
+      <option value="">-- Choose WorkField --</option>
+      <option *ngFor="let wf of existingWorkFields" [value]="wf.id">
+        {{ wf.name }} - {{ wf.code }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Forma za update -->
+  <form [formGroup]="workfieldReqForm" (ngSubmit)="onSubmit()" *ngIf="selectedWorkField">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" formControlName="name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" formControlName="description" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>Code</label>
+      <input type="text" formControlName="code" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3" [disabled]="workfieldReqForm.invalid">Update WorkField</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+

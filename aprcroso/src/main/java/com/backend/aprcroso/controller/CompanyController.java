@@ -156,6 +156,22 @@ public class CompanyController {
     return ResponseEntity.ok(workFields);
   }
 
+  // update WorkField in a company
+  @PutMapping("/companies/{companyId}/workfields/{workFieldId}")
+  public ResponseEntity<WorkField> updateWorkField(
+          @PathVariable Long companyId,
+          @PathVariable Long workFieldId,
+          @RequestBody @Validated WorkField updatedWorkField) {
+    try {
+      WorkField workField = companyServiceImpl.updateWorkField(companyId, workFieldId, updatedWorkField);
+      return ResponseEntity.ok(workField);
+    } catch (NotFoundException e) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
   @DeleteMapping("/companies/{id}")
   public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
     try {
