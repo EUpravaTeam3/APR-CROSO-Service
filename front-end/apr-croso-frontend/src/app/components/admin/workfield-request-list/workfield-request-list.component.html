@@ -1,0 +1,31 @@
+<nav-bar></nav-bar>
+
+<h1>WorkField Change Requests</h1>
+
+<table class="table table-striped mt-3" *ngIf="requests.length > 0; else noRequests">
+  <thead>
+    <tr>
+      <th>Company ID</th>
+      <th>Old Value</th>
+      <th>New Value</th>
+      <th>Requested By</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let req of requests">
+      <td>{{ req.companyId }}</td>
+      <td>{{ req.oldValue }}</td>
+      <td>{{ req.newValue }}</td>
+      <td>{{ req.createdBy }}</td>
+      <td>
+        <button class="btn btn-success btn-sm me-2" (click)="approve(req.id)">Approve</button>
+        <button class="btn btn-danger btn-sm" (click)="reject(req.id)">Reject</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #noRequests>
+  <p>No pending requests at the moment.</p>
+</ng-template>

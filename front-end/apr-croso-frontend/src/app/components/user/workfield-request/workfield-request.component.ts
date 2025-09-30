@@ -77,27 +77,37 @@ export class WorkfieldRequestComponent implements OnInit{
     }
   }
 
-  // Submit → update workfield
+// Submit - zahtev adminu
   onSubmit(): void {
-    if (this.selectedCompany && this.selectedWorkField && this.workfieldReqForm.valid) {
-      const updatedWorkField: WorkField = {
-        ...this.selectedWorkField,
-        ...this.workfieldReqForm.value
-      };
+  if (this.selectedCompany && this.selectedWorkField && this.workfieldReqForm.valid) {
 
-      this.workfieldService.updateWorkField(this.selectedCompany.id!, this.selectedWorkField.id!, updatedWorkField)
-        .subscribe({
-          next: () => {
-            alert('WorkField updated successfully!');
-            this.onCompanyChange({ target: { value: this.selectedCompany!.id!.toString() } } as unknown as Event); // refresh fields
-          },
-          error: (err) => {
-            console.error('Error updating WorkField:', err);
-            alert('Failed to update WorkField.');
-          }
-        });
+    if (this.selectedWorkField.id === undefined) {
+      console.error('Selected WorkField has no ID!');
+      return;
     }
+
+    const request = {
+      companyId: this.selectedCompany.id,
+      workFieldId: this.selectedWorkField.id,
+      requestedBy: this.auth.currentUserData()?.ucn!,
+      newValues: this.workfieldReqForm.value
+    };
+
+    this.workfieldService.submitChangeRequest(request).subscribe({
+      next: () => {
+        alert('Change request submitted successfully!');
+        this.workfieldReqForm.reset();
+        this.selectedWorkField = null;
+      },
+      error: (err) => {
+        console.error('Error submitting change request:', err);
+        alert('Failed to submit change request.');
+      }
+    });
   }
+}
+
+
 
 
 
