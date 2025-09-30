@@ -1,0 +1,26 @@
+<nav-bar></nav-bar>
+
+<div class="dashboard">
+  <h2>📊 Statistika sistema</h2>
+
+  <p><b>Ukupan broj firmi:</b> {{ totalCompanies }}</p>
+  <p><b>Ukupan broj korisnika:</b> {{ totalUsers }}</p>
+
+  <h3>Firme po delatnostima</h3>
+  <table>
+    <tr>
+      <th>Delatnost</th>
+      <th>Broj firmi</th>
+      <th>Vizuelno</th>
+    </tr>
+    <tr *ngFor="let stat of workfieldStats">
+      <td>{{ stat.name }}</td>
+      <td>{{ stat.count }}</td>
+      <td>
+        <div class="bar">
+          <div class="fill" [style.width.%]="(stat.count / totalCompanies) * 100"></div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

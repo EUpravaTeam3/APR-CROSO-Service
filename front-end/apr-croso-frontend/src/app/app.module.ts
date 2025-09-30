@@ -26,6 +26,7 @@ import { AddingEmployeeFinalComponent } from './components/admin/employee-manage
 import { LoginComponent } from './components/login/login.component';
 import { WorkfieldRequestComponent } from './components/user/workfield-request/workfield-request.component';
 import { WorkfieldRequestListComponent } from './components/admin/workfield-request-list/workfield-request-list.component';
+import { StatsDashboardComponent } from './components/admin/stats-dashboard/stats-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { WorkfieldRequestListComponent } from './components/admin/workfield-requ
     AddingEmployeeFinalComponent,
     LoginComponent,
     WorkfieldRequestComponent,
-    WorkfieldRequestListComponent
+    WorkfieldRequestListComponent,
+    StatsDashboardComponent
   ],
   imports: [
     BrowserModule,

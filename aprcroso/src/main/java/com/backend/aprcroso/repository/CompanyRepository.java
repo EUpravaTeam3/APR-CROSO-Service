@@ -18,4 +18,11 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     @Query("SELECT c.workFields FROM Company c WHERE c.id = :companyId")
     List<WorkField> findWorkFieldsByCompanyId(@Param("companyId") Long companyId);
 
+
+    //Stats prikaz funkcija
+    @Query("SELECT w.name, COUNT(c) " +
+            "FROM Company c JOIN c.workFields w " +
+            "GROUP BY w.name")
+    List<Object[]> countCompaniesByWorkfield();
+
 }
