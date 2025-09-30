@@ -13,10 +13,10 @@
   }
 
   table {
-  margin-left: 10px;
+  margin: 0 auto;
   border-collapse: collapse;
   border: 1px solid #ddd;
-  width: 30%;
+  width: 50%;
 }
 
 table, th, td {
@@ -24,10 +24,16 @@ table, th, td {
   border-collapse: collapse;
 }
 th, td {
-  background-color: #96D4D4;
+  background-color: #afb5c2;
   padding: 10px;
 }
 
 tr {
   border-bottom: 1px solid #ddd;
+}
+
+#h2-zahtev{
+  text-align: center;
+  font-weight: lighter;
+  color: #a13f3f;
 }

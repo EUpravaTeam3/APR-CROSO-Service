@@ -6,16 +6,16 @@
   <thead>
     <tr>
       <th>Company ID</th>
-      <th>Old Value</th>
       <th>New Value</th>
-      <th>Requested By</th>
+      <th>Requested By 
+        (OwnerUCN)
+      </th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let req of requests">
       <td>{{ req.companyId }}</td>
-      <td>{{ req.oldValue }}</td>
       <td>{{ req.newValue }}</td>
       <td>{{ req.createdBy }}</td>
       <td>

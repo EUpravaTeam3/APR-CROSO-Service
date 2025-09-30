@@ -2,7 +2,6 @@
 <br>
 
 
-<h1>Zahtev za promenu delatnosti kompanije</h1>
 
 <!-- <table class="table table-striped">
     <tr>
@@ -16,8 +15,10 @@
   
 </table> -->
 
+<h2 id="h2-zahtev">*Zahtev za promenu delatnosti kompanije*</h2>
 
 <div class="container mt-3">
+
   <h2>Update WorkField</h2>
 
   <!-- Odabir firme -->
@@ -61,31 +62,34 @@
   </form>
 </div>
 
-<h3>Moji zahtevi</h3>
-<table class="table table-striped" *ngIf="userRequests.length > 0">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Novi WorkField</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let req of userRequests">
-      <td>{{ req.id }}</td>
-      <td>{{ req.newValue }}</td>
-      <td>
-        <span [ngClass]="{
-          'text-warning': req.status === 'PENDING',
-          'text-success': req.status === 'APPROVED',
-          'text-danger': req.status === 'REJECTED'
-        }">
-          {{ req.status }}
-        </span>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container mt-3">
+  <h3>My requests</h3>
+  <table class="table table-striped" *ngIf="userRequests.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Novi WorkField</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let req of userRequests">
+        <td>{{ req.id }}</td>
+        <td>{{ req.newValue }}</td>
+        <td>
+          <span [ngClass]="{
+            'text-warning': req.status === 'PENDING',
+            'text-success': req.status === 'APPROVED',
+            'text-danger': req.status === 'REJECTED'
+          }">
+            {{ req.status }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 
 
