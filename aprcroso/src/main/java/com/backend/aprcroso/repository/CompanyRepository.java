@@ -25,4 +25,15 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
             "GROUP BY w.name")
     List<Object[]> countCompaniesByWorkfield();
 
+
+
+    // Nađi firme sa istim vlasnikom
+    List<Company> findByOwnerUcnAndIdNot(String ownerUcn, Long excludeId);
+
+    // Nađi firme sa istim delatnostima (pretpostavljam da u WorkField imaš šifru aktivnosti)
+    @Query("SELECT DISTINCT c FROM Company c JOIN c.workFields wf " +
+            "WHERE wf.code IN :activityCodes AND c.id <> :excludeId")
+    List<Company> findByActivityCodes(@Param("activityCodes") List<String> activityCodes,
+                                      @Param("excludeId") Long excludeId);
+
 }

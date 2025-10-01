@@ -1,0 +1,15 @@
+.related-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.related-table th, .related-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.related-table th {
+  background-color: #f5f5f5;
+  text-align: left;
+}

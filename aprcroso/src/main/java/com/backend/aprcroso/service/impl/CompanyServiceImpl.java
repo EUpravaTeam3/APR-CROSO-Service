@@ -219,6 +219,32 @@ public class CompanyServiceImpl implements CompanyService{
 
 
 
+    public List<Company> findRelatedCompanies(Long companyId) {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new RuntimeException("Company not found with id: " + companyId));
 
-    //......
+        // 1. Ako postoji vlasnik, po ownerUcn
+        if (company.getOwnerUcn() != null && !company.getOwnerUcn().isBlank()) {
+            List<Company> sameOwnerCompanies =
+                    companyRepository.findByOwnerUcnAndIdNot(company.getOwnerUcn(), companyId);
+            if (!sameOwnerCompanies.isEmpty()) {
+                return sameOwnerCompanies;
+            }
+        }
+
+        // 2. Ako nema vlasnika ili nema povezanih firmi, po delatnostima
+        if (company.getWorkFields() != null && !company.getWorkFields().isEmpty()) {
+            List<String> activityCodes = company.getWorkFields()
+                    .stream()
+                    .map(wf -> wf.getCode())
+                    .toList();
+
+            return companyRepository.findByActivityCodes(activityCodes, companyId);
+        }
+
+        return List.of();
+    }
+
+
+
 }

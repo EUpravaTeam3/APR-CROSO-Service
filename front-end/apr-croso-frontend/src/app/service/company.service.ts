@@ -34,10 +34,14 @@ export class CompanyService {
     return this.httpClient.get<Address>(`${this.baseURL}/${companyId}/address`);
   }
 
-
   //AuditLogCompanyHistory
   getCompanyHistory(companyId: number): Observable<AuditLog[]> {
     return this.httpClient.get<AuditLog[]>(`${this.baseURL}/${companyId}/history`);
   }
+
+  //GetRelatedCompanies - preporucene kompanije
+  getRelatedCompanies(companyId: number) {
+  return this.httpClient.get<any[]>(`http://localhost:8005/api/companies/${companyId}/related`);
+}
 
 }

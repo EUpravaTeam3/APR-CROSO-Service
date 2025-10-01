@@ -28,6 +28,7 @@ import { WorkfieldRequestComponent } from './components/user/workfield-request/w
 import { WorkfieldRequestListComponent } from './components/admin/workfield-request-list/workfield-request-list.component';
 import { StatsDashboardComponent } from './components/admin/stats-dashboard/stats-dashboard.component';
 import { CompanyHistoryComponent } from './components/admin/company-history/company-history.component';
+import { CompanyRelatedComponent } from './components/user/company-related/company-related.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { CompanyHistoryComponent } from './components/admin/company-history/comp
     WorkfieldRequestComponent,
     WorkfieldRequestListComponent,
     StatsDashboardComponent,
-    CompanyHistoryComponent
+    CompanyHistoryComponent,
+    CompanyRelatedComponent
   ],
   imports: [
     BrowserModule,

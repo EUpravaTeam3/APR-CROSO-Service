@@ -18,6 +18,7 @@ import { WorkfieldRequestComponent } from './components/user/workfield-request/w
 import { WorkfieldRequestListComponent } from './components/admin/workfield-request-list/workfield-request-list.component';
 import { StatsDashboardComponent } from './components/admin/stats-dashboard/stats-dashboard.component';
 import { CompanyHistoryComponent } from './components/admin/company-history/company-history.component';
+import { CompanyRelatedComponent } from './components/user/company-related/company-related.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -38,7 +39,8 @@ const routes: Routes = [
   {path: 'workfield-request', component: WorkfieldRequestComponent},
   {path: 'workfield-request-list', component: WorkfieldRequestListComponent},
   {path: 'stats-dashboard', component: StatsDashboardComponent},
-  {path: 'company-history', component: CompanyHistoryComponent}
+  {path: 'company-history', component: CompanyHistoryComponent},
+  {path: 'company-related', component: CompanyRelatedComponent}
 ];
 
 @NgModule({

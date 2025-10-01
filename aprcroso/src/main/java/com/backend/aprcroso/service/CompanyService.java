@@ -3,6 +3,7 @@ package com.backend.aprcroso.service;
 import com.backend.aprcroso.dto.CompanyDTO;
 import com.backend.aprcroso.dto.CreateCompanyDTO;
 import com.backend.aprcroso.model.Address;
+import com.backend.aprcroso.model.Company;
 import com.backend.aprcroso.model.WorkField;
 
 import java.util.List;
@@ -26,5 +27,6 @@ public interface CompanyService {
 
     WorkField updateWorkField(Long companyId, Long workFieldId, WorkField updatedWorkField);
 
+    List <Company> findRelatedCompanies(Long companyId);
 
 }

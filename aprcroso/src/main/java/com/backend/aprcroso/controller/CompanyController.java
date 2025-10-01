@@ -2,6 +2,7 @@ package com.backend.aprcroso.controller;
 
 
 import com.backend.aprcroso.dto.CompanyDTO;
+import com.backend.aprcroso.dto.CompanyRelatedDTO;
 import com.backend.aprcroso.dto.CreateCompanyDTO;
 import com.backend.aprcroso.dto.UpdateCompanyStatusRequest;
 import com.backend.aprcroso.exception.NotFoundException;
@@ -219,6 +220,18 @@ public class CompanyController {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
+
+  //get related companies
+  @GetMapping("/companies/{id}/related")
+  public ResponseEntity<List<CompanyRelatedDTO>> getRelatedCompanies(@PathVariable Long id) {
+    List<CompanyRelatedDTO> related = companyService.findRelatedCompanies(id)
+            .stream()
+            .map(CompanyRelatedDTO::fromEntity)
+            .toList();
+    return ResponseEntity.ok(related);
+  }
+
+
 
 
 

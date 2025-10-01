@@ -1,0 +1,25 @@
+<div *ngIf="loading">Loading related companies...</div>
+
+<div *ngIf="!loading && relatedCompanies.length > 0">
+  <h3>Related Companies</h3>
+  <table class="related-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>PIB</th>
+        <th>Registration Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of relatedCompanies">
+        <td>{{ c.name }}</td>
+        <td>{{ c.pib }}</td>
+        <td>{{ c.registrationNumber }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="!loading && relatedCompanies.length === 0">
+  No related companies found.
+</div>

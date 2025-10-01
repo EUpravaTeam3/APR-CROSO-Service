@@ -53,6 +53,9 @@
 
 
   <company-history *ngIf="isAdmin && company?.id" [companyId]="company.id"></company-history>
+  <br>
+  <company-related *ngIf="company?.id" [companyId]="company.id"></company-related>
+
 
 
 
