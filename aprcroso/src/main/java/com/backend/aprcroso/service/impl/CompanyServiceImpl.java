@@ -1,7 +1,9 @@
 package com.backend.aprcroso.service.impl;
 
 import com.backend.aprcroso.dto.CompanyDTO;
+import com.backend.aprcroso.dto.CompanyRelatedDTO;
 import com.backend.aprcroso.dto.CreateCompanyDTO;
+import com.backend.aprcroso.dto.WorkFieldDTO;
 import com.backend.aprcroso.exception.NotFoundException;
 import com.backend.aprcroso.model.Address;
 import com.backend.aprcroso.model.Company;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -219,31 +222,65 @@ public class CompanyServiceImpl implements CompanyService{
 
 
 
-    public List<Company> findRelatedCompanies(Long companyId) {
-        Company company = companyRepository.findById(companyId)
-                .orElseThrow(() -> new RuntimeException("Company not found with id: " + companyId));
 
-        // 1. Ako postoji vlasnik, po ownerUcn
-        if (company.getOwnerUcn() != null && !company.getOwnerUcn().isBlank()) {
-            List<Company> sameOwnerCompanies =
-                    companyRepository.findByOwnerUcnAndIdNot(company.getOwnerUcn(), companyId);
-            if (!sameOwnerCompanies.isEmpty()) {
-                return sameOwnerCompanies;
+
+    public List<CompanyRelatedDTO> findRelatedCompanies(Long companyId) {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new RuntimeException("Company not found"));
+
+        List<CompanyRelatedDTO> related = new ArrayList<>();
+
+        //  Povezane po istom ownerUcn
+        if (company.getOwnerUcn() != null && !company.getOwnerUcn().isEmpty()) {
+            List<Company> byOwner = companyRepository.findByOwnerUcnAndIdNot(company.getOwnerUcn(), companyId);
+            if (!byOwner.isEmpty()) {
+                byOwner.forEach(c -> related.add(toDto(c)));
+                return related;
             }
         }
 
-        // 2. Ako nema vlasnika ili nema povezanih firmi, po delatnostima
-        if (company.getWorkFields() != null && !company.getWorkFields().isEmpty()) {
-            List<String> activityCodes = company.getWorkFields()
-                    .stream()
-                    .map(wf -> wf.getCode())
-                    .toList();
-
-            return companyRepository.findByActivityCodes(activityCodes, companyId);
+        //  Ako nema po ownerUcn, povezane po istom workField kodu i različiti ownerUcn
+        if (!company.getWorkFields().isEmpty()) {
+            for (WorkField wf : company.getWorkFields()) {
+                List<Company> byWorkField = companyRepository
+                        .findDistinctByWorkFields_CodeAndOwnerUcnNotAndIdNot(wf.getCode(),
+                                company.getOwnerUcn() != null ? company.getOwnerUcn() : "",
+                                companyId);
+                byWorkField.forEach(c -> {
+                    if (related.stream().noneMatch(r -> r.getId().equals(c.getId()))) {
+                        related.add(toDto(c));
+                    }
+                });
+            }
         }
 
-        return List.of();
+        return related;
     }
+
+    // DTO mapping
+    private CompanyRelatedDTO toDto(Company c) {
+        CompanyRelatedDTO dto = new CompanyRelatedDTO();
+        dto.setId(c.getId());
+        dto.setName(c.getName());
+        dto.setOwnerUcn(c.getOwnerUcn());
+        dto.setCompanyStatus(c.getCompanyStatus());
+
+        // mapiranje workFields
+        List<WorkFieldDTO> workFields = new ArrayList<>();
+        c.getWorkFields().forEach(wf -> {
+            WorkFieldDTO wfDto = new WorkFieldDTO();
+            wfDto.setId(wf.getId());
+            wfDto.setName(wf.getName());
+            wfDto.setDescription(wf.getDescription());
+            wfDto.setCode(wf.getCode());
+            workFields.add(wfDto);
+        });
+
+        dto.setWorkFields(workFields);
+        return dto;
+    }
+
+
 
 
 

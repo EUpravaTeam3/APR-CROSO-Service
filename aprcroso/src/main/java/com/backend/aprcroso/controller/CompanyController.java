@@ -224,10 +224,7 @@ public class CompanyController {
   //get related companies
   @GetMapping("/companies/{id}/related")
   public ResponseEntity<List<CompanyRelatedDTO>> getRelatedCompanies(@PathVariable Long id) {
-    List<CompanyRelatedDTO> related = companyService.findRelatedCompanies(id)
-            .stream()
-            .map(CompanyRelatedDTO::fromEntity)
-            .toList();
+    List<CompanyRelatedDTO> related = companyService.findRelatedCompanies(id);
     return ResponseEntity.ok(related);
   }
 

@@ -8,8 +8,10 @@ import { CompanyService } from '../../../service/company.service';
 })
 export class CompanyRelatedComponent implements OnInit {
   @Input() companyId!: number;
+
   relatedCompanies: any[] = [];
   loading = false;
+  error: string | null = null;
 
   constructor(private companyService: CompanyService) {}
 
@@ -21,14 +23,16 @@ export class CompanyRelatedComponent implements OnInit {
 
   loadRelatedCompanies(): void {
     this.loading = true;
+    this.error = null;
+
     this.companyService.getRelatedCompanies(this.companyId).subscribe({
       next: (data) => {
         this.relatedCompanies = data;
-        console.log("relatedCompanies:", data);
         this.loading = false;
       },
       error: (err) => {
-        console.error("Greška pri učitavanju related kompanija:", err);
+        console.error('Greška pri učitavanju related kompanija:', err);
+        this.error = 'Nije moguće učitati related kompanije';
         this.loading = false;
       }
     });
