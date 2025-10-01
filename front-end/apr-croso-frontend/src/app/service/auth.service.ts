@@ -100,7 +100,21 @@ fetchRole() {
   }
 
   logout() {
-    localStorage.removeItem('user');
+    this.http.post('http://localhost:9090/user/logout', {
+    }, { withCredentials: true }).subscribe(res => {
+      console.log('status:', res);
+    localStorage.removeItem('eupravaAddress');
+    localStorage.removeItem('eupravaEmail');
+    localStorage.removeItem('eupravaName');
+    localStorage.removeItem('eupravaSurname');
+    localStorage.removeItem('eupravaUcn');
+    localStorage.removeItem('eupravaUser');
+    
+
     this.currentUserSignal.set(null);
+    // window.location.href = "http://localhost:4200/login"
+
+
+    });
   }
 }
