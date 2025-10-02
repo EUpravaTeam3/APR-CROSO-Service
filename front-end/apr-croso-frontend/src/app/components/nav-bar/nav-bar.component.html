@@ -1,5 +1,12 @@
 <nav class="navbar">
   <ul *ngIf="user() as u">
+
+    <!-- zaglavlje sa imenom korisnika -->
+    <li class="nav-user-info">
+      👤 {{ u.name }} {{ u.surname }}
+      <small>({{ u.role | uppercase }})</small>
+    </li>
+    
     <!-- USER stavke -->
     <ng-container *ngIf="u.role === 'user'">
       <li><a routerLink="/home" routerLinkActive="active">HOME</a></li>

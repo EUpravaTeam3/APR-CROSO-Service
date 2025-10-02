@@ -51,7 +51,6 @@ export class AuthService {
 }
 
 
- /** Uzimanje role sa backend-a (9090) i update signala */
   /** Uzimanje role sa backend-a (9090) i update signala */
 fetchRole() {
   return this.http.get<{ role: string }>("http://localhost:9090/user/aprcroso", { withCredentials: true })

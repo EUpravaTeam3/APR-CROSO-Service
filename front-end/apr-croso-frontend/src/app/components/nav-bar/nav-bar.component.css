@@ -51,3 +51,15 @@
 .logout-button:hover {
   background-color: #c0392b;
 }
+
+.nav-user-info {
+  margin-right: auto; 
+  font-weight: bold;
+  color: #ecf0f1;
+}
+
+.nav-user-info small {
+  font-size: 12px;
+  margin-left: 5px;
+  color: #bdc3c7;
+}

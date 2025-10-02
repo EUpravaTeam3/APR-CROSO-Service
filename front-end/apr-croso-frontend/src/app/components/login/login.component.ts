@@ -24,53 +24,65 @@ export class LoginComponent implements OnInit {
   private auth = inject(AuthService);
   private http = inject(HttpClient)
 
-  form = this.fb.nonNullable.group({
-    username: ['', Validators.required],
-  });
+  // form = this.fb.nonNullable.group({
+  //   username: ['', Validators.required],
+  // });
 
   loading = signal(false);
   error = signal<string | null>(null);
+
+  username = '';
+  password = '';
+
 
   ngOnInit() {
     // ako je ulogovan, skip login page.
     if (this.auth.currentUser()) this.router.navigateByUrl('/');
   }
 
-  username = '';
-  password = '';
-
+  
   submit() {
-    if (this.form.invalid) return;
+    if (!this.username || !this.password) {
+      alert("Molimo unesite UCN i lozinku.");
+      return;
+    }
+
+    this.loading.set(true);
+
     this.http.post<LoginUsers>('http://localhost:9090/user', {
       ucn: this.username,
       password: this.password
-    }, { withCredentials: true }).subscribe(res => {
-      console.log('Logged in:', res);
-      
-      // user = res
-      // console.log(res);
-      const user = (res as any).user;  // uzimamo user objekat iz res
+    }, { withCredentials: true }).subscribe({
+      next: (res) => {
+        console.log('Logged in:', res);
 
-      this.auth.setCurrentUser(user);
-      localStorage.setItem("eupravaUcn", user.ucn ?? '');
-      localStorage.setItem("eupravaEmail", user.email ?? '');
-      localStorage.setItem("eupravaName", user.name ?? '');
-      localStorage.setItem("eupravaSurname", user.surname ?? '');
-      localStorage.setItem("eupravaAddress", user.address ?? '');
+        const user = (res as any).user;
+        if (!user) {
+          alert("Pogrešni kredencijali, pokušajte ponovo.");
+          this.loading.set(false);
+          return;
+        }
 
-      this.auth.fetchRole();
+        this.auth.setCurrentUser(user);
+        // === PROVERA ownerUcn ===
+        console.log('Current user UCN in AuthService:', this.auth.currentUserData()?.ucn);
+        console.log('Current user in AuthService:', this.auth.currentUserData());
 
+        localStorage.setItem("eupravaUcn", user.ucn ?? '');
+        localStorage.setItem("eupravaEmail", user.email ?? '');
+        localStorage.setItem("eupravaName", user.name ?? '');
+        localStorage.setItem("eupravaSurname", user.surname ?? '');
+        localStorage.setItem("eupravaAddress", user.address ?? '');
 
-      // === PROVERA ownerUcn ===
-    console.log('Current user UCN in AuthService:', this.auth.currentUserData()?.ucn);
-    console.log('Current user in AuthService:', this.auth.currentUserData());
+        this.auth.fetchRole();
 
-
-
-      this.router.navigateByUrl("/home")
+        this.router.navigateByUrl("/home");
+      },
+      error: () => {
+        alert("Pogrešni kredencijali, pokušajte ponovo.");
+        this.loading.set(false);
+      }
     });
-      this.loading.set(true);
   }
 }
 
-//trenutno spojeno, edited

@@ -1,41 +1,35 @@
-<form
-  [formGroup]="form"
-  (ngSubmit)="submit()"
-  class="login-form"
->
+<form (ngSubmit)="submit()" class="login-form">
   <h2 class="form-title">Sign in</h2>
 
   <label class="form-label">
-    <span class="form-label-text">Ucn</span>
+    <span class="form-label-text">UCN</span>
     <input
-    [(ngModel)]="username"
+      [(ngModel)]="username"
+      name="username"
       class="form-input"
       type="text"
-      formControlName="username"
       placeholder="111"
+      required
     />
   </label>
 
   <label class="form-label">
-    <span class="form-label-text">password</span>
+    <span class="form-label-text">Password</span>
     <input
       [(ngModel)]="password"
+      name="password"
       class="form-input"
       type="password"
-      formControlName="username"
       placeholder="password"
+      required
     />
   </label>
 
   <button
     class="form-button"
     type="submit"
-    [disabled]="form.invalid || loading()"
+    [disabled]="loading()"
   >
     {{ loading() ? 'Signing in…' : 'Login' }}
   </button>
-
-  <p class="form-error" *ngIf="error()">
-    {{ error() }}
-  </p>
 </form>
