@@ -8,8 +8,6 @@
       <th>Ime i Prezime</th>
       <th>Pozicija</th>
       <th>Status</th>
-      <th>Kreirao</th>
-      <th>Kompanija</th>
       <th>Akcija</th>
     </tr>
   </thead>
@@ -19,8 +17,6 @@
       <td>{{ req.employee.name }}</td>
       <td>{{ req.employee.position }}</td>
       <td>{{ req.status }}</td>
-      <td>{{ req.createdByUsername }}</td>
-      <td>{{ req.companyName }}</td>
       <td>
         <button (click)="processRequest(req.id!, true)">Odobri</button>
         <button (click)="processRequest(req.id!, false)">Odbij</button>
