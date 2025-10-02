@@ -39,4 +39,6 @@ public class FinancialReport {
 
     private Boolean valid = false;
 
+    private String submittedByUcn;
+
     }

@@ -26,4 +26,10 @@ public class BankruptcyReportService {
     public BankruptcyReport saveBankruptcyReport(BankruptcyReport bankruptcyReport) {
         return bankruptcyReportRepository.save(bankruptcyReport);
     }
+
+    public List<BankruptcyReport> getReportsByUserUcn(String ucn) {
+        return bankruptcyReportRepository.findBySubmittedByUcn(ucn);
+    }
+
+
 }

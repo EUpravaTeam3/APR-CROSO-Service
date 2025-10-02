@@ -37,5 +37,11 @@ public class FinancialReportService {
         financialReportRepository.delete(report);
     }
 
+    public List<FinancialReport> getReportsByUserUcn(String ucn) {
+        return financialReportRepository.findBySubmittedByUcn(ucn);
+    }
+
+
+
 
 }

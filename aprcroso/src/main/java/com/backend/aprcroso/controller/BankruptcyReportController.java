@@ -43,6 +43,13 @@ public class BankruptcyReportController {
         return ResponseEntity.ok(bankruptcyReports);
     }
 
+    //Getting by UserUCN
+    @GetMapping("/user/{ucn}")
+    public ResponseEntity<List<BankruptcyReport>> getReportsByUser(@PathVariable String ucn) {
+        return ResponseEntity.ok(bankruptcyReportService.getReportsByUserUcn(ucn));
+    }
+
+
 
 
 }

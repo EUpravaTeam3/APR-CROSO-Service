@@ -77,4 +77,11 @@ public class FinancialReportController {
         }
     }
 
+    //Getting by UserUCN
+    @GetMapping("/user/{ucn}")
+    public ResponseEntity<List<FinancialReport>> getReportsByUser(@PathVariable String ucn) {
+        return ResponseEntity.ok(financialReportService.getReportsByUserUcn(ucn));
+    }
+
+
 }

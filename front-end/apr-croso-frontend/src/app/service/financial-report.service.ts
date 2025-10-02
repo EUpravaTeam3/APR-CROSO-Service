@@ -50,6 +50,17 @@ export class FinancialReportService {
   updateCompanyStatusByPib(requestBody: { pib: string; status: string }): Observable<any> {
     return this.http.put('http://localhost:8005/api/companies/update-status-by-pib', requestBody);
   }
+
+
+  //dobavljanje reportova po UserUcn
+  getFinancialReportsByUser(ucn: string): Observable<any[]> {
+  return this.http.get<any[]>(`${this.financialReportUrl}/user/${ucn}`);
+}
+
+getBankruptcyReportsByUser(ucn: string): Observable<any[]> {
+  return this.http.get<any[]>(`${this.bankruptcyReportUrl}/user/${ucn}`);
+}
+
   
   
 

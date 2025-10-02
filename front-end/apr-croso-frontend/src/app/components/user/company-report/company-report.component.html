@@ -77,5 +77,69 @@
       <p><strong>Datum početka stečaja:</strong> {{ bankruptcyData.bankruptcyDate }}</p>
       <p><strong>Likvidacija:</strong> {{ bankruptcyData.liquidation ? 'Da' : 'Ne' }}</p>
     </div>
+
+
+    <!-- ***********REPORTS LIST*********** -->
+    <div class="reports-container">
+  <button class="refresh-btn" (click)="reloadReports()">🔄 Osveži</button>
+
+  <div *ngIf="financialReportData?.length > 0" class="report-section">
+    <h3>📊 Moji finansijski izveštaji:</h3>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Kompanija</th>
+          <th>PIB</th>
+          <th>Godina</th>
+          <th>Bilans Stanja</th>
+          <th>Bilans Uspeha</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of financialReportData">
+          <td>{{ report.companyName }}</td>
+          <td>{{ report.pib }}</td>
+          <td>{{ report.year }}</td>
+          <td>{{ report.balanceSheet }} $</td>
+          <td>{{ report.incomeStatement }} $</td>
+          <td>
+            <span [ngClass]="report.valid ? 'status-approved' : 'status-pending'">
+              {{ report.valid ? '✔ Odobren' : '⏳ Na čekanju' }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="bankruptcyData?.length > 0" class="report-section">
+    <h3>⚖ Moje prijave za stečaj/likvidaciju:</h3>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Kompanija</th>
+          <th>PIB</th>
+          <th>Datum stečaja</th>
+          <th>Likvidacija</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let b of bankruptcyData">
+          <td>{{ b.companyName }}</td>
+          <td>{{ b.pib }}</td>
+          <td>{{ b.bankruptcyDate }}</td>
+          <td>{{ b.liquidation ? 'Da' : 'Ne' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  
+
+  
+
+
   </div>
   

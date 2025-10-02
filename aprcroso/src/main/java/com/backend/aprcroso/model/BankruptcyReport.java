@@ -19,4 +19,5 @@ public class BankruptcyReport {
     private String PIB;
     private LocalDate bankruptcyDate;
     private boolean liquidation;    //likvidacija
+    private String submittedByUcn;
 }

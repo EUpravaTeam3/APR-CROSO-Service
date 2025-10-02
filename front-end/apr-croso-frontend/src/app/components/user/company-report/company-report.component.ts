@@ -45,58 +45,87 @@ export class CompanyReportComponent implements OnInit {
       bankruptcyDate: ['', Validators.required],
       liquidation: [false]
     });
-    this.loadCompanies();
+    
+
+      const currentUcn = localStorage.getItem('eupravaUcn');
+    if (currentUcn) {
+      this.loadCompanies(currentUcn);
+      this.loadUserFinancialReports(currentUcn);
+      this.loadUserBankruptcyReports(currentUcn);
+  }
   }
 
   //Ucitavanje Kompanije iz servisa
-  loadCompanies(): void {
+  loadCompanies(ucn: string): void {
     this.companyService.getCompanyList().subscribe({
-      next: (data) => {
-        this.companies = data;
-      },
-      error: (err) => console.error('Failed to load companies:', err)
-    });
+    next: (companies) => {
+      this.companies = companies.filter(c => c.ownerUcn === ucn); // filter by ownerUcn
+    },
+    error: (err) => console.error('Failed to load companies:', err)
+  });
   }
 
   // Obrada podnošenja finansijskog izveštaja
   onSubmitFinancialReport(): void {
-    if (this.financialReportForm.valid) {
-      const report = this.financialReportForm.value;
+  if (this.financialReportForm.valid) {
+    const currentUcn = localStorage.getItem('eupravaUcn');  
+    const report = {
+      ...this.financialReportForm.value,
+      submittedByUcn: currentUcn
+    };
 
-      // Koristimo servis za slanje podataka na backend
-      this.financialReportService.createFinancialReport(report).subscribe({
-        next: (response: any) => {
-          this.financialReportData = response;
-          this.financialReportSubmitted = true;
-          this.financialReportForm.reset();
-          alert('Finansijski izveštaj uspešno podnet.');
-        },
-        error: (err: any) => {
-          console.error('Greška pri podnošenju finansijskog izveštaja:', err);
-          alert('Došlo je do greške. Pokušajte ponovo.');
-        }
-      });
-    }
+    this.financialReportService.createFinancialReport(report).subscribe({
+      next: () => {
+        this.loadUserFinancialReports(currentUcn!); 
+        this.financialReportForm.reset();
+        alert('Finansijski izveštaj uspešno podnet.');
+      },
+      error: (err) => console.error(err)
+    });
   }
+}
 
-  // Obrada podnošenja prijave za stečaj i likvidaciju
-  onSubmitBankruptcy(): void {
-    if (this.bankruptcyForm.valid) {
-      const report = this.bankruptcyForm.value;
+onSubmitBankruptcy(): void {
+  if (this.bankruptcyForm.valid) {
+    const currentUcn = localStorage.getItem('eupravaUcn'); 
+    const report = {
+      ...this.bankruptcyForm.value,
+      submittedByUcn: currentUcn
+    };
 
-      // Koristimo servis za slanje podataka na backend
-      this.financialReportService.createBankruptcyReport(report).subscribe({
-        next: (response: any) => {
-          this.bankruptcyData = response;
-          this.bankruptcySubmitted = true;
-          this.bankruptcyForm.reset();
-          alert('Prijava za stečaj uspešno podneta.');
-        },
-        error: (err: any) => {
-          console.error('Greška pri podnošenju prijave za stečaj:', err);
-          alert('Došlo je do greške. Pokušajte ponovo.');
-        }
-      });
-    }
+    this.financialReportService.createBankruptcyReport(report).subscribe({
+      next: () => {
+        this.loadUserBankruptcyReports(currentUcn!);
+        this.bankruptcyForm.reset();
+        alert('Prijava za stečaj uspešno podneta.');
+      },
+      error: (err) => console.error(err)
+    });
   }
+}
+
+loadUserFinancialReports(ucn: string): void {
+  this.financialReportService.getFinancialReportsByUser(ucn).subscribe({
+    next: (data) => this.financialReportData = data,
+    error: (err) => console.error(err)
+  });
+}
+
+loadUserBankruptcyReports(ucn: string): void {
+  this.financialReportService.getBankruptcyReportsByUser(ucn).subscribe({
+    next: (data) => this.bankruptcyData = data,
+    error: (err) => console.error(err)
+  });
+}
+
+reloadReports(): void {
+  const currentUcn = localStorage.getItem('eupravaUcn');
+  if (currentUcn) {
+    this.loadUserFinancialReports(currentUcn);
+    this.loadUserBankruptcyReports(currentUcn);
+  }
+}
+
+
+
 }
